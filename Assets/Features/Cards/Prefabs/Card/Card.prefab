@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9157bbb47f340ba99b5162813e437e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSettings: {fileID: 11400000, guid: 4b916dbde90eede47ae54ae64460f3ec, type: 2}
   costText: {fileID: 2303251701736624938}
 --- !u!1 &2532914334999887616
 GameObject:
