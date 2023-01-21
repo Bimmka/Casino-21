@@ -85,3 +85,4 @@ MonoBehaviour:
   userHandsParent: {fileID: 0}
   dealerHands: {fileID: 38822525523178506, guid: ee878385592c8ef43bfa72d0e1e68f20, type: 3}
   dealerHandsParent: {fileID: 0}
+  gameRules: {fileID: 11400000, guid: 3dfce60fc7a7ea643b2cc82669d9a896, type: 2}

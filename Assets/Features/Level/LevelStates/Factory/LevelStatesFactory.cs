@@ -5,6 +5,7 @@ using Features.Hands.Scripts.Dealer;
 using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Machine;
 using Features.Level.LevelStates.States;
+using Features.Rules.Data;
 using Features.Services.UI.Windows;
 
 namespace Features.Level.LevelStates.Factory
@@ -15,13 +16,16 @@ namespace Features.Level.LevelStates.Factory
     private readonly CardDeck deck;
     private readonly UserHands userHands;
     private readonly DealerHands dealerHands;
+    private readonly GameRules gameRules;
 
-    public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands, DealerHands dealerHands)
+    public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands, DealerHands dealerHands,
+      GameRules gameRules)
     {
       this.windowsService = windowsService;
       this.deck = deck;
       this.userHands = userHands;
       this.dealerHands = dealerHands;
+      this.gameRules = gameRules;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -43,7 +47,7 @@ namespace Features.Level.LevelStates.Factory
         case nameof(LevelPrepareState):
           return new LevelPrepareState(levelStateMachine,deck);
         case nameof(LevelUserCheckState):
-          return new LevelUserCheckState();
+          return new LevelUserCheckState(userHands, gameRules, levelStateMachine);
         case nameof(LevelUserTurnState):
           return new LevelUserTurnState(windowsService);
         case nameof(LevelWinState):

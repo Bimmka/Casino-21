@@ -8,6 +8,7 @@ using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Factory;
 using Features.Level.LevelStates.Machine;
 using Features.Level.Observer;
+using Features.Rules.Data;
 using Features.Services.UI.Factory.BaseUI;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
@@ -25,8 +26,11 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private Transform userHandsParent;
     [SerializeField] private DealerHands dealerHands;
     [SerializeField] private Transform dealerHandsParent;
+    [SerializeField] private GameRules gameRules;
 
     private CardDeck spawnedDeck;
+    private UserHands spawnedUserHands;
+    private DealerHands spawnedDealerHands;
     
     public override void Start()
     {
@@ -53,7 +57,7 @@ namespace Features.Bootstrapp.Scripts
       Container.Bind<ILevelStateMachine>().To<LevelStateMachine>().FromNew().AsSingle();
 
     private void BindLevelStatesFactory() => 
-      Container.Bind<LevelStatesFactory>().ToSelf().FromNew().AsSingle();
+      Container.Bind<LevelStatesFactory>().ToSelf().FromNew().AsSingle().WithArguments(gameRules);
 
     private void BindDeckShuffler() => 
       Container.Bind<CardDeckShuffler>().ToSelf().FromNew().AsSingle();
@@ -87,13 +91,22 @@ namespace Features.Bootstrapp.Scripts
     private void BindUserHands() => 
       Container.Bind<UserHands>().ToSelf().FromMethod(UserHands).AsSingle();
 
-    private UserHands UserHands() => 
-      Container.InstantiatePrefab(userHands, userHandsParent).GetComponent<UserHands>();
+    private UserHands UserHands()
+    {
+      if (spawnedUserHands == null)
+        spawnedUserHands = Container.InstantiatePrefab(userHands, userHandsParent).GetComponent<UserHands>();
+      return spawnedUserHands;
+    }
 
     private void BindDealerHands() => 
       Container.Bind<DealerHands>().ToSelf().FromMethod(DealerHands).AsSingle();
 
-    private DealerHands DealerHands() => 
-      Container.InstantiatePrefab(dealerHands, dealerHandsParent).GetComponent<DealerHands>();
+    private DealerHands DealerHands()
+    {
+      if (spawnedDealerHands == null)
+        spawnedDealerHands = Container.InstantiatePrefab(dealerHands, dealerHandsParent).GetComponent<DealerHands>();
+
+      return spawnedDealerHands;
+    }
   }
 }
