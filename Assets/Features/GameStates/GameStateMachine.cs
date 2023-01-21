@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Features.GameStates.Factory;
 using Features.GameStates.States.Interfaces;
 using Zenject;
 
@@ -7,14 +8,15 @@ namespace Features.GameStates
 {
   public class GameStateMachine : IGameStateMachine
   {
+    private readonly GameStatesFactory factory;
     private readonly Dictionary<Type, IExitableState> _states;
     private IExitableState _activeState;
 
     [Inject]
-    public GameStateMachine()
+    public GameStateMachine(GameStatesFactory factory)
     {
+      this.factory = factory;
       _states = new Dictionary<Type, IExitableState>(5);
-  
     }
 
     public void Register<TState>(TState state) where TState : class, IState => 
@@ -38,8 +40,13 @@ namespace Features.GameStates
       state.Enter(payload, loadedCallback, curtainHideCallback);
     }
 
-    public TState GetState<TState>() where TState : class, IExitableState => 
-      _states[typeof(TState)] as TState;
+    public TState GetState<TState>() where TState : class, IExitableState
+    {
+      if (_states.ContainsKey(typeof(TState)) == false)
+        _states.Add(typeof(TState), factory.Create<TState>(this));
+      
+      return _states[typeof(TState)] as TState;
+    }
 
 
     private TState ChangeState<TState>() where TState : class, IExitableState

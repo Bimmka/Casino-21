@@ -20,6 +20,6 @@ namespace Features.GameStates.Observer.Scripts
     }
 
     public void StartGame() => 
-      gameStateMachine.Enter<MainMenuState>();
+      gameStateMachine.Enter<ProgressLoadState>();
   }
 }

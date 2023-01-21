@@ -4,9 +4,9 @@ namespace Features.GameStates.States
 {
   public class GameLoopState : IState
   {
-    public GameLoopState(IGameStateMachine gameStateMachine)
+    public GameLoopState()
     {
-      gameStateMachine.Register(this);
+ 
     }
     
     public void Enter()

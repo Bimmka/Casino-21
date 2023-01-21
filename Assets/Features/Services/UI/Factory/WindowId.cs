@@ -2,7 +2,7 @@
 {
   public enum WindowId
   {
-    None = 0, 
+    Registration = 0,
     MainMenu = 1,
     LevelEnd = 2,
     HUD = 3,
