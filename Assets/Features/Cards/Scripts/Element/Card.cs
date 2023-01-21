@@ -33,7 +33,6 @@ namespace Features.Cards.Scripts.Element
     public void Hide() => 
       gameObject.SetActive(false);
 
-
     public void SetPosition(Vector3 at) =>
       mover.SetPosition(at);
 
@@ -42,5 +41,10 @@ namespace Features.Cards.Scripts.Element
 
     public void Move(Vector3 at, Quaternion rotation, Action callback) => 
       mover.Move(at, rotation, callback);
+
+    public void Display()
+    {
+      
+    }
   }
 }

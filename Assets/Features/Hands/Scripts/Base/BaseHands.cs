@@ -1,3 +1,4 @@
+using System;
 using Features.Cards.Scripts.Deck;
 using Features.Cards.Scripts.Element;
 using UnityEngine;
@@ -50,6 +51,19 @@ namespace Features.Hands.Scripts.Base
       {
         cardPoints[i].Release();
       }
+    }
+
+    public void DisplayCards(Action callback)
+    {
+      for (int i = 0; i < cardPoints.Length; i++)
+      {
+        if (cardPoints[i].Card == null)
+          break;
+
+        cardPoints[i].DisplayCard();
+      }
+      
+      callback?.Invoke();
     }
 
     protected virtual void OnTookCard() { }

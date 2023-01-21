@@ -47,7 +47,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelCardDeckShuffleState):
           return new LevelCardDeckShuffleState(deck, levelStateMachine);
         case nameof(LevelDealerCheckState):
-          return new LevelDealerCheckState(userHands, dealer, gameRules, levelStateMachine, infoDisplayer);
+          return new LevelDealerCheckState(userHands, dealer, gameRules, levelStateMachine, infoDisplayer, gameSettings);
         case nameof(LevelDealerTurnState):
           return new LevelDealerTurnState(dealer, levelStateMachine);
         case nameof(LevelFirstCardsState):
@@ -59,7 +59,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
         case nameof(LevelUserCheckState):
-          return new LevelUserCheckState(userHands, gameRules, levelStateMachine, infoDisplayer);
+          return new LevelUserCheckState(userHands, gameRules, levelStateMachine, infoDisplayer, gameSettings);
         case nameof(LevelUserTurnState):
           return new LevelUserTurnState(windowsService);
         case nameof(LevelWinState):

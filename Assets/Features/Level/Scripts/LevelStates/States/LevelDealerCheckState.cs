@@ -1,9 +1,11 @@
+using System;
 using Features.GameStates.States.Interfaces;
 using Features.Hands.Scripts.User;
 using Features.Level.Scripts.Info;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.NPC.Scripts.Base;
 using Features.Rules.Data;
+using Features.Services.GameSettings;
 
 namespace Features.Level.Scripts.LevelStates.States
 {
@@ -14,18 +16,36 @@ namespace Features.Level.Scripts.LevelStates.States
     private readonly GameRules rules;
     private readonly ILevelStateMachine levelStateMachine;
     private readonly LevelInfoDisplayer levelInfoDisplayer;
+    private readonly IGameSettings gameSettings;
 
     public LevelDealerCheckState(UserHands userHands, DealerMachine dealer, GameRules rules,
-      ILevelStateMachine levelStateMachine, LevelInfoDisplayer levelInfoDisplayer)
+      ILevelStateMachine levelStateMachine, LevelInfoDisplayer levelInfoDisplayer, IGameSettings gameSettings)
     {
       this.userHands = userHands;
       this.dealer = dealer;
       this.rules = rules;
       this.levelStateMachine = levelStateMachine;
       this.levelInfoDisplayer = levelInfoDisplayer;
+      this.gameSettings = gameSettings;
     }
     
     public void Enter()
+    {
+      if (gameSettings.DifficultType != GameDifficultType.Easy)
+        DisplayCards(Check);
+      else
+        Check();
+    }
+
+    public void Exit()
+    {
+      
+    }
+    
+    private void DisplayCards(Action callback) => 
+      userHands.DisplayCards(callback);
+
+    private void Check()
     {
       int dealerPoints = dealer.Points;
       levelInfoDisplayer.DisplayDealerPoints(dealerPoints);
@@ -33,11 +53,6 @@ namespace Features.Level.Scripts.LevelStates.States
         UserLose();
       else
         UserWin();
-    }
-
-    public void Exit()
-    {
-      
     }
 
     private void UserLose() => 

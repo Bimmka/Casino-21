@@ -55,6 +55,9 @@ namespace Features.UI.Windows.Actions.Scripts
 
     private void CheckPoints()
     {
+      if (userHands.IsTakingCard)
+        return;
+      
       levelStateMachine.Enter<LevelUserCheckState>();
       HideButtons();
     }

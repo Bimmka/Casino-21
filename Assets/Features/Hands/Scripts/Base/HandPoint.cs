@@ -22,5 +22,10 @@ namespace Features.Hands.Scripts.Base
         Card = null;
       }
     }
+
+    public void DisplayCard()
+    {
+      Card.Display();
+    }
   }
 }
