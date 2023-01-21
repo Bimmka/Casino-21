@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Features.Level.Info
+namespace Features.Level.Scripts.Info
 {
   public class LevelInfoDisplayer : MonoBehaviour
   {

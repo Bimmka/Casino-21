@@ -1,11 +1,11 @@
 using Features.Cards.Scripts.Deck;
 using Features.GameStates.States.Interfaces;
 using Features.Hands.Scripts.User;
-using Features.Level.Info;
-using Features.Level.LevelStates.Machine;
+using Features.Level.Scripts.Info;
+using Features.Level.Scripts.LevelStates.Machine;
 using Features.NPC.Scripts.Base;
 
-namespace Features.Level.LevelStates.States
+namespace Features.Level.Scripts.LevelStates.States
 {
   public class LevelResetState : IState
   {

@@ -1,12 +1,10 @@
 using Features.GameStates.States.Interfaces;
-using Features.Hands.Scripts.User;
-using Features.NPC.Scripts.Base;
 using Features.Services.GameSettings;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
 
-namespace Features.Level.LevelStates.States
+namespace Features.Level.Scripts.LevelStates.States
 {
   public class LevelWinState: IState
   {

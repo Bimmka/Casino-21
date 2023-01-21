@@ -1,8 +1,8 @@
 using Features.Cards.Scripts.Deck;
 using Features.GameStates.States.Interfaces;
-using Features.Level.LevelStates.Machine;
+using Features.Level.Scripts.LevelStates.Machine;
 
-namespace Features.Level.LevelStates.States
+namespace Features.Level.Scripts.LevelStates.States
 {
   public class LevelCardDeckShuffleState: IState
   {

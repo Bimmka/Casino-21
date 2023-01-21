@@ -1,6 +1,6 @@
-using Features.Level.Info;
-using Features.Level.LevelStates.Machine;
-using Features.Level.LevelStates.States;
+using Features.Level.Scripts.Info;
+using Features.Level.Scripts.LevelStates.Machine;
+using Features.Level.Scripts.LevelStates.States;
 using Features.Services.GameSettings;
 using Features.Services.Save;
 using Features.Services.UI.Windows;

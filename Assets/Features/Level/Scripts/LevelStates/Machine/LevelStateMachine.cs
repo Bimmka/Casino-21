@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Features.GameStates.States.Interfaces;
-using Features.Level.LevelStates.Factory;
+using Features.Level.Scripts.LevelStates.Factory;
 
-namespace Features.Level.LevelStates.Machine
+namespace Features.Level.Scripts.LevelStates.Machine
 {
   public class LevelStateMachine : ILevelStateMachine
   {

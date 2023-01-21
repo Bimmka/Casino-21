@@ -1,6 +1,6 @@
 using Features.GameStates;
 
-namespace Features.Level.LevelStates.Machine
+namespace Features.Level.Scripts.LevelStates.Machine
 {
   public interface ILevelStateMachine : IStateMachine
   {

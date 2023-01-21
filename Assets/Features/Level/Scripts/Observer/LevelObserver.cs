@@ -1,10 +1,9 @@
-using System;
-using Features.Level.LevelStates.Machine;
-using Features.Level.LevelStates.States;
+using Features.Level.Scripts.LevelStates.Machine;
+using Features.Level.Scripts.LevelStates.States;
 using UnityEngine;
 using Zenject;
 
-namespace Features.Level.Observer
+namespace Features.Level.Scripts.Observer
 {
   public class LevelObserver : MonoBehaviour
   {

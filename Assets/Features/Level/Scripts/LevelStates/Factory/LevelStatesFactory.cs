@@ -2,16 +2,16 @@ using System;
 using Features.Cards.Scripts.Deck;
 using Features.GameStates.States.Interfaces;
 using Features.Hands.Scripts.User;
-using Features.Level.Info;
-using Features.Level.LevelStates.Machine;
-using Features.Level.LevelStates.States;
+using Features.Level.Scripts.Info;
+using Features.Level.Scripts.LevelStates.Machine;
+using Features.Level.Scripts.LevelStates.States;
 using Features.NPC.Scripts.Base;
 using Features.Rules.Data;
 using Features.Services.GameSettings;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
 
-namespace Features.Level.LevelStates.Factory
+namespace Features.Level.Scripts.LevelStates.Factory
 {
   public class LevelStatesFactory
   {

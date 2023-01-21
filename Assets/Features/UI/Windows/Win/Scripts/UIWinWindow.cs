@@ -1,7 +1,7 @@
 using Features.GameStates;
 using Features.GameStates.States;
-using Features.Level.LevelStates.Machine;
-using Features.Level.LevelStates.States;
+using Features.Level.Scripts.LevelStates.Machine;
+using Features.Level.Scripts.LevelStates.States;
 using Features.Services.GameSettings;
 using Features.UI.Windows.Base.Scripts;
 using TMPro;

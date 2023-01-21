@@ -1,6 +1,6 @@
 using Features.Hands.Scripts.User;
-using Features.Level.LevelStates.Machine;
-using Features.Level.LevelStates.States;
+using Features.Level.Scripts.LevelStates.Machine;
+using Features.Level.Scripts.LevelStates.States;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
