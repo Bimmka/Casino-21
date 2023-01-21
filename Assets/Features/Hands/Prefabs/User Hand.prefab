@@ -51,12 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPoints:
-  - {fileID: 4222341088012742809}
-  - {fileID: 3962842349617430044}
-  - {fileID: 3962842349489341503}
-  - {fileID: 3962842347736100971}
-  - {fileID: 3962842348962105333}
   - {fileID: 3962842348095260437}
+  - {fileID: 3962842348962105333}
+  - {fileID: 3962842347736100971}
+  - {fileID: 3962842349489341503}
+  - {fileID: 3962842349617430044}
+  - {fileID: 4222341088012742809}
 --- !u!1001 &6179307386486904342
 PrefabInstance:
   m_ObjectHideFlags: 0

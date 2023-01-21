@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: dealerHandsParent
       value: 
       objectReference: {fileID: 423456303}
+    - target: {fileID: 1114132975440018042, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
+      propertyPath: levelInfoDisplayer
+      value: 
+      objectReference: {fileID: 1910758547723941931}
     - target: {fileID: 1874012533458762423, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -514,3 +518,14 @@ PrefabInstance:
       objectReference: {fileID: 963194227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce50701ffc442d74a98e7b3d7e29222d, type: 3}
+--- !u!114 &1910758547723941931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1624961995575787455, guid: ce50701ffc442d74a98e7b3d7e29222d, type: 3}
+  m_PrefabInstance: {fileID: 1910758547723941930}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78167a881c834581a1c9ad1c2f3f340f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

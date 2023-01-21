@@ -68,13 +68,29 @@ namespace Features.Cards.Scripts.Deck
       callback?.Invoke();
     }
 
+    public void Reset(Action callback)
+    {
+      Card card;
+      while (cardIndex > 0)
+      {
+        cardIndex--;
+        card = cardsContainer.Card(cardIds[cardIndex]);
+        card.SetPosition(CardPosition(cardIds.Count - 1 - cardIndex));
+        card.SetRotation(Quaternion.Euler(spawnRotation));
+        card.Show();
+      }
+
+      cardIndex = 0;
+      callback?.Invoke();
+    }
+
     private void SwapCards()
     {
       Card card;
       for (int i = 0; i < cardIds.Count; i++)
       {
         card = cardsContainer.Card(cardIds[i]);
-        card.transform.position = CardPosition(cardIds.Count - i -1);
+        card.SetPosition(CardPosition(cardIds.Count - i - 1));
       }
     }
 

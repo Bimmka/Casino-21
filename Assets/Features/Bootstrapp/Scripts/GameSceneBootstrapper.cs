@@ -5,6 +5,7 @@ using Features.Cards.Scripts.Factory;
 using Features.Cards.Scripts.Shuffle;
 using Features.Hands.Scripts.Dealer;
 using Features.Hands.Scripts.User;
+using Features.Level.Info;
 using Features.Level.LevelStates.Factory;
 using Features.Level.LevelStates.Machine;
 using Features.Level.Observer;
@@ -31,6 +32,7 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private GameRules gameRules;
     [SerializeField] private DealerMachine npcMachine;
     [SerializeField] private NPCSettings npcSettings;
+    [SerializeField] private LevelInfoDisplayer levelInfoDisplayer;
 
     private CardDeck spawnedDeck;
     private UserHands spawnedUserHands;
@@ -56,6 +58,7 @@ namespace Features.Bootstrapp.Scripts
       BindUserHands();
       BindDealerHands();
       BindNPCMachine();
+      BindLevelInfoDisplayer();
     }
 
     private void BindLevelStateMachine() => 
@@ -116,5 +119,8 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindNPCMachine() => 
       Container.Bind<DealerMachine>().ToSelf().FromComponentInNewPrefab(npcMachine).AsSingle().WithArguments(npcSettings);
+
+    private void BindLevelInfoDisplayer() => 
+      Container.Bind<LevelInfoDisplayer>().ToSelf().FromInstance(levelInfoDisplayer).AsSingle();
   }
 }

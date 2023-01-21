@@ -1,3 +1,4 @@
+using Features.Level.Info;
 using Features.Level.LevelStates.Machine;
 using Features.Level.LevelStates.States;
 using Features.Services.GameSettings;
@@ -24,11 +25,14 @@ namespace Features.UI.Windows.Bet.Scripts
     private IGameSettings gameSettings;
     private ISaveService saveService;
     private IWindowsService windowsService;
+    private LevelInfoDisplayer levelInfoDisplayer;
 
     [Inject]
     public void Construct(IUserProvider userProvider, ILevelStateMachine levelStateMachine,
-      IGameSettings gameSettings, ISaveService saveService, IWindowsService windowsService)
+      IGameSettings gameSettings, ISaveService saveService, IWindowsService windowsService,
+      LevelInfoDisplayer levelInfoDisplayer)
     {
+      this.levelInfoDisplayer = levelInfoDisplayer;
       this.windowsService = windowsService;
       this.saveService = saveService;
       this.gameSettings = gameSettings;
@@ -64,6 +68,7 @@ namespace Features.UI.Windows.Bet.Scripts
       user.PointsData.Reduce((int)betSlider.value);
       saveService.SavePlayer(user);
       levelStateMachine.Enter<LevelCardDeckShuffleState>();
+      levelInfoDisplayer.DisplayBet(gameSettings.CurrentBet);
       windowsService.Close(ID);
     }
   }

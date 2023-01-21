@@ -41,8 +41,6 @@ namespace Features.Hands.Scripts.Base
     {
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
-      card.transform.position = freePoint.transform.position;
-      card.transform.rotation = Quaternion.Euler(90,0,0);
       freePoint.SetCard(card);
     }
 

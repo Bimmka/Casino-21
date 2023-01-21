@@ -55,6 +55,6 @@ namespace Features.UI.Windows.Lose.Scripts
       gameStateMachine.Enter<MainMenuState>();
 
     private void RestartGame() => 
-      levelStateMachine.Enter<LevelBetState>();
+      levelStateMachine.Enter<LevelResetState>();
   }
 }

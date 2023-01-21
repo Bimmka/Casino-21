@@ -7,10 +7,19 @@ namespace Features.Hands.Scripts.Base
   {
     public Card Card { get; private set; }
 
-    public void SetCard(Card card) => 
+    public void SetCard(Card card)
+    {
       Card = card;
+      Card.Move(transform.position, Quaternion.Euler(90,0,0));
+    }
 
-    public void Release() => 
-      Card = null;
+    public void Release()
+    {
+      if (Card != null)
+      {
+        Card.Hide();
+        Card = null;
+      }
+    }
   }
 }

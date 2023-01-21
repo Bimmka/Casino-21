@@ -10,17 +10,13 @@ namespace Features.Level.LevelStates.States
 {
   public class LevelWinState: IState
   {
-    private readonly UserHands userHands;
-    private readonly DealerMachine dealer;
     private readonly IWindowsService windowsService;
     private readonly IGameSettings gameSettings;
     private readonly IUserProvider userProvider;
 
-    public LevelWinState(UserHands userHands, DealerMachine dealer, IWindowsService windowsService,
+    public LevelWinState(IWindowsService windowsService,
       IGameSettings gameSettings, IUserProvider userProvider)
     {
-      this.userHands = userHands;
-      this.dealer = dealer;
       this.windowsService = windowsService;
       this.gameSettings = gameSettings;
       this.userProvider = userProvider;
@@ -28,8 +24,6 @@ namespace Features.Level.LevelStates.States
 
     public void Enter()
     {
-      userHands.ReleaseCards();
-      dealer.ReleaseCards();
       windowsService.Open(WindowId.Win);
       userProvider.User.PointsData.Add(gameSettings.CurrentBet * 2);
     }
