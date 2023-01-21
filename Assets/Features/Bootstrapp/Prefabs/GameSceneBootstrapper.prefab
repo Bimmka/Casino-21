@@ -81,3 +81,7 @@ MonoBehaviour:
   deckPrefab: {fileID: 4036485307608012832, guid: 51f109105c537c34db0fb3591fed7a15, type: 3}
   deckSpawnParent: {fileID: 0}
   deckSettings: {fileID: 11400000, guid: bce71f630da2a3e438ae7b1aa70881c7, type: 2}
+  userHands: {fileID: 1183751794195884175, guid: 1d22667295d74ed4dbe62623738abe67, type: 3}
+  userHandsParent: {fileID: 0}
+  dealerHands: {fileID: 38822525523178506, guid: ee878385592c8ef43bfa72d0e1e68f20, type: 3}
+  dealerHandsParent: {fileID: 0}

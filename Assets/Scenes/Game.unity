@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &423456303 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5135628273695077886, guid: ce50701ffc442d74a98e7b3d7e29222d, type: 3}
+  m_PrefabInstance: {fileID: 1910758547723941930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &693680186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +139,14 @@ PrefabInstance:
       propertyPath: deckSpawnParent
       value: 
       objectReference: {fileID: 1124874970}
+    - target: {fileID: 1114132975440018042, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
+      propertyPath: userHandsParent
+      value: 
+      objectReference: {fileID: 888432105}
+    - target: {fileID: 1114132975440018042, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
+      propertyPath: dealerHandsParent
+      value: 
+      objectReference: {fileID: 423456303}
     - target: {fileID: 1874012533458762423, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -278,6 +291,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &888432105 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5135628274193743416, guid: ce50701ffc442d74a98e7b3d7e29222d, type: 3}
+  m_PrefabInstance: {fileID: 1910758547723941930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +383,7 @@ Transform:
 --- !u!4 &1124874970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5135628274939814155, guid: ce50701ffc442d74a98e7b3d7e29222d, type: 3}
-  m_PrefabInstance: {fileID: 5135628273848507345}
+  m_PrefabInstance: {fileID: 1910758547723941930}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1401870338
 GameObject:
@@ -435,7 +453,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5135628273848507345
+--- !u!1001 &1910758547723941930
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2

@@ -22,6 +22,7 @@ namespace Features.Cards.Scripts.Deck
     private CardDeckShuffler shuffler;
 
     private List<string> cardIds;
+    private int cardIndex = 0;
 
     [Inject]
     public void Construct(CardsContainer cardsContainer, CardFactory factory)
@@ -51,6 +52,13 @@ namespace Features.Cards.Scripts.Deck
           index++;
         }
       }
+    }
+
+    public Card TopCard()
+    {
+      Card card = cardsContainer.Card(cardIds[cardIndex]);
+      cardIndex++;
+      return card;
     }
 
     public void Shuffle(Action callback)

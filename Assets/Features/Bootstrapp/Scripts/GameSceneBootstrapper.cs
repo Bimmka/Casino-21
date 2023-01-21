@@ -3,6 +3,8 @@ using Features.Cards.Scripts.Data.Deck;
 using Features.Cards.Scripts.Deck;
 using Features.Cards.Scripts.Factory;
 using Features.Cards.Scripts.Shuffle;
+using Features.Hands.Scripts.Dealer;
+using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Factory;
 using Features.Level.LevelStates.Machine;
 using Features.Level.Observer;
@@ -19,6 +21,10 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private CardDeck deckPrefab;
     [SerializeField] private Transform deckSpawnParent;
     [SerializeField] private DeckSettings deckSettings;
+    [SerializeField] private UserHands userHands;
+    [SerializeField] private Transform userHandsParent;
+    [SerializeField] private DealerHands dealerHands;
+    [SerializeField] private Transform dealerHandsParent;
 
     private CardDeck spawnedDeck;
     
@@ -39,6 +45,8 @@ namespace Features.Bootstrapp.Scripts
       BindDeckPrefab();
       BindCardFactory();
       BindCardsContainer();
+      BindUserHands();
+      BindDealerHands();
     }
 
     private void BindLevelStateMachine() => 
@@ -66,9 +74,7 @@ namespace Features.Bootstrapp.Scripts
         spawnedDeck = Container.InstantiatePrefab(deckPrefab, deckSpawnParent).GetComponent<CardDeck>();
         spawnedDeck.InitializeDeck(deckSettings);
         Container.Inject(spawnedDeck);
-        
       }
-
       return spawnedDeck;
     }
 
@@ -77,5 +83,17 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindCardsContainer() => 
       Container.Bind<CardsContainer>().ToSelf().FromNew().AsSingle();
+
+    private void BindUserHands() => 
+      Container.Bind<UserHands>().ToSelf().FromMethod(UserHands).AsSingle();
+
+    private UserHands UserHands() => 
+      Container.InstantiatePrefab(userHands, userHandsParent).GetComponent<UserHands>();
+
+    private void BindDealerHands() => 
+      Container.Bind<DealerHands>().ToSelf().FromMethod(DealerHands).AsSingle();
+
+    private DealerHands DealerHands() => 
+      Container.InstantiatePrefab(dealerHands, dealerHandsParent).GetComponent<DealerHands>();
   }
 }

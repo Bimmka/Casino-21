@@ -1,6 +1,8 @@
 using System;
 using Features.Cards.Scripts.Deck;
 using Features.GameStates.States.Interfaces;
+using Features.Hands.Scripts.Dealer;
+using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Machine;
 using Features.Level.LevelStates.States;
 using Features.Services.UI.Windows;
@@ -11,11 +13,15 @@ namespace Features.Level.LevelStates.Factory
   {
     private readonly IWindowsService windowsService;
     private readonly CardDeck deck;
+    private readonly UserHands userHands;
+    private readonly DealerHands dealerHands;
 
-    public LevelStatesFactory(IWindowsService windowsService, CardDeck deck)
+    public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands, DealerHands dealerHands)
     {
       this.windowsService = windowsService;
       this.deck = deck;
+      this.userHands = userHands;
+      this.dealerHands = dealerHands;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -31,7 +37,7 @@ namespace Features.Level.LevelStates.Factory
         case nameof(LevelDealerTurnState):
           return new LevelDealerTurnState();
         case nameof(LevelFirstCardsState):
-          return new LevelFirstCardsState();
+          return new LevelFirstCardsState(userHands, dealerHands, levelStateMachine);
         case nameof(LevelLoseState):
           return new LevelLoseState();
         case nameof(LevelPrepareState):
@@ -39,7 +45,7 @@ namespace Features.Level.LevelStates.Factory
         case nameof(LevelUserCheckState):
           return new LevelUserCheckState();
         case nameof(LevelUserTurnState):
-          return new LevelUserTurnState();
+          return new LevelUserTurnState(windowsService);
         case nameof(LevelWinState):
           return new LevelWinState();
         default:
