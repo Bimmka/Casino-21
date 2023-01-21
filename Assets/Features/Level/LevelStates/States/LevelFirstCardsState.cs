@@ -1,28 +1,27 @@
-using Features.Cards.Scripts.Deck;
 using Features.GameStates.States.Interfaces;
-using Features.Hands.Scripts.Dealer;
 using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Machine;
+using Features.NPC.Scripts.Base;
 
 namespace Features.Level.LevelStates.States
 {
   public class LevelFirstCardsState : IState
   {
     private readonly UserHands userHands;
-    private readonly DealerHands dealerHands;
+    private readonly DealerMachine dealer;
     private readonly ILevelStateMachine levelStateMachine;
 
-    public LevelFirstCardsState(UserHands userHands, DealerHands dealerHands, ILevelStateMachine levelStateMachine)
+    public LevelFirstCardsState(UserHands userHands, DealerMachine dealer, ILevelStateMachine levelStateMachine)
     {
       this.userHands = userHands;
-      this.dealerHands = dealerHands;
+      this.dealer = dealer;
       this.levelStateMachine = levelStateMachine;
     }
 
     public void Enter()
     {
       userHands.TakeCard();
-      dealerHands.TakeCard();
+      dealer.TakeCard();
       levelStateMachine.Enter<LevelUserTurnState>();
     }
 

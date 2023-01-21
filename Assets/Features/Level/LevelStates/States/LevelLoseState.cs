@@ -1,6 +1,6 @@
 using Features.GameStates.States.Interfaces;
-using Features.Hands.Scripts.Dealer;
 using Features.Hands.Scripts.User;
+using Features.NPC.Scripts.Base;
 using Features.Services.GameSettings;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
@@ -11,22 +11,22 @@ namespace Features.Level.LevelStates.States
   public class LevelLoseState: IState
   {
     private readonly UserHands userHands;
-    private readonly DealerHands dealerHands;
+    private readonly DealerMachine dealer;
     private readonly IGameSettings gameSettings;
     private readonly IUserProvider userProvider;
     private readonly IWindowsService windowsService;
 
-    public LevelLoseState(UserHands userHands, DealerHands dealerHands, IWindowsService windowsService)
+    public LevelLoseState(UserHands userHands, DealerMachine dealer, IWindowsService windowsService)
     {
       this.userHands = userHands;
-      this.dealerHands = dealerHands;
+      this.dealer = dealer;
       this.windowsService = windowsService;
     }
     
     public void Enter()
     {
       userHands.ReleaseCards();
-      dealerHands.ReleaseCards();
+      dealer.ReleaseCards();
       windowsService.Open(WindowId.Lose);
     }
 

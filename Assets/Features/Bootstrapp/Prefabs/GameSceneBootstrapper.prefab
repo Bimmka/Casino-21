@@ -86,3 +86,5 @@ MonoBehaviour:
   dealerHands: {fileID: 38822525523178506, guid: ee878385592c8ef43bfa72d0e1e68f20, type: 3}
   dealerHandsParent: {fileID: 0}
   gameRules: {fileID: 11400000, guid: 3dfce60fc7a7ea643b2cc82669d9a896, type: 2}
+  npcMachine: {fileID: 7766081321678786722, guid: 4a63ee728609d7f46abafda35ade58a2, type: 3}
+  npcSettings: {fileID: 11400000, guid: 0a736cf3f8a919e44aa71d2442968eb6, type: 2}

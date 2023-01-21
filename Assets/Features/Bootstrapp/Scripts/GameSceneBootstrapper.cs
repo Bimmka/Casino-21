@@ -8,6 +8,8 @@ using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Factory;
 using Features.Level.LevelStates.Machine;
 using Features.Level.Observer;
+using Features.NPC.Scripts.Base;
+using Features.NPC.Scripts.Data;
 using Features.Rules.Data;
 using Features.Services.UI.Factory.BaseUI;
 using Features.UI.Windows.Base.Scripts;
@@ -27,6 +29,8 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private DealerHands dealerHands;
     [SerializeField] private Transform dealerHandsParent;
     [SerializeField] private GameRules gameRules;
+    [SerializeField] private DealerMachine npcMachine;
+    [SerializeField] private NPCSettings npcSettings;
 
     private CardDeck spawnedDeck;
     private UserHands spawnedUserHands;
@@ -51,6 +55,7 @@ namespace Features.Bootstrapp.Scripts
       BindCardsContainer();
       BindUserHands();
       BindDealerHands();
+      BindNPCMachine();
     }
 
     private void BindLevelStateMachine() => 
@@ -108,5 +113,8 @@ namespace Features.Bootstrapp.Scripts
 
       return spawnedDealerHands;
     }
+
+    private void BindNPCMachine() => 
+      Container.Bind<DealerMachine>().ToSelf().FromComponentInNewPrefab(npcMachine).AsSingle().WithArguments(npcSettings);
   }
 }
