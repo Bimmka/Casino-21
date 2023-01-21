@@ -9,5 +9,6 @@
     public static string UIRootPath = "StaticData/UI/UIRoot";
     public static string PlayerNickKey = "Nickname";
     public static string PlayerPointsKey = "Points";
+    public static int PlayerDefaultPoints = 10000;
   }
 }
