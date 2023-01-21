@@ -1,18 +1,23 @@
 using Features.Cards.Shuffle;
 using Features.Level.LevelStates.Factory;
 using Features.Level.LevelStates.Machine;
+using Features.Level.Observer;
 using Features.Services.UI.Factory.BaseUI;
 using Features.UI.Windows.Base.Scripts;
+using UnityEngine;
 using Zenject;
 
 namespace Features.Bootstrapp.Scripts
 {
   public class GameSceneBootstrapper : MonoInstaller
   {
+    [SerializeField] private LevelObserver levelObserverPrefab;
+    
     public override void Start()
     {
       base.Start();
       Container.Resolve<IUIFactory>();
+      Container.Resolve<LevelObserver>();
     }
 
     public override void InstallBindings()
@@ -21,6 +26,7 @@ namespace Features.Bootstrapp.Scripts
       BindLevelStateMachine();
       BindLevelStatesFactory();
       BindDeckShuffler();
+      BindLevelObserverPrefab();
     }
 
     private void BindLevelStateMachine() => 
@@ -34,5 +40,8 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindUIFactory() =>
       Container.BindFactoryCustomInterface<BaseWindow, UIFactory, IUIFactory>().AsSingle();
+
+    private void BindLevelObserverPrefab() => 
+      Container.Bind<LevelObserver>().ToSelf().FromComponentInNewPrefab(levelObserverPrefab).AsSingle();
   }
 }

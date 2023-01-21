@@ -77,3 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7e3c49f92e4a12aa44cda1ea795ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelObserverPrefab: {fileID: 3594009028738253228, guid: 493edf5781a8753468d56cc6892f7776, type: 3}
