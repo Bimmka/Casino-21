@@ -1,3 +1,4 @@
+using Features.Constants;
 using Features.GameStates;
 using Features.GameStates.States;
 using Features.Services.Save;
@@ -77,7 +78,7 @@ namespace Features.UI.Windows.Registration.Scripts
 
     private void Register()
     {
-      userProvider.User.Initialize(nicknameInputField.text, 0);
+      userProvider.User.Initialize(nicknameInputField.text, GameConstants.PlayerDefaultPoints);
       saveService.SavePlayer(userProvider.User);
       gameStateMachine.Enter<MainMenuState>();
     }

@@ -8,7 +8,7 @@ namespace Features.Services.Save
   {
     public SerializedUser LoadPlayer()
     {
-      int points = PlayerPrefs.GetInt(GameConstants.PlayerPointsKey, 0);
+      int points = PlayerPrefs.GetInt(GameConstants.PlayerPointsKey, GameConstants.PlayerDefaultPoints);
       string nickname = PlayerPrefs.GetString(GameConstants.PlayerNickKey, "");
       
       return new SerializedUser()
