@@ -4,28 +4,26 @@ using Features.Level.LevelStates.Machine;
 
 namespace Features.Level.LevelStates.States
 {
-  public class LevelCardDeckShuffleState: IState
+  public class LevelPrepareState : IState
   {
-    private readonly CardDeck deck;
     private readonly ILevelStateMachine levelStateMachine;
+    private readonly CardDeck deck;
 
-    public LevelCardDeckShuffleState(CardDeck deck, ILevelStateMachine levelStateMachine)
+    public LevelPrepareState(ILevelStateMachine levelStateMachine, CardDeck deck)
     {
-      this.deck = deck;
       this.levelStateMachine = levelStateMachine;
+      this.deck = deck;
     }
     
     public void Enter()
     {
-      deck.Shuffle(StartGame);
+      deck.Create();
+      levelStateMachine.Enter<LevelBetState>();
     }
 
     public void Exit()
     {
       
     }
-
-    private void StartGame() => 
-      levelStateMachine.Enter<LevelFirstCardsState>();
   }
 }

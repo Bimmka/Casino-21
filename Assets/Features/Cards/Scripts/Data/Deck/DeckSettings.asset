@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6567ebf5e1d411ab0e1c2fb37a33d98, type: 3}
+  m_Name: DeckSettings
+  m_EditorClassIdentifier: 
+  Cards:
+  - Settings: {fileID: 11400000, guid: 7318eb030ec15e74a91b86e42ff50a30, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: 2450b9488f9b11e4590d1522a716ed08, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: 25cf9fb4824c8ca4b8b536fb4d0e36ee, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: be61ed9f94d40ee478c7c2c97cdb3055, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: f538941bcc4cd4143bd0baf87c51872d, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: 2326016ecd7a2e244ad5a7edf2598980, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: 3ab3458546b832b4bb6f38c5723bf60e, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: bb971008daa5af64d9db8b32414b522f, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: b0d6f01fccc62e54098047e0e4a44435, type: 2}
+    Count: 5
+  - Settings: {fileID: 11400000, guid: dd4908eb896a92045aab351a2ab4bb7d, type: 2}
+    Count: 5
+  TotalCardsCount: 50

@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1114132975440018042, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
+      propertyPath: deckSpawnParent
+      value: 
+      objectReference: {fileID: 1124874970}
     - target: {fileID: 1874012533458762423, guid: c9f5a2250093bbd44b55f41f54224f49, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -358,6 +362,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1124874970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5135628274939814155, guid: ce50701ffc442d74a98e7b3d7e29222d, type: 3}
+  m_PrefabInstance: {fileID: 5135628273848507345}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1401870338
 GameObject:
   m_ObjectHideFlags: 0

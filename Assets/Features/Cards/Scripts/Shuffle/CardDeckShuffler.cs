@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 
-namespace Features.Cards.Shuffle
+namespace Features.Cards.Scripts.Shuffle
 {
   public class CardDeckShuffler
   {
@@ -11,16 +12,18 @@ namespace Features.Cards.Shuffle
       random = new Random();
     }
     
-    public void Shuffle<T> (T[] array)
+    public List<string> Shuffle(List<string> array)
     {
-        int n = array.Length;
+        int n = array.Count;
         while (n > 1) 
         {
             int k = random.Next(n--);
-            T temp = array[n];
+            string temp = array[n];
             array[n] = array[k];
             array[k] = temp;
         }
+
+        return array;
     }
   }
 }

@@ -78,3 +78,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelObserverPrefab: {fileID: 3594009028738253228, guid: 493edf5781a8753468d56cc6892f7776, type: 3}
+  deckPrefab: {fileID: 4036485307608012832, guid: 51f109105c537c34db0fb3591fed7a15, type: 3}
+  deckSpawnParent: {fileID: 0}
+  deckSettings: {fileID: 11400000, guid: bce71f630da2a3e438ae7b1aa70881c7, type: 2}

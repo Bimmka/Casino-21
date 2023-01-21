@@ -18,7 +18,7 @@ namespace Features.Level.Observer
 
     private void Start()
     {
-      levelStateMachine.Enter<LevelBetState>();
+      levelStateMachine.Enter<LevelPrepareState>();
     }
   }
 }
