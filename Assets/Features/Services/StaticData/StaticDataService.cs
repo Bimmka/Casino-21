@@ -1,5 +1,4 @@
 ﻿using Features.Services.UI.Factory;
-using Features.StaticData.Windows;
 using Features.UI.Windows.Base;
 using Features.UI.Windows.Data;
 

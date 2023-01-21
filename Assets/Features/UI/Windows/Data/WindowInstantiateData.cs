@@ -2,7 +2,7 @@
 using Features.Services.UI.Factory;
 using Features.UI.Windows.Base;
 
-namespace Features.StaticData.Windows
+namespace Features.UI.Windows.Data
 {
   [Serializable]
   public struct WindowInstantiateData

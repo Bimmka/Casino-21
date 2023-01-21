@@ -2,7 +2,6 @@
 using Features.Services.Assets;
 using Features.Services.StaticData;
 using Features.Services.UI.Windows;
-using Features.StaticData.Windows;
 using Features.UI.Windows.Base;
 using UnityEngine;
 using Zenject;
