@@ -1,3 +1,6 @@
+using System;
+using Features.Cards.Scripts.Data.Move;
+using Features.Cards.Scripts.Move;
 using TMPro;
 using UnityEngine;
 
@@ -5,9 +8,17 @@ namespace Features.Cards.Scripts.Element
 {
   public class Card : MonoBehaviour
   {
+    [SerializeField] private CardMoveSettings moveSettings;
     [SerializeField] private TextMeshProUGUI costText;
+
+    private CardMover mover;
     public string ID { get; private set; }
     public int Cost { get; private set; }
+
+    private void Awake()
+    {
+      mover = new CardMover(moveSettings, transform);
+    }
 
     public void Initialize(string id, int cost)
     {
@@ -21,22 +32,15 @@ namespace Features.Cards.Scripts.Element
 
     public void Hide() => 
       gameObject.SetActive(false);
-    
 
-    public void SetPosition(Vector3 at)
-    {
-      transform.position = at;
-    }
 
-    public void Move(Vector3 at, Quaternion rotation)
-    {
-      transform.position = at;
-      transform.rotation = rotation;
-    }
+    public void SetPosition(Vector3 at) =>
+      mover.SetPosition(at);
 
-    public void SetRotation(Quaternion rotation)
-    {
-      transform.rotation = rotation;
-    }
+    public void SetRotation(Quaternion rotation) =>
+      mover.SetRotation(rotation);
+
+    public void Move(Vector3 at, Quaternion rotation, Action callback) => 
+      mover.Move(at, rotation, callback);
   }
 }

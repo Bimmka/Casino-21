@@ -1,3 +1,4 @@
+using System;
 using Features.Cards.Scripts.Element;
 using UnityEngine;
 
@@ -7,10 +8,10 @@ namespace Features.Hands.Scripts.Base
   {
     public Card Card { get; private set; }
 
-    public void SetCard(Card card)
+    public void SetCard(Card card, Action callback = null)
     {
       Card = card;
-      Card.Move(transform.position, Quaternion.Euler(90,0,0));
+      Card.Move(transform.position, Quaternion.Euler(90,0,0), callback);
     }
 
     public void Release()

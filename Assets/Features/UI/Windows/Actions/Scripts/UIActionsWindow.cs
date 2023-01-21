@@ -47,7 +47,7 @@ namespace Features.UI.Windows.Actions.Scripts
 
     private void TakeCard()
     {
-      if (userHands.IsFull)
+      if (userHands.IsFull || userHands.IsTakingCard)
         return;
       
       userHands.TakeCard();

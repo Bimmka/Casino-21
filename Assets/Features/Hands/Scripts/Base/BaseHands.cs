@@ -37,11 +37,11 @@ namespace Features.Hands.Scripts.Base
       return sum;
     }
 
-    public void TakeCard()
+    public virtual void TakeCard()
     {
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
-      freePoint.SetCard(card);
+      freePoint.SetCard(card, OnTookCard);
     }
 
     public void ReleaseCards()
@@ -51,6 +51,8 @@ namespace Features.Hands.Scripts.Base
         cardPoints[i].Release();
       }
     }
+
+    protected virtual void OnTookCard() { }
 
     private bool IsHandFull()
     {
