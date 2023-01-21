@@ -6,7 +6,9 @@ using Features.Hands.Scripts.User;
 using Features.Level.LevelStates.Machine;
 using Features.Level.LevelStates.States;
 using Features.Rules.Data;
+using Features.Services.GameSettings;
 using Features.Services.UI.Windows;
+using Features.Services.UserProvider;
 
 namespace Features.Level.LevelStates.Factory
 {
@@ -17,15 +19,19 @@ namespace Features.Level.LevelStates.Factory
     private readonly UserHands userHands;
     private readonly DealerHands dealerHands;
     private readonly GameRules gameRules;
+    private readonly IGameSettings gameSettings;
+    private readonly IUserProvider userProvider;
 
     public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands, DealerHands dealerHands,
-      GameRules gameRules)
+      GameRules gameRules, IGameSettings gameSettings, IUserProvider userProvider)
     {
       this.windowsService = windowsService;
       this.deck = deck;
       this.userHands = userHands;
       this.dealerHands = dealerHands;
       this.gameRules = gameRules;
+      this.gameSettings = gameSettings;
+      this.userProvider = userProvider;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -43,7 +49,7 @@ namespace Features.Level.LevelStates.Factory
         case nameof(LevelFirstCardsState):
           return new LevelFirstCardsState(userHands, dealerHands, levelStateMachine);
         case nameof(LevelLoseState):
-          return new LevelLoseState();
+          return new LevelLoseState(userHands, dealerHands, windowsService);
         case nameof(LevelPrepareState):
           return new LevelPrepareState(levelStateMachine,deck);
         case nameof(LevelUserCheckState):
@@ -51,7 +57,7 @@ namespace Features.Level.LevelStates.Factory
         case nameof(LevelUserTurnState):
           return new LevelUserTurnState(windowsService);
         case nameof(LevelWinState):
-          return new LevelWinState();
+          return new LevelWinState(userHands, dealerHands, windowsService, gameSettings, userProvider);
         default:
           throw new ArgumentOutOfRangeException();
       }
