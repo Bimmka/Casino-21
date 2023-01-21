@@ -28,6 +28,9 @@ namespace Features.Hands.Scripts.Base
       int sum = 0;
       for (int i = 0; i < cardPoints.Length; i++)
       {
+        if (cardPoints[i].Card == null)
+          break;
+        
         sum += cardPoints[i].Card.Cost;
       }
 
