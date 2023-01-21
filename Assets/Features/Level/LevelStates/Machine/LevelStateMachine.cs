@@ -1,21 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using Features.GameStates.Factory;
 using Features.GameStates.States.Interfaces;
-using Zenject;
+using Features.Level.LevelStates.Factory;
 
-namespace Features.GameStates
+namespace Features.Level.LevelStates.Machine
 {
-  public class GameStateMachine : IGameStateMachine
+  public class LevelStateMachine : ILevelStateMachine
   {
-    private readonly GameStatesFactory factory;
+    private readonly LevelStatesFactory factory;
     private readonly Dictionary<Type, IExitableState> states;
     private IExitableState activeState;
-    
-    public GameStateMachine(GameStatesFactory factory)
+
+    public LevelStateMachine(LevelStatesFactory factory)
     {
       this.factory = factory;
-      states = new Dictionary<Type, IExitableState>(5);
+      states = new Dictionary<Type, IExitableState>(10);
     }
 
     public void Enter<TState>() where TState : class, IState
@@ -31,8 +30,7 @@ namespace Features.GameStates
       
       return states[typeof(TState)] as TState;
     }
-
-
+    
     private TState ChangeState<TState>() where TState : class, IExitableState
     {
       activeState?.Exit();

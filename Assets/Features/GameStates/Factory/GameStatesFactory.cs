@@ -23,7 +23,7 @@ namespace Features.GameStates.Factory
       this.userProvider = userProvider;
     }
     
-    public IState Create<TState>(IGameStateMachine gameStateMachine) where TState : IExitableState
+    public IExitableState Create<TState>(IGameStateMachine gameStateMachine) where TState : IExitableState
     {
       switch (typeof(TState).Name)
       {
