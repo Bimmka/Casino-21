@@ -19,9 +19,6 @@ namespace Features.GameStates
       _states = new Dictionary<Type, IExitableState>(5);
     }
 
-    public void Register<TState>(TState state) where TState : class, IState => 
-      _states.Add(typeof(TState), state);
-
     public void Enter<TState>() where TState : class, IState
     {
       IState state = ChangeState<TState>();

@@ -16,9 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 3734460225679814582, guid: 0e8b6fac8c7c12541bb7479049083155, type: 3}
-    - {fileID: -1632482846730829949, guid: 31ba3fe5c3ec15b4fa460e8623ed77da, type: 3}
-    - {fileID: 5854124670240133631, guid: 06baa63ba7bc5c148af1afdc4afc1049, type: 3}
+    - {fileID: 4170104143556404543, guid: 974dba26c3795e247aeb05a66fb60ea2, type: 3}
+    - {fileID: 9181592297361692778, guid: 114088b342c3b4147a5b86a4eafbcf05, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,7 +26,7 @@ MonoBehaviour:
     - Name: InstantiateData
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[Features.Services.UI.Factory.WindowId,
-        Assembly-CSharp],[Features.StaticData.Windows.WindowInstantiateData, Assembly-CSharp]],
+        Assembly-CSharp],[Features.UI.Windows.Base.Scripts.BaseWindow, Assembly-CSharp]],
         mscorlib
     - Name: comparer
       Entry: 7
@@ -44,67 +43,28 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 1
+      Data: 0
     - Name: $v
-      Entry: 7
-      Data: Features.StaticData.Windows.WindowInstantiateData, Assembly-CSharp
-    - Name: ID
-      Entry: 3
-      Data: 1
-    - Name: Window
       Entry: 10
       Data: 0
     - Name: 
       Entry: 8
       Data: 
     - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 3
-      Data: 2
+      Data: 1
     - Name: $v
-      Entry: 7
-      Data: Features.StaticData.Windows.WindowInstantiateData, Assembly-CSharp
-    - Name: ID
-      Entry: 3
-      Data: 2
-    - Name: Window
       Entry: 10
       Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 3
-    - Name: $v
-      Entry: 7
-      Data: Features.StaticData.Windows.WindowInstantiateData, Assembly-CSharp
-    - Name: ID
-      Entry: 3
-      Data: 3
-    - Name: Window
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 8
       Data: 

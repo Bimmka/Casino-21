@@ -34,7 +34,7 @@ namespace Features.GameStates.Factory
         case nameof(GameLoopState):
           return new GameLoopState();
         case nameof(MainMenuState):
-          return new MainMenuState(gameStateMachine, sceneLoader, windowsService);
+          return new MainMenuState(sceneLoader, windowsService);
         case nameof(RegistrationState):
           return new RegistrationState(sceneLoader, windowsService);
         case nameof(ProgressLoadState):

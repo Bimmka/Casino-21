@@ -6,6 +6,7 @@ using Features.UI.Windows.Base.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Features.UI.Windows.Registration.Scripts
 {
@@ -20,6 +21,7 @@ namespace Features.UI.Windows.Registration.Scripts
     private IUserProvider userProvider;
     private ISaveService saveService;
 
+    [Inject]
     public void Construct(IGameStateMachine gameStateMachine, IUserProvider userProvider, ISaveService saveService)
     {
       this.saveService = saveService;

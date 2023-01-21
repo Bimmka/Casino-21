@@ -9,6 +9,5 @@ namespace Features.GameStates
     void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>;
     void Enter<TState, TPayload, TCallback>(TPayload payload, TCallback loadedCallback, TCallback curtainHideCallback) where TState : class, IPayloadedCallbackState<TPayload, TCallback>;
     TState GetState<TState>() where TState : class, IExitableState;
-    void Register<TState>(TState state) where TState : class, IState;
   }
 }
