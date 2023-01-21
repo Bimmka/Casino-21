@@ -1,5 +1,6 @@
 ﻿using Features.Services.UI.Factory;
 using Features.UI.Windows.Base;
+using Features.UI.Windows.Base.Scripts;
 
 namespace Features.Services.StaticData
 {

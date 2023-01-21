@@ -5,8 +5,10 @@ using Features.GameStates.Observer.Scripts;
 using Features.GameStates.States;
 using Features.SceneLoading.Scripts;
 using Features.Services.Assets;
+using Features.Services.Save;
 using Features.Services.StaticData;
 using Features.Services.UI.Windows;
+using Features.Services.UserProvider;
 using Features.UI.Windows.Data;
 using UnityEngine;
 using Zenject;
@@ -36,6 +38,8 @@ namespace Features.Bootstrapp.Scripts
       BindGameStateMachine();
       BindGameStatesFactory();
       BindGameStatesObserver();
+      BindUserProviderService();
+      BindSaveService();
     }
 
     private void ResolveGameStatesObserver() => 
@@ -68,5 +72,11 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindGameStatesObserver() => 
       Container.Bind<GameStatesObserver>().ToSelf().FromComponentInNewPrefab(gameStatesObserver).AsSingle();
+    
+    private void BindUserProviderService() => 
+      Container.Bind<IUserProvider>().To<UserProviderService>().FromNew().AsSingle();
+
+    private void BindSaveService() => 
+      Container.Bind<ISaveService>().To<PrefsSaveService>().FromNew().AsSingle();
   }
 }

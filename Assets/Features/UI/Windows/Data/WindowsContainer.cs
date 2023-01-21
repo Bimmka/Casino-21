@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Features.Services.UI.Factory;
 using Features.UI.Windows.Base;
+using Features.UI.Windows.Base.Scripts;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

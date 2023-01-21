@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Features.UI.Windows.Base
+namespace Features.UI.Windows.Base.Scripts
 {
   public class UIRoot : MonoBehaviour
   {

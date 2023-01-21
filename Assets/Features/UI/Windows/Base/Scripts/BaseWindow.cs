@@ -2,7 +2,7 @@
 using Features.Services.UI.Factory;
 using UnityEngine;
 
-namespace Features.UI.Windows.Base
+namespace Features.UI.Windows.Base.Scripts
 {
   public class BaseWindow : MonoBehaviour
   {

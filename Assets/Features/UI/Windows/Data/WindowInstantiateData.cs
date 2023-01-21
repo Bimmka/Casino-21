@@ -1,6 +1,7 @@
 ﻿using System;
 using Features.Services.UI.Factory;
 using Features.UI.Windows.Base;
+using Features.UI.Windows.Base.Scripts;
 
 namespace Features.UI.Windows.Data
 {

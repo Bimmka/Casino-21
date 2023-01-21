@@ -1,5 +1,8 @@
 using Features.Constants;
 using Features.GameStates.States.Interfaces;
+using Features.Services.Save;
+using Features.Services.UserProvider;
+using Features.User.Data;
 using UnityEngine;
 
 namespace Features.GameStates.States
@@ -7,18 +10,24 @@ namespace Features.GameStates.States
   public class ProgressLoadState : IState
   {
     private readonly IGameStateMachine gameStateMachine;
+    private readonly ISaveService saveService;
+    private readonly IUserProvider userProvider;
 
-    public ProgressLoadState(IGameStateMachine gameStateMachine)
+    public ProgressLoadState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider)
     {
       this.gameStateMachine = gameStateMachine;
+      this.saveService = saveService;
+      this.userProvider = userProvider;
     }
     
     public void Enter()
     {
-      if (IsHaveSavedPlayer())
+      UserData data =  CreateUserData();
+      SetToProvider(data);
+      SerializedUser user = saveService.LoadPlayer();
+      if (IsHaveSavedUser(user))
       {
-        LoadPlayerPoints();
-        LoadPlayerNickname();
+        InitializeUser(data, user);
         SetMainMenuState();
       }
       else
@@ -30,15 +39,14 @@ namespace Features.GameStates.States
       
     }
 
-    private void LoadPlayerPoints()
-    {
-      int points = PlayerPrefs.GetInt(GameConstants.PlayerPointsKey);
-    }
+    private UserData CreateUserData() => 
+      new UserData();
 
-    private void LoadPlayerNickname()
-    {
-      string nickname = PlayerPrefs.GetString(GameConstants.PlayerNickKey);
-    }
+    private void SetToProvider(UserData data) => 
+      userProvider.Initialize(data);
+
+    private void InitializeUser(UserData data, SerializedUser user) => 
+      data.Restore(user);
 
     private void SetMainMenuState() => 
       gameStateMachine.Enter<MainMenuState>();
@@ -46,7 +54,7 @@ namespace Features.GameStates.States
     private void SetRegistrationState() => 
       gameStateMachine.Enter<RegistrationState>();
 
-    private bool IsHaveSavedPlayer() => 
-      PlayerPrefs.HasKey(GameConstants.PlayerNickKey) && PlayerPrefs.HasKey(GameConstants.PlayerPointsKey);
+    private bool IsHaveSavedUser(SerializedUser serializedUser) => 
+      string.IsNullOrEmpty(serializedUser.Nickname) == false;
   }
 }
