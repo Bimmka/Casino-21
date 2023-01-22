@@ -80,3 +80,4 @@ MonoBehaviour:
   coefficientsSettings: {fileID: 11400000, guid: d742843732853b54a9b93702a2ba3b11, type: 2}
   audioContainer: {fileID: 11400000, guid: 19c877e0b2e55154cb7e1cf48d5accea, type: 2}
   leaderboardSettings: {fileID: 11400000, guid: d51b6d6afae614446ba2176ea8297220, type: 2}
+  perksSettingsContainer: {fileID: 11400000, guid: 4a4fe37f392603548b67800ad47d7c70, type: 2}

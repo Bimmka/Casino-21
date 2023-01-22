@@ -7,5 +7,6 @@ namespace Features.Perks.Data
   {
     public UnlockConditionType Type;
     public int Count;
+    public string TextFormat;
   }
 }

@@ -2,6 +2,7 @@ namespace Features.Perks.Data
 {
   public enum PerkType
   {
+    None,
     OpenFirstUserCard,
     OpenLastUserCard,
     RemoveUserFirstCard,

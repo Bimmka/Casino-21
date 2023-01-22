@@ -1,9 +1,8 @@
-using Features.Perks.Strategy;
 using UnityEngine;
 
 namespace Features.Perks.Data
 {
-  [CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
+  [CreateAssetMenu(fileName = "PerkSettings", menuName = "StaticData/Perks/Create Perks Settings", order = 52)]
   public class PerkSettings : ScriptableObject
   {
     public string Name;
@@ -11,5 +10,6 @@ namespace Features.Perks.Data
     public PerkType Type;
     public int UseCost;
     public UnlockCondition UnlockCondition;
+    public Sprite Icon;
   }
 }
