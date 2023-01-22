@@ -123,5 +123,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Cost: 0
-  Prefab: {fileID: 1688167902864737543, guid: 6666f32439711a642a648ea78a9a792d, type: 3}
+  Prefab: {fileID: 5910634380682699763, guid: 490bbb892a2f39a4190ec40de4c6f6ee, type: 3}
   AlphaCutoff: 0.1
