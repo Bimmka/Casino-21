@@ -47,7 +47,7 @@ namespace Features.UI.Windows.Win.Scripts
 
     public override void Open()
     {
-      winText.text = string.Format(winTextFormat, gameSettings.CurrentBet * 2);
+      winText.text = string.Format(winTextFormat, (int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
       base.Open();
     }
 

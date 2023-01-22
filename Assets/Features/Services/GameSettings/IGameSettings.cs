@@ -6,5 +6,6 @@ namespace Features.Services.GameSettings
     int CurrentBet { get; }
     void SetType(GameDifficultType type);
     void InitializeBet(int bet);
+    float CurrentCoefficient();
   }
 }

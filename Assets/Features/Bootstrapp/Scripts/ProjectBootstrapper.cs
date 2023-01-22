@@ -1,4 +1,5 @@
-﻿using Features.CustomCoroutine;
+﻿using Features.Coefficients.Data;
+using Features.CustomCoroutine;
 using Features.GameStates;
 using Features.GameStates.Factory;
 using Features.GameStates.Observer.Scripts;
@@ -21,6 +22,7 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private WindowsContainer windowsContainer;
     [SerializeField] private LoadingCurtain loadingCurtain;
     [SerializeField] private GameStatesObserver gameStatesObserver;
+    [SerializeField] private CoefficientsSettings coefficientsSettings;
 
     public override void Start()
     {
@@ -82,6 +84,6 @@ namespace Features.Bootstrapp.Scripts
       Container.Bind<ISaveService>().To<PrefsSaveService>().FromNew().AsSingle();
 
     private void BindGameSettingsService() => 
-      Container.Bind<IGameSettings>().To<GameSettingsService>().FromNew().AsSingle();
+      Container.Bind<IGameSettings>().To<GameSettingsService>().FromNew().AsSingle().WithArguments(coefficientsSettings);
   }
 }
