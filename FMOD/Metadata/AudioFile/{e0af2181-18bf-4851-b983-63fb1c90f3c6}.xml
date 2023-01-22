@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e0af2181-18bf-4851-b983-63fb1c90f3c6}">
+		<property name="assetPath">
+			<value>Games, Misc, Playing Cards, Dealing Table 01 SND28873 2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.34359374999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{df98afff-7f63-4a43-9d2e-675c2721da79}</destination>
+		</relationship>
+	</object>
+</objects>
