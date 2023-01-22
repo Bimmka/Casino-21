@@ -1,6 +1,7 @@
 using Features.Constants;
 using Features.GameStates;
 using Features.GameStates.States;
+using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UserProvider;
 using Features.UI.Windows.Base.Scripts;
@@ -21,10 +22,15 @@ namespace Features.UI.Windows.Registration.Scripts
     private IGameStateMachine gameStateMachine;
     private IUserProvider userProvider;
     private ISaveService saveService;
+    private ILeaderboard leaderboard;
+
+    private bool isRegistrating;
 
     [Inject]
-    public void Construct(IGameStateMachine gameStateMachine, IUserProvider userProvider, ISaveService saveService)
+    public void Construct(IGameStateMachine gameStateMachine, IUserProvider userProvider, ISaveService saveService,
+      ILeaderboard leaderboard)
     {
+      this.leaderboard = leaderboard;
       this.saveService = saveService;
       this.userProvider = userProvider;
       this.gameStateMachine = gameStateMachine;
@@ -44,6 +50,9 @@ namespace Features.UI.Windows.Registration.Scripts
 
     private void TryRegistration()
     {
+      if(isRegistrating)
+        return;
+      
       HideErrorTip();
       
       if (IsNicknameEmpty())
@@ -78,9 +87,43 @@ namespace Features.UI.Windows.Registration.Scripts
 
     private void Register()
     {
-      userProvider.User.Initialize(nicknameInputField.text, GameConstants.PlayerDefaultPoints);
-      saveService.SavePlayer(userProvider.User);
-      gameStateMachine.Enter<MainMenuState>();
+      isRegistrating = true;
+      leaderboard.SetNickname(nicknameInputField.text, OnRegister);
     }
+
+    private void OnRegister(bool success)
+    {
+      if (success)
+        SetDefaultPoints();
+      else
+      {
+        ShowSetNameError();
+        isRegistrating = false;
+      }
+    }
+
+    private void SetDefaultPoints() => 
+      leaderboard.LogPoints(GameConstants.PlayerDefaultPoints, OnSetPoints);
+
+    private void ShowSetNameError() => 
+      view.DisplaySetNameError();
+
+    private void OnSetPoints(bool success)
+    {
+      if (success)
+      {
+        userProvider.User.Initialize(nicknameInputField.text, GameConstants.PlayerDefaultPoints);
+        saveService.SavePlayer(userProvider.User);
+        gameStateMachine.Enter<MainMenuState>();
+      }
+      else
+      {
+        isRegistrating = false;
+        ShowSetPointsError();
+      }
+    }
+
+    private void ShowSetPointsError() => 
+      view.DisplaySetPointsError();
   }
 }

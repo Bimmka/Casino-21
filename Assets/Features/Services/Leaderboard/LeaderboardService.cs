@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using Features.Constants;
-using Features.CustomCoroutine;
 using Features.StaticData.Leaderboard;
 using LootLocker.Requests;
 using UnityEngine;
@@ -11,25 +10,49 @@ namespace Features.Services.Leaderboard
   public class LeaderboardService : ILeaderboard
   {
     private readonly LeaderboardSettings settings;
-    private readonly ICoroutineRunner coroutineRunner;
 
     private string playerID;
 
-    public LeaderboardService(LeaderboardSettings settings, ICoroutineRunner coroutineRunner)
+    public LeaderboardService(LeaderboardSettings settings)
     {
       this.settings = settings;
-      this.coroutineRunner = coroutineRunner;
     }
     
-    public void Login(Action<bool> callback) => 
+    public void Login(Action<bool> callback = null) => 
       LootLockerSDKManager.StartGuestSession((response) => { OnLogin(callback, response); });
 
-    public void SetNickname(string nickname, Action<bool> callback) => 
+    public void SetNickname(string nickname, Action<bool> callback = null) => 
       LootLockerSDKManager.SetPlayerName(nickname, (response) => OnSetName(response, callback));
 
-    public void LogPoints(int points, Action<bool> callback) =>
+    public void LogPoints(int points, Action<bool> callback = null) =>
       LootLockerSDKManager.SubmitScore(playerID, points, settings.LeaderboardId, 
         (response) => OnPointsSet(response, callback));
+    
+    public void FetchTopHighscores(Action<bool,List<LeaderboardUser>> callback) => 
+      LootLockerSDKManager.GetScoreList(settings.LeaderboardId, settings.TopCount, (response) => OnLeaderboardList(response, callback));
+
+    private void OnLeaderboardList(LootLockerGetScoreListResponse response,
+      Action<bool, List<LeaderboardUser>> callback)
+    {
+      List<LeaderboardUser> users = new List<LeaderboardUser>();
+      if(response.success)
+      {
+        LootLockerLeaderboardMember[] members = response.items;
+
+        for (int i = 0; i < members.Length; i++)
+        {
+          users.Add(new LeaderboardUser(members[i].player.name, members[i].score));
+        }
+      }
+      else
+      {
+#if DEBUG_LOOTLOCKER
+        Debug.Log("Failed" + response.Error);
+#endif
+      }
+      
+      callback?.Invoke(response.success, users);
+    }
 
     private void OnLogin(Action<bool> callback, LootLockerSessionResponse response)
     {
@@ -67,7 +90,6 @@ namespace Features.Services.Leaderboard
 #if DEBUG_LOOTLOCKER
         Debug.Log("Successfully uploaded score");
 #endif
-         
       }
       else
       {

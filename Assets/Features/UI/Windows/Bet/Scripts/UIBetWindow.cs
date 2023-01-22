@@ -2,6 +2,7 @@ using Features.Level.Scripts.Info;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.Services.GameSettings;
+using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
@@ -26,12 +27,14 @@ namespace Features.UI.Windows.Bet.Scripts
     private ISaveService saveService;
     private IWindowsService windowsService;
     private LevelInfoDisplayer levelInfoDisplayer;
+    private ILeaderboard leaderboard;
 
     [Inject]
     public void Construct(IUserProvider userProvider, ILevelStateMachine levelStateMachine,
       IGameSettings gameSettings, ISaveService saveService, IWindowsService windowsService,
-      LevelInfoDisplayer levelInfoDisplayer)
+      LevelInfoDisplayer levelInfoDisplayer, ILeaderboard leaderboard)
     {
+      this.leaderboard = leaderboard;
       this.levelInfoDisplayer = levelInfoDisplayer;
       this.windowsService = windowsService;
       this.saveService = saveService;
@@ -66,6 +69,7 @@ namespace Features.UI.Windows.Bet.Scripts
     {
       gameSettings.InitializeBet((int)betSlider.value);
       user.PointsData.Reduce((int)betSlider.value);
+      leaderboard.LogPoints(user.PointsData.CurrentPoints);
       saveService.SavePlayer(user);
       levelStateMachine.Enter<LevelCardDeckShuffleState>();
       levelInfoDisplayer.DisplayBet(gameSettings.CurrentBet);
