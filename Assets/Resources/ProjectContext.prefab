@@ -78,3 +78,4 @@ MonoBehaviour:
   loadingCurtain: {fileID: 2197872955370472661, guid: 5e0050b3d46137d4aab541462ad79303, type: 3}
   gameStatesObserver: {fileID: 6570564850292617894, guid: 579da1ca7c805a54f99f96f89b900cf0, type: 3}
   coefficientsSettings: {fileID: 11400000, guid: d742843732853b54a9b93702a2ba3b11, type: 2}
+  audioContainer: {fileID: 11400000, guid: 19c877e0b2e55154cb7e1cf48d5accea, type: 2}
