@@ -8,5 +8,6 @@ namespace Features.StaticData.Leaderboard
     public string LeaderboardId = "10783";
     public string APIKEY = "dev_18c8c2155f4944a98b154fd386223f39";
     public int TopCount = 20;
+    public float UpdateTopCooldown = 60f;
   }
 }

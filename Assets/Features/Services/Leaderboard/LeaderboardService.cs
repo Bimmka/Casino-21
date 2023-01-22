@@ -12,10 +12,13 @@ namespace Features.Services.Leaderboard
     private readonly LeaderboardSettings settings;
 
     private string playerID;
+    private readonly List<LeaderboardUser> leaderboardUsers;
+    private float lastUpdateTime;
 
     public LeaderboardService(LeaderboardSettings settings)
     {
       this.settings = settings;
+      leaderboardUsers = new List<LeaderboardUser>(settings.TopCount);
     }
     
     public void Login(Action<bool> callback = null) => 
@@ -28,30 +31,13 @@ namespace Features.Services.Leaderboard
       LootLockerSDKManager.SubmitScore(playerID, points, settings.LeaderboardId, 
         (response) => OnPointsSet(response, callback));
     
-    public void FetchTopHighscores(Action<bool,List<LeaderboardUser>> callback) => 
-      LootLockerSDKManager.GetScoreList(settings.LeaderboardId, settings.TopCount, (response) => OnLeaderboardList(response, callback));
-
-    private void OnLeaderboardList(LootLockerGetScoreListResponse response,
-      Action<bool, List<LeaderboardUser>> callback)
+    public void FetchTopHighscores(Action<bool,List<LeaderboardUser>> callback)
     {
-      List<LeaderboardUser> users = new List<LeaderboardUser>();
-      if(response.success)
-      {
-        LootLockerLeaderboardMember[] members = response.items;
-
-        for (int i = 0; i < members.Length; i++)
-        {
-          users.Add(new LeaderboardUser(members[i].player.name, members[i].score));
-        }
-      }
+      if (IsNeedUpdateLeaderboard())
+        LootLockerSDKManager.GetScoreList(settings.LeaderboardId, settings.TopCount,
+          (response) => OnLeaderboardList(response, callback));
       else
-      {
-#if DEBUG_LOOTLOCKER
-        Debug.Log("Failed" + response.Error);
-#endif
-      }
-      
-      callback?.Invoke(response.success, users);
+        ReturnCached(callback);
     }
 
     private void OnLogin(Action<bool> callback, LootLockerSessionResponse response)
@@ -100,5 +86,36 @@ namespace Features.Services.Leaderboard
       
       callback?.Invoke(response.success);
     }
+
+    private void OnLeaderboardList(LootLockerGetScoreListResponse response,
+      Action<bool, List<LeaderboardUser>> callback)
+    {
+      List<LeaderboardUser> users = new List<LeaderboardUser>();
+      if(response.success)
+      {
+        LootLockerLeaderboardMember[] members = response.items;
+
+        for (int i = 0; i < members.Length; i++)
+        {
+          users.Add(new LeaderboardUser(members[i].player.name, members[i].score));
+        }
+
+        lastUpdateTime = Time.time;
+      }
+      else
+      {
+#if DEBUG_LOOTLOCKER
+        Debug.Log("Failed" + response.Error);
+#endif
+      }
+      
+      callback?.Invoke(response.success, users);
+    }
+
+    private void ReturnCached(Action<bool,List<LeaderboardUser>> callback) => 
+      callback?.Invoke(true, leaderboardUsers);
+
+    private bool IsNeedUpdateLeaderboard() => 
+      lastUpdateTime + settings.UpdateTopCooldown >= Time.time || leaderboardUsers.Count == 0;
   }
 }
