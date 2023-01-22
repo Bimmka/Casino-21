@@ -16,6 +16,7 @@ namespace Features.Hands.Scripts.Base
     private IAudioService audioService;
 
     public bool IsFull => IsHandFull();
+    public bool IsTakingCard { get; private set; }
 
     [Inject]
     public void Construct(CardDeck deck, IAudioService audioService)
@@ -40,6 +41,7 @@ namespace Features.Hands.Scripts.Base
 
     public virtual void TakeCard()
     {
+      IsTakingCard = true;
       audioService.Play(AudioEventType.Card);
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
@@ -67,7 +69,10 @@ namespace Features.Hands.Scripts.Base
       callback?.Invoke();
     }
 
-    protected virtual void OnTookCard() { }
+    protected virtual void OnTookCard()
+    {
+      IsTakingCard = false;
+    }
 
     private bool IsHandFull()
     {

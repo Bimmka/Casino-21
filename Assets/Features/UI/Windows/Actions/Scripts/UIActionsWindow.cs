@@ -25,6 +25,12 @@ namespace Features.UI.Windows.Actions.Scripts
       this.userHands = userHands;
     }
 
+    public void Hide()
+    {
+      view.Hide();
+    }
+    
+
     protected override void Subscribe()
     {
       base.Subscribe();
@@ -42,6 +48,7 @@ namespace Features.UI.Windows.Actions.Scripts
     public override void Open()
     {
       base.Open();
+      Show();
       ShowButtons();
     }
 
@@ -61,6 +68,9 @@ namespace Features.UI.Windows.Actions.Scripts
       levelStateMachine.Enter<LevelUserCheckState>();
       HideButtons();
     }
+
+    private void Show() => 
+      view.Show();
 
     private void ShowButtons() => 
       view.ShowButtons();

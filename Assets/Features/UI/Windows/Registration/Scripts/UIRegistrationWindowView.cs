@@ -8,6 +8,8 @@ namespace Features.UI.Windows.Registration.Scripts
     [SerializeField] private TextMeshProUGUI errorText;
     [SerializeField] private string emptyNicknameError;
     [SerializeField] private string invalidLettersError;
+    [SerializeField] private string setNameError;
+    [SerializeField] private string setPointsError;
 
     public void HideErrorTip() => 
       errorText.enabled = false;
@@ -17,6 +19,12 @@ namespace Features.UI.Windows.Registration.Scripts
 
     public void DisplayInvalidLettersError() => 
       DisplayTip(invalidLettersError);
+
+    public void DisplaySetNameError() => 
+      DisplayTip(setNameError);
+
+    public void DisplaySetPointsError() => 
+      DisplayTip(setPointsError);
 
     private void DisplayTip(string tip)
     {

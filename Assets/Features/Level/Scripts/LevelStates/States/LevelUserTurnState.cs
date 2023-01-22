@@ -1,6 +1,7 @@
 using Features.GameStates.States.Interfaces;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.UI.Windows.Actions.Scripts;
 
 namespace Features.Level.Scripts.LevelStates.States
 {
@@ -20,7 +21,7 @@ namespace Features.Level.Scripts.LevelStates.States
 
     public void Exit()
     {
-      windowsService.Close(WindowId.Action);
+      ((UIActionsWindow)windowsService.Window(WindowId.Action)).Hide();
     }
   }
 }

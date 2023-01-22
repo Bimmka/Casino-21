@@ -527,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146336089513582532, guid: 97e805ed51530dc4b981b18a98cbb1f7, type: 3}
       propertyPath: m_Name
-      value: Base Window
+      value: ActionsWindow
       objectReference: {fileID: 0}
     - target: {fileID: 2213336514258153611, guid: 97e805ed51530dc4b981b18a98cbb1f7, type: 3}
       propertyPath: m_Pivot.x
@@ -615,6 +615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97e805ed51530dc4b981b18a98cbb1f7, type: 3}
+--- !u!225 &4450852470308446096 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 7588092243664971345, guid: 97e805ed51530dc4b981b18a98cbb1f7, type: 3}
+  m_PrefabInstance: {fileID: 6091904699629025729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5349593395074009418 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2213336514258153611, guid: 97e805ed51530dc4b981b18a98cbb1f7, type: 3}
@@ -625,20 +630,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 146336089513582532, guid: 97e805ed51530dc4b981b18a98cbb1f7, type: 3}
   m_PrefabInstance: {fileID: 6091904699629025729}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4295846744816311855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6236686042916546053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19192dc1dc5e49de9d6cb188c5bf9018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  takeButtonParent: {fileID: 7146737293656379352}
-  checkButtonParent: {fileID: 4594809255807849578}
 --- !u!114 &2313499738532062130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,3 +645,18 @@ MonoBehaviour:
   view: {fileID: 4295846744816311855}
   takeButton: {fileID: 1237582746677996788}
   checkButton: {fileID: 7533266832202999442}
+--- !u!114 &4295846744816311855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236686042916546053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19192dc1dc5e49de9d6cb188c5bf9018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 4450852470308446096}
+  takeButtonParent: {fileID: 7146737293656379352}
+  checkButtonParent: {fileID: 4594809255807849578}

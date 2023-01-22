@@ -10,6 +10,8 @@ namespace Features.UI.Windows.Base.Scripts
     
     public WindowId ID { get; private set; }
     
+    protected bool IsDestroying { get; private set; }
+    
     private void Awake() => 
       OnAwake();
 
@@ -41,6 +43,7 @@ namespace Features.UI.Windows.Base.Scripts
 
     public virtual void Destroy()
     {
+      IsDestroying = true;
       Destroy(gameObject);
     }
   }
