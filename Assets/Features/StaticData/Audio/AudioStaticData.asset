@@ -17,7 +17,7 @@ MonoBehaviour:
   Events:
   - Path: event:/Cards
     BankType: 0
-    Type: 11
+    Type: 1
   Banks:
   - Path: Master.strings
     Type: 0
