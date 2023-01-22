@@ -37,8 +37,8 @@ namespace Features.GameStates.Factory
           return new MainMenuState(sceneLoader, windowsService);
         case nameof(RegistrationState):
           return new RegistrationState(sceneLoader, windowsService);
-        case nameof(ProgressLoadState):
-          return new ProgressLoadState(gameStateMachine, saveService, userProvider);
+        case nameof(LoadProgressState):
+          return new LoadProgressState(gameStateMachine, saveService, userProvider);
         default:
           throw new ArgumentOutOfRangeException();
       }

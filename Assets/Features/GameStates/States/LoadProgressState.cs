@@ -3,17 +3,18 @@ using Features.GameStates.States.Interfaces;
 using Features.Services.Save;
 using Features.Services.UserProvider;
 using Features.User.Data;
+using Services.Audio;
 using UnityEngine;
 
 namespace Features.GameStates.States
 {
-  public class ProgressLoadState : IState
+  public class LoadProgressState : IState
   {
     private readonly IGameStateMachine gameStateMachine;
     private readonly ISaveService saveService;
     private readonly IUserProvider userProvider;
 
-    public ProgressLoadState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider)
+    public LoadProgressState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider)
     {
       this.gameStateMachine = gameStateMachine;
       this.saveService = saveService;
