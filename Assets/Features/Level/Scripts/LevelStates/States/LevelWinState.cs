@@ -26,7 +26,7 @@ namespace Features.Level.Scripts.LevelStates.States
     public void Enter()
     {
       windowsService.Open(WindowId.Win);
-      userProvider.User.PointsData.Add((int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
+      userProvider.User.PointsData.Add(gameSettings.CurrentBet + (int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
       saveService.SavePlayer(userProvider.User);
     }
 
