@@ -7,7 +7,7 @@ namespace Features.Cards.Scripts.Element
 {
   public class CardView : MonoBehaviour
   {
-    [SerializeField] private Renderer cardRenderer;
+    [SerializeField] private Renderer cardPlane;
 
     private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
     private static readonly int Cutoff = Shader.PropertyToID("_Cutoff");
@@ -26,10 +26,13 @@ namespace Features.Cards.Scripts.Element
     {
       this.alphaCutoff = alphaCutoff;
       this.hideCostMasks = hideCostMasks;
-      cardRenderer.GetPropertyBlock(propBlock);
+      cardPlane.GetPropertyBlock(propBlock);
       propBlock.SetTexture(MaskTex, RandomMasks(difficultType));
       propBlock.SetFloat(Cutoff, 0f);
-      cardRenderer.SetPropertyBlock(propBlock);
+      cardPlane.SetPropertyBlock(propBlock);
+      
+      if (difficultType == GameDifficultType.Easy)
+        cardPlane.gameObject.SetActive(false);
     }
 
     public void Show() => 
@@ -40,16 +43,16 @@ namespace Features.Cards.Scripts.Element
 
     public void DisplayCost()
     {
-      cardRenderer.GetPropertyBlock(propBlock);
+      cardPlane.GetPropertyBlock(propBlock);
       propBlock.SetFloat(Cutoff, 0f);
-      cardRenderer.SetPropertyBlock(propBlock);
+      cardPlane.SetPropertyBlock(propBlock);
     }
 
     public void HideCost()
     {
-      cardRenderer.GetPropertyBlock(propBlock);
+      cardPlane.GetPropertyBlock(propBlock);
       propBlock.SetFloat(Cutoff, alphaCutoff);
-      cardRenderer.SetPropertyBlock(propBlock);
+      cardPlane.SetPropertyBlock(propBlock);
     }
 
     private Texture2D RandomMasks(GameDifficultType difficultType) => 

@@ -16,8 +16,9 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 2800000, guid: bf049d9f3f54a564db5e18c798f7eff0, type: 3}
-    - {fileID: 2800000, guid: 5169c1213dcb7be469da896f9f79b577, type: 3}
+    - {fileID: 2800000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
+    - {fileID: 2800000, guid: 158d9c687149a0e499002e08c9420c70, type: 3}
+    - {fileID: 2800000, guid: 81ed8c76d2bc4a4c95d092c98af4e58f, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -81,7 +82,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 13
       Data: 
@@ -105,7 +106,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 13
       Data: 
@@ -122,5 +123,5 @@ MonoBehaviour:
       Entry: 8
       Data: 
   Cost: 5
-  Prefab: {fileID: 81236761899702337, guid: 2141976e79ef91a4ba51bab8954c9245, type: 3}
+  Prefab: {fileID: 4801138394049755373, guid: 52ab5bf807040a246a727438ab0fb9c9, type: 3}
   AlphaCutoff: 0.1

@@ -13,7 +13,6 @@ namespace Features.Cards.Scripts.Element
   {
     [SerializeField] private CardView view;
     [SerializeField] private CardMoveSettings moveSettings;
-    [SerializeField] private TextMeshProUGUI costText;
 
     private CardMover mover;
     private CardSettings settings;
@@ -30,7 +29,6 @@ namespace Features.Cards.Scripts.Element
       this.settings = settings;
       ID = id;
       Cost = cost;
-      costText.text = cost.ToString();
       view.Initialize(settings.DifficultMasks, settings.AlphaCutoff, difficultType);
     }
 

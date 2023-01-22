@@ -2,6 +2,7 @@ using System;
 using Features.GameStates.States;
 using Features.GameStates.States.Interfaces;
 using Features.SceneLoading.Scripts;
+using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
@@ -16,15 +17,17 @@ namespace Features.GameStates.Factory
     private readonly ISaveService saveService;
     private readonly IUserProvider userProvider;
     private readonly IAudioService audioService;
+    private readonly ILeaderboard leaderboard;
 
     public GameStatesFactory(ISceneLoader sceneLoader, IWindowsService windowsService, ISaveService saveService, IUserProvider userProvider,
-      IAudioService audioService)
+      IAudioService audioService, ILeaderboard leaderboard)
     {
       this.sceneLoader = sceneLoader;
       this.windowsService = windowsService;
       this.saveService = saveService;
       this.userProvider = userProvider;
       this.audioService = audioService;
+      this.leaderboard = leaderboard;
     }
     
     public IExitableState Create<TState>(IGameStateMachine gameStateMachine) where TState : IExitableState
@@ -42,7 +45,7 @@ namespace Features.GameStates.Factory
         case nameof(RegistrationState):
           return new RegistrationState(sceneLoader, windowsService);
         case nameof(LoadProgressState):
-          return new LoadProgressState(gameStateMachine, saveService, userProvider, audioService);
+          return new LoadProgressState(gameStateMachine, saveService, userProvider, audioService, leaderboard);
         default:
           throw new ArgumentOutOfRangeException();
       }

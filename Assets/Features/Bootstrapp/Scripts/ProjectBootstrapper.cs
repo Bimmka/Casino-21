@@ -7,11 +7,13 @@ using Features.GameStates.States;
 using Features.SceneLoading.Scripts;
 using Features.Services.Assets;
 using Features.Services.GameSettings;
+using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.StaticData;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
 using Features.StaticData.Audio;
+using Features.StaticData.Leaderboard;
 using Features.UI.Windows.Data;
 using Services.Audio;
 using UnityEngine;
@@ -26,6 +28,7 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private GameStatesObserver gameStatesObserver;
     [SerializeField] private CoefficientsSettings coefficientsSettings;
     [SerializeField] private AudioContainer audioContainer;
+    [SerializeField] private LeaderboardSettings leaderboardSettings;
 
     public override void Start()
     {
@@ -48,6 +51,7 @@ namespace Features.Bootstrapp.Scripts
       BindSaveService();
       BindGameSettingsService();
       BindAudioService();
+      BindLeaderboardService();
     }
 
     private void ResolveGameStatesObserver() => 
@@ -92,5 +96,8 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindAudioService() => 
       Container.Bind<IAudioService>().To<AudioService>().FromNew().AsSingle().WithArguments(audioContainer);
+
+    private void BindLeaderboardService() => 
+      Container.Bind<ILeaderboard>().To<LeaderboardService>().FromNew().AsSingle().WithArguments(leaderboardSettings);
   }
 }
