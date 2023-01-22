@@ -20,12 +20,13 @@ namespace Features.Services.UI.Windows
     public void Register(IUIFactory factory) => 
       uiFactory = factory;
 
-    public void Open(WindowId windowId)
+    public BaseWindow Open(WindowId windowId)
     {
       if (windows.ContainsKey(windowId) == false)
         AddSpawnedWindow(windowId,CreateWindow(windowId));
       
       windows[windowId].Open();
+      return windows[windowId];
     }
 
     public void Close(WindowId windowId)

@@ -3,6 +3,7 @@ using Features.GameStates.States.Interfaces;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.UI.Windows.Actions.Scripts;
 
 namespace Features.Level.Scripts.LevelStates.States
 {
@@ -22,6 +23,8 @@ namespace Features.Level.Scripts.LevelStates.States
     public void Enter()
     {
       windowsService.Open(WindowId.HUD);
+      UIActionsWindow window = (UIActionsWindow) windowsService.Open(WindowId.Action);
+      window.Hide();
       deck.Create();
       levelStateMachine.Enter<LevelBetState>();
     }

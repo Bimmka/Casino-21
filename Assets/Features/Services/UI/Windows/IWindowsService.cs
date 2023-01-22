@@ -8,7 +8,7 @@ namespace Features.Services.UI.Windows
   public interface IWindowsService
   {
     void Register(IUIFactory factory);
-    void Open(WindowId windowId);
+    BaseWindow Open(WindowId windowId);
     void Close(WindowId windowId);
     BaseWindow Window(WindowId windowId);
   }
