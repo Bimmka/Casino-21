@@ -1,4 +1,5 @@
 using Features.GameStates.States.Interfaces;
+using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UserProvider;
 using Features.StaticData.Audio;
@@ -13,14 +14,16 @@ namespace Features.GameStates.States
     private readonly ISaveService saveService;
     private readonly IUserProvider userProvider;
     private readonly IAudioService audioService;
+    private readonly ILeaderboard leaderboard;
 
     public LoadProgressState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider,
-      IAudioService audioService)
+      IAudioService audioService, ILeaderboard leaderboard)
     {
       this.gameStateMachine = gameStateMachine;
       this.saveService = saveService;
       this.userProvider = userProvider;
       this.audioService = audioService;
+      this.leaderboard = leaderboard;
     }
     
     public void Enter()
@@ -28,6 +31,7 @@ namespace Features.GameStates.States
       audioService.LoadBank(AudioBankType.Master);
       audioService.LoadBank(AudioBankType.UI);
       UserData data =  CreateUserData();
+      leaderboard.Login(OnComplete);
       SetToProvider(data);
       SerializedUser user = saveService.LoadPlayer();
       if (IsHaveSavedUser(user))
@@ -37,6 +41,18 @@ namespace Features.GameStates.States
       }
       else
         SetRegistrationState();
+    }
+
+    private void OnComplete(bool obj)
+    {
+      if (obj)
+        leaderboard.SetNickname(userProvider.User.CommonData.Nickname, OnSetName);
+    }
+
+    private void OnSetName(bool obj)
+    {
+      if (obj)
+        leaderboard.LogPoints(userProvider.User.PointsData.CurrentPoints, null);
     }
 
     public void Exit()
