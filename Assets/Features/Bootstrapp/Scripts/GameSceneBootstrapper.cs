@@ -12,6 +12,7 @@ using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.Observer;
 using Features.NPC.Scripts.Base;
 using Features.NPC.Scripts.Data;
+using Features.Perks.Factory;
 using Features.Rules.Data;
 using Features.Services.UI.Factory.BaseUI;
 using Features.UI.Windows.Base.Scripts;
@@ -60,6 +61,7 @@ namespace Features.Bootstrapp.Scripts
       BindDealerHands();
       BindNPCMachine();
       BindLevelInfoDisplayer();
+      BindPerksFactory();
     }
 
     private void BindLevelStateMachine() => 
@@ -123,5 +125,8 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindLevelInfoDisplayer() => 
       Container.Bind<LevelInfoDisplayer>().ToSelf().FromInstance(levelInfoDisplayer).AsSingle();
+
+    private void BindPerksFactory() => 
+      Container.Bind<PerkStrategyFactory>().ToSelf().FromNew().AsSingle();
   }
 }

@@ -10,16 +10,11 @@ namespace Features.Perks.Strategy
   {
     private readonly UserHands userHands;
     private readonly DealerMachine dealerMachine;
-    private readonly ILevelStateMachine levelStateMachine;
-    private readonly GameRules gameRules;
 
-    public TakeFullHands(PerkSettings settings, UserHands userHands, DealerMachine dealerMachine,
-      ILevelStateMachine levelStateMachine, GameRules gameRules) : base(settings)
+    public TakeFullHands(PerkSettings settings, UserHands userHands, DealerMachine dealerMachine) : base(settings)
     {
       this.userHands = userHands;
       this.dealerMachine = dealerMachine;
-      this.levelStateMachine = levelStateMachine;
-      this.gameRules = gameRules;
     }
 
     public override bool IsCanBeUsed() => 

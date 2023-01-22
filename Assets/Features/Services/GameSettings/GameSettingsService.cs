@@ -26,5 +26,12 @@ namespace Features.Services.GameSettings
 
     public void AddPerk(PerkType type) => 
       PerkType = type;
+
+    public void Reset()
+    {
+      PerkType = PerkType.None;
+      CurrentBet = 0;
+      DifficultType = GameDifficultType.Easy;
+    }
   }
 }

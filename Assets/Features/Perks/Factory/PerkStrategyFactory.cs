@@ -1,10 +1,9 @@
 using System;
 using Features.Hands.Scripts.User;
-using Features.Level.Scripts.LevelStates.Machine;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Data;
 using Features.Perks.Strategy;
-using Features.Rules.Data;
+using Features.Services.StaticData;
 
 namespace Features.Perks.Factory
 {
@@ -12,21 +11,24 @@ namespace Features.Perks.Factory
   {
     private readonly UserHands userHands;
     private readonly DealerMachine dealerMachine;
-    private readonly ILevelStateMachine levelStateMachine;
-    private readonly GameRules gameRules;
+    private readonly IStaticDataService staticDataService;
 
     public PerkStrategyFactory(UserHands userHands, DealerMachine dealerMachine,
-      ILevelStateMachine levelStateMachine, GameRules gameRules)
+      IStaticDataService staticDataService)
     {
       this.userHands = userHands;
       this.dealerMachine = dealerMachine;
-      this.levelStateMachine = levelStateMachine;
-      this.gameRules = gameRules;
+      this.staticDataService = staticDataService;
     }
     
-    public PerkStrategy Create(PerkSettings settings)
+    public PerkStrategy Create(PerkType type)
     {
-      switch (settings.Type)
+      if (type == PerkType.None)
+        return null;
+
+      PerkSettings settings = staticDataService.ForPerks().Perk(type);
+      
+      switch (type)
       {
         case PerkType.OpenFirstUserCard:
           return new OpenFirstUserCardPerk(settings, userHands);
@@ -43,8 +45,7 @@ namespace Features.Perks.Factory
         case PerkType.SwapFirstCards:
           return new SwapFirstCardsPerk(settings, userHands, dealerMachine);
         case PerkType.TakeFullHands:
-          return new TakeFullHands(settings, userHands, dealerMachine,
-            levelStateMachine, gameRules);
+          return new TakeFullHands(settings, userHands, dealerMachine);
         default:
           throw new ArgumentOutOfRangeException();
       }

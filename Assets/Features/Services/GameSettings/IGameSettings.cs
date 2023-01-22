@@ -11,5 +11,6 @@ namespace Features.Services.GameSettings
     void InitializeBet(int bet);
     float CurrentCoefficient();
     void AddPerk(PerkType type);
+    void Reset();
   }
 }

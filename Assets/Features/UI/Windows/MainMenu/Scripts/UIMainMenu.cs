@@ -43,6 +43,12 @@ namespace Features.UI.Windows.MainMenu.Scripts
       leaderboardButton.onClick.RemoveListener(OpenLeaderboard);
     }
 
+    public override void Open()
+    {
+      base.Open();
+      gameSettings.Reset();
+    }
+
     private void StartEasyPlay() => 
       StartGame(GameDifficultType.Easy);
 

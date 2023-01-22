@@ -6,5 +6,16 @@ namespace Features.Perks.Data
   public class PerksSettingsContainer : ScriptableObject
   {
     public PerkSettings[] Perks;
+
+    public PerkSettings Perk(PerkType type)
+    {
+      for (int i = 0; i < Perks.Length; i++)
+      {
+        if (Perks[i].Type == type)
+          return Perks[i];
+      }
+
+      return null;
+    }
   }
 }

@@ -16,12 +16,16 @@ namespace Features.Level.Scripts.LevelStates.States
     
     public void Enter()
     {
-      windowsService.Open(WindowId.Action);
+      ActionsWindow().Open();
     }
 
     public void Exit()
     {
-      ((UIActionsWindow)windowsService.Window(WindowId.Action)).Hide();
+      ActionsWindow().LockPerk();
+      ActionsWindow().Hide();
     }
+
+    private UIActionsWindow ActionsWindow() => 
+      ((UIActionsWindow) windowsService.Window(WindowId.Action));
   }
 }

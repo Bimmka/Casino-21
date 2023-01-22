@@ -6,6 +6,7 @@ using Features.Level.Scripts.Info;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.NPC.Scripts.Base;
+using Features.Perks.Factory;
 using Features.Rules.Data;
 using Features.Services.GameSettings;
 using Features.Services.Leaderboard;
@@ -29,10 +30,12 @@ namespace Features.Level.Scripts.LevelStates.Factory
     private readonly ISaveService saveService;
     private readonly ILeaderboard leaderboard;
     private readonly IAudioService audioService;
+    private readonly PerkStrategyFactory perksFactory;
 
     public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands,
       GameRules gameRules, IGameSettings gameSettings, IUserProvider userProvider, DealerMachine dealer,
-      LevelInfoDisplayer infoDisplayer, ISaveService saveService, ILeaderboard leaderboard, IAudioService audioService)
+      LevelInfoDisplayer infoDisplayer, ISaveService saveService, ILeaderboard leaderboard, IAudioService audioService,
+      PerkStrategyFactory perksFactory)
     {
       this.windowsService = windowsService;
       this.deck = deck;
@@ -45,6 +48,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
       this.saveService = saveService;
       this.leaderboard = leaderboard;
       this.audioService = audioService;
+      this.perksFactory = perksFactory;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -64,7 +68,8 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelLoseState):
           return new LevelLoseState(windowsService);
         case nameof(LevelPrepareState):
-          return new LevelPrepareState(levelStateMachine,deck, windowsService, audioService);
+          return new LevelPrepareState(levelStateMachine,deck, windowsService, audioService, perksFactory, userProvider, 
+            userHands, gameSettings);
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
         case nameof(LevelUserCheckState):
