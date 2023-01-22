@@ -51,7 +51,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelDealerTurnState):
           return new LevelDealerTurnState(dealer, levelStateMachine);
         case nameof(LevelFirstCardsState):
-          return new LevelFirstCardsState(userHands, dealer, levelStateMachine);
+          return new LevelFirstCardsState(userHands, dealer, levelStateMachine, deck, gameSettings);
         case nameof(LevelLoseState):
           return new LevelLoseState(windowsService);
         case nameof(LevelPrepareState):

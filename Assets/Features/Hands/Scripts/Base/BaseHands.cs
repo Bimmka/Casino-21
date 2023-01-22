@@ -53,14 +53,14 @@ namespace Features.Hands.Scripts.Base
       }
     }
 
-    public void DisplayCards(Action callback)
+    public void DisplayCardsCost(Action callback)
     {
       for (int i = 0; i < cardPoints.Length; i++)
       {
         if (cardPoints[i].Card == null)
           break;
 
-        cardPoints[i].DisplayCard();
+        cardPoints[i].DisplayCardCost();
       }
       
       callback?.Invoke();
