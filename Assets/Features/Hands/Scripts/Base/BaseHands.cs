@@ -1,6 +1,8 @@
 using System;
 using Features.Cards.Scripts.Deck;
 using Features.Cards.Scripts.Element;
+using Services.Audio;
+using StaticData.Audio;
 using UnityEngine;
 using Zenject;
 
@@ -9,21 +11,19 @@ namespace Features.Hands.Scripts.Base
   public abstract class BaseHands : MonoBehaviour
   {
     [SerializeField] private HandPoint[] cardPoints;
+    
     private CardDeck deck;
+    private IAudioService audioService;
 
     public bool IsFull => IsHandFull();
 
     [Inject]
-    public void Construct(CardDeck deck)
+    public void Construct(CardDeck deck, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.deck = deck;
     }
-
-    public void Open()
-    {
-      
-    }
-
+    
     public int CardPoints()
     {
       int sum = 0;
@@ -40,6 +40,7 @@ namespace Features.Hands.Scripts.Base
 
     public virtual void TakeCard()
     {
+      audioService.Play(AudioEventType.Card);
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
       freePoint.SetCard(card, OnTookCard);
@@ -53,14 +54,14 @@ namespace Features.Hands.Scripts.Base
       }
     }
 
-    public void DisplayCards(Action callback)
+    public void DisplayCardsCost(Action callback)
     {
       for (int i = 0; i < cardPoints.Length; i++)
       {
         if (cardPoints[i].Card == null)
           break;
 
-        cardPoints[i].DisplayCard();
+        cardPoints[i].DisplayCardCost();
       }
       
       callback?.Invoke();

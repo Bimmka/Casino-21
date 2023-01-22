@@ -5,6 +5,7 @@ using Features.SceneLoading.Scripts;
 using Features.Services.Save;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Services.Audio;
 
 namespace Features.GameStates.Factory
 {
@@ -14,13 +15,16 @@ namespace Features.GameStates.Factory
     private readonly IWindowsService windowsService;
     private readonly ISaveService saveService;
     private readonly IUserProvider userProvider;
+    private readonly IAudioService audioService;
 
-    public GameStatesFactory(ISceneLoader sceneLoader, IWindowsService windowsService, ISaveService saveService, IUserProvider userProvider)
+    public GameStatesFactory(ISceneLoader sceneLoader, IWindowsService windowsService, ISaveService saveService, IUserProvider userProvider,
+      IAudioService audioService)
     {
       this.sceneLoader = sceneLoader;
       this.windowsService = windowsService;
       this.saveService = saveService;
       this.userProvider = userProvider;
+      this.audioService = audioService;
     }
     
     public IExitableState Create<TState>(IGameStateMachine gameStateMachine) where TState : IExitableState
@@ -37,8 +41,8 @@ namespace Features.GameStates.Factory
           return new MainMenuState(sceneLoader, windowsService);
         case nameof(RegistrationState):
           return new RegistrationState(sceneLoader, windowsService);
-        case nameof(ProgressLoadState):
-          return new ProgressLoadState(gameStateMachine, saveService, userProvider);
+        case nameof(LoadProgressState):
+          return new LoadProgressState(gameStateMachine, saveService, userProvider, audioService);
         default:
           throw new ArgumentOutOfRangeException();
       }

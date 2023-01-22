@@ -43,7 +43,7 @@ namespace Features.Level.Scripts.LevelStates.States
     }
     
     private void DisplayCards(Action callback) => 
-      userHands.DisplayCards(callback);
+      userHands.DisplayCardsCost(callback);
 
     private void Check()
     {

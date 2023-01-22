@@ -1,4 +1,5 @@
-﻿using Features.CustomCoroutine;
+﻿using Features.Coefficients.Data;
+using Features.CustomCoroutine;
 using Features.GameStates;
 using Features.GameStates.Factory;
 using Features.GameStates.Observer.Scripts;
@@ -10,7 +11,9 @@ using Features.Services.Save;
 using Features.Services.StaticData;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Data;
+using Services.Audio;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +24,8 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private WindowsContainer windowsContainer;
     [SerializeField] private LoadingCurtain loadingCurtain;
     [SerializeField] private GameStatesObserver gameStatesObserver;
+    [SerializeField] private CoefficientsSettings coefficientsSettings;
+    [SerializeField] private AudioContainer audioContainer;
 
     public override void Start()
     {
@@ -42,6 +47,7 @@ namespace Features.Bootstrapp.Scripts
       BindUserProviderService();
       BindSaveService();
       BindGameSettingsService();
+      BindAudioService();
     }
 
     private void ResolveGameStatesObserver() => 
@@ -82,6 +88,9 @@ namespace Features.Bootstrapp.Scripts
       Container.Bind<ISaveService>().To<PrefsSaveService>().FromNew().AsSingle();
 
     private void BindGameSettingsService() => 
-      Container.Bind<IGameSettings>().To<GameSettingsService>().FromNew().AsSingle();
+      Container.Bind<IGameSettings>().To<GameSettingsService>().FromNew().AsSingle().WithArguments(coefficientsSettings);
+
+    private void BindAudioService() => 
+      Container.Bind<IAudioService>().To<AudioService>().FromNew().AsSingle().WithArguments(audioContainer);
   }
 }

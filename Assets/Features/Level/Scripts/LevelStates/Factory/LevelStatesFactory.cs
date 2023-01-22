@@ -8,6 +8,7 @@ using Features.Level.Scripts.LevelStates.States;
 using Features.NPC.Scripts.Base;
 using Features.Rules.Data;
 using Features.Services.GameSettings;
+using Features.Services.Save;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
 
@@ -23,10 +24,11 @@ namespace Features.Level.Scripts.LevelStates.Factory
     private readonly IUserProvider userProvider;
     private readonly DealerMachine dealer;
     private readonly LevelInfoDisplayer infoDisplayer;
+    private readonly ISaveService saveService;
 
     public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands,
       GameRules gameRules, IGameSettings gameSettings, IUserProvider userProvider, DealerMachine dealer,
-      LevelInfoDisplayer infoDisplayer)
+      LevelInfoDisplayer infoDisplayer, ISaveService saveService)
     {
       this.windowsService = windowsService;
       this.deck = deck;
@@ -36,6 +38,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
       this.userProvider = userProvider;
       this.dealer = dealer;
       this.infoDisplayer = infoDisplayer;
+      this.saveService = saveService;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -51,11 +54,11 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelDealerTurnState):
           return new LevelDealerTurnState(dealer, levelStateMachine);
         case nameof(LevelFirstCardsState):
-          return new LevelFirstCardsState(userHands, dealer, levelStateMachine);
+          return new LevelFirstCardsState(userHands, dealer, levelStateMachine, deck, gameSettings);
         case nameof(LevelLoseState):
           return new LevelLoseState(windowsService);
         case nameof(LevelPrepareState):
-          return new LevelPrepareState(levelStateMachine,deck);
+          return new LevelPrepareState(levelStateMachine,deck, windowsService);
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
         case nameof(LevelUserCheckState):
@@ -63,7 +66,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelUserTurnState):
           return new LevelUserTurnState(windowsService);
         case nameof(LevelWinState):
-          return new LevelWinState(windowsService, gameSettings, userProvider);
+          return new LevelWinState(windowsService, gameSettings, userProvider, saveService);
         default:
           throw new ArgumentOutOfRangeException();
       }

@@ -54,6 +54,14 @@ namespace Features.Cards.Scripts.Deck
       }
     }
 
+    public void HideCardsCost()
+    {
+      for (int i = 0; i < cardIds.Count; i++)
+      {
+        cardsContainer.Card(cardIds[i]).HideCost();
+      }
+    }
+
     public Card TopCard()
     {
       Card card = cardsContainer.Card(cardIds[cardIndex]);

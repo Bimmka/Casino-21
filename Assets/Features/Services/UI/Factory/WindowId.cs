@@ -10,5 +10,6 @@
     Action = 5,
     Win = 6,
     Lose = 7,
+    PauseMenu = 8,
   }
 }

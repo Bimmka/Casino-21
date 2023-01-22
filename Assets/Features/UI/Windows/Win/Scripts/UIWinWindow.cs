@@ -3,6 +3,7 @@ using Features.GameStates.States;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.Services.GameSettings;
+using Features.Services.UI.Windows;
 using Features.UI.Windows.Base.Scripts;
 using TMPro;
 using UnityEngine;
@@ -21,11 +22,13 @@ namespace Features.UI.Windows.Win.Scripts
     private IGameSettings gameSettings;
     private IGameStateMachine gameStateMachine;
     private ILevelStateMachine levelStateMachine;
+    private IWindowsService windowsService;
 
     [Inject]
     public void Construct(IGameSettings gameSettings, IGameStateMachine gameStateMachine,
-      ILevelStateMachine levelStateMachine)
+      ILevelStateMachine levelStateMachine, IWindowsService windowsService)
     {
+      this.windowsService = windowsService;
       this.levelStateMachine = levelStateMachine;
       this.gameStateMachine = gameStateMachine;
       this.gameSettings = gameSettings;
@@ -47,14 +50,17 @@ namespace Features.UI.Windows.Win.Scripts
 
     public override void Open()
     {
-      winText.text = string.Format(winTextFormat, gameSettings.CurrentBet * 2);
+      winText.text = string.Format(winTextFormat, (int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
       base.Open();
     }
 
     private void LoadMainMenu() => 
       gameStateMachine.Enter<MainMenuState>();
 
-    private void RestartGame() => 
+    private void RestartGame()
+    {
       levelStateMachine.Enter<LevelResetState>();
+      windowsService.Close(ID);
+    }
   }
 }

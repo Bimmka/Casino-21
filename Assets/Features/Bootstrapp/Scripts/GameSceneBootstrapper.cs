@@ -3,6 +3,7 @@ using Features.Cards.Scripts.Data.Deck;
 using Features.Cards.Scripts.Deck;
 using Features.Cards.Scripts.Factory;
 using Features.Cards.Scripts.Shuffle;
+using Features.Coefficients.Data;
 using Features.Hands.Scripts.Dealer;
 using Features.Hands.Scripts.User;
 using Features.Level.Scripts.Info;

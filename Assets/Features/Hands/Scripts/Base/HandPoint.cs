@@ -23,9 +23,9 @@ namespace Features.Hands.Scripts.Base
       }
     }
 
-    public void DisplayCard()
+    public void DisplayCardCost()
     {
-      Card.Display();
+      Card.DisplayCost();
     }
   }
 }

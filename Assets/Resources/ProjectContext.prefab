@@ -74,10 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78978204580c4547866215ecab4b6877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipsContainer: {fileID: 11400000, guid: 9ae9c6251fc727b4f88971d3e452d1b4, type: 2}
-  weaponsContainer: {fileID: 11400000, guid: f6ad2c237dd173b4988c5915641fc54f, type: 2}
-  modulesContainer: {fileID: 11400000, guid: 39ab23d1ff3b97540b802561def58483, type: 2}
-  bindingsContainer: {fileID: 11400000, guid: 2b77e5761cd94914fa8711af4c12de3f, type: 2}
   windowsContainer: {fileID: 11400000, guid: af19f1885a7c3884ead312e646417f15, type: 2}
   loadingCurtain: {fileID: 2197872955370472661, guid: 5e0050b3d46137d4aab541462ad79303, type: 3}
   gameStatesObserver: {fileID: 6570564850292617894, guid: 579da1ca7c805a54f99f96f89b900cf0, type: 3}
+  coefficientsSettings: {fileID: 11400000, guid: d742843732853b54a9b93702a2ba3b11, type: 2}
+  audioContainer: {fileID: 11400000, guid: 19c877e0b2e55154cb7e1cf48d5accea, type: 2}

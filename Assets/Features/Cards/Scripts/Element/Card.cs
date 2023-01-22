@@ -1,17 +1,22 @@
 using System;
+using Features.Cards.Scripts.Data.Cards;
 using Features.Cards.Scripts.Data.Move;
 using Features.Cards.Scripts.Move;
+using Features.Services.GameSettings;
 using TMPro;
 using UnityEngine;
 
 namespace Features.Cards.Scripts.Element
 {
+  [RequireComponent(typeof(CardView))]
   public class Card : MonoBehaviour
   {
+    [SerializeField] private CardView view;
     [SerializeField] private CardMoveSettings moveSettings;
     [SerializeField] private TextMeshProUGUI costText;
 
     private CardMover mover;
+    private CardSettings settings;
     public string ID { get; private set; }
     public int Cost { get; private set; }
 
@@ -20,18 +25,26 @@ namespace Features.Cards.Scripts.Element
       mover = new CardMover(moveSettings, transform);
     }
 
-    public void Initialize(string id, int cost)
+    public void Initialize(string id, int cost, CardSettings settings, GameDifficultType difficultType)
     {
+      this.settings = settings;
       ID = id;
       Cost = cost;
       costText.text = cost.ToString();
+      view.Initialize(settings.DifficultMasks, settings.AlphaCutoff, difficultType);
     }
 
     public void Show() => 
-      gameObject.SetActive(true);
+      view.Show();
 
     public void Hide() => 
-      gameObject.SetActive(false);
+      view.Hide();
+
+    public void HideCost() => 
+      view.HideCost();
+
+    public void DisplayCost() => 
+      view.DisplayCost();
 
     public void SetPosition(Vector3 at) =>
       mover.SetPosition(at);
@@ -41,10 +54,5 @@ namespace Features.Cards.Scripts.Element
 
     public void Move(Vector3 at, Quaternion rotation, Action callback) => 
       mover.Move(at, rotation, callback);
-
-    public void Display()
-    {
-      
-    }
   }
 }

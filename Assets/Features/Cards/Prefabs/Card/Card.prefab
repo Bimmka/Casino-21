@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3811507966757937891}
   - component: {fileID: 392958114121304031}
   - component: {fileID: 81236761899702337}
+  - component: {fileID: 7376315320504511520}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -97,8 +98,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9157bbb47f340ba99b5162813e437e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 7376315320504511520}
   moveSettings: {fileID: 11400000, guid: 4b916dbde90eede47ae54ae64460f3ec, type: 2}
   costText: {fileID: 2303251701736624938}
+--- !u!114 &7376315320504511520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214810173908325225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2dbf649bd4f46a1b87524512ca10d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardRenderer: {fileID: 392958114121304031}
 --- !u!1 &2532914334999887616
 GameObject:
   m_ObjectHideFlags: 0
