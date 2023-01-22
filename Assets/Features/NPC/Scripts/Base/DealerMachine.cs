@@ -41,7 +41,10 @@ namespace Features.NPC.Scripts.Base
       while (dealerHands.IsFull == false && IsNeedTake())
       {
         TakeCard();
-        yield return null;
+        while (dealerHands.IsTakingCard)
+        {
+          yield return null;
+        }
       }
       End?.Invoke();
     }
