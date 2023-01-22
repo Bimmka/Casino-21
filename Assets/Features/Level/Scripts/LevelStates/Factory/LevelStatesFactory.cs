@@ -58,7 +58,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelLoseState):
           return new LevelLoseState(windowsService);
         case nameof(LevelPrepareState):
-          return new LevelPrepareState(levelStateMachine,deck);
+          return new LevelPrepareState(levelStateMachine,deck, windowsService);
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
         case nameof(LevelUserCheckState):
