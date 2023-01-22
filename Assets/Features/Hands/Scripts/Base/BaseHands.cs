@@ -1,6 +1,7 @@
 using System;
 using Features.Cards.Scripts.Deck;
 using Features.Cards.Scripts.Element;
+using Features.StaticData.Audio;
 using Services.Audio;
 using StaticData.Audio;
 using UnityEngine;
