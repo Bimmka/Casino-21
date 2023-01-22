@@ -14,6 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHoldingInstancesCount: 20
   MaxPlayingEventsOnOneTime: 5
-  Events: []
-  Banks: []
+  Events:
+  - Path: event:/Cards
+    BankType: 0
+    Type: 11
+  Banks:
+  - Path: Master.strings
+    Type: 0
+    IsPreloadSimples: 0
+  - Path: Master
+    Type: 1
+    IsPreloadSimples: 0
   Parameters: []

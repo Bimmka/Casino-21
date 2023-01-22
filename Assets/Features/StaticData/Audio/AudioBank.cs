@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StaticData.Audio
+namespace Features.StaticData.Audio
 {
   [Serializable]
   public struct AudioBank

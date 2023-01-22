@@ -131,11 +131,11 @@ MonoBehaviour:
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers:
-  - 46fbfdf3fc43db0458918377fd40293e
-  - 0f8eb3f400726694eb47beb1a9f94ce8
-  - 2c5177b11d81d824dbb064f9ac8527da
-  - fd7c55dab0fce234b8c25f6ffca523c1
   - c88d16e5272a4e241b0ef0ac2e53b73d
+  - fd7c55dab0fce234b8c25f6ffca523c1
+  - 2c5177b11d81d824dbb064f9ac8527da
+  - 0f8eb3f400726694eb47beb1a9f94ce8
+  - 46fbfdf3fc43db0458918377fd40293e
   codecChannels:
     Value: []
     HasValue: 0
@@ -153,11 +153,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: 2c5177b11d81d824dbb064f9ac8527da
   parentIdentifier: default
-  active: 0
+  active: 1
   Properties:
     LiveUpdate:
-      Value: 0
-      HasValue: 0
+      Value: 1
+      HasValue: 1
     LiveUpdatePort:
       Value: 0
       HasValue: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  OutputTypeName: 
+  OutputTypeName: AUTODETECT
   threadAffinities:
     Value: []
     HasValue: 0
@@ -219,15 +219,15 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   switchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
-  sourceProjectPath: 
-  sourceBankPath: 
+  HasSourceProject: 0
+  HasPlatforms: 0
+  sourceProjectPath: FMOD/BlackMatch.fspro
+  sourceBankPath: FMOD/Build/Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
-  AutomaticEventLoading: 1
-  BankLoadType: 0
+  AutomaticEventLoading: 0
+  BankLoadType: 2
   AutomaticSampleLoading: 0
   EncryptionKey: 
   ImportType: 0
@@ -243,7 +243,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
+  MasterBanks:
+  - Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
@@ -259,13 +260,13 @@ MonoBehaviour:
   HideSetupWizard: 0
   LastEventReferenceScanVersion: 131601
   Platforms:
-  - {fileID: 2481382063036354330}
-  - {fileID: 8585515297044224741}
-  - {fileID: -2182176639642923926}
-  - {fileID: -3570079227740306614}
-  - {fileID: 8742900767540394049}
-  - {fileID: -2403455647651545365}
   - {fileID: 6904882107735059001}
+  - {fileID: -2403455647651545365}
+  - {fileID: 8742900767540394049}
+  - {fileID: -3570079227740306614}
+  - {fileID: -2182176639642923926}
+  - {fileID: 8585515297044224741}
+  - {fileID: 2481382063036354330}
   MigratedPlatforms: 150000000b0000000800000005000000060000000200000001000000
 --- !u!114 &2481382063036354330
 MonoBehaviour:
@@ -281,11 +282,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identifier: 46fbfdf3fc43db0458918377fd40293e
   parentIdentifier: default
-  active: 0
+  active: 1
   Properties:
     LiveUpdate:
-      Value: 0
-      HasValue: 0
+      Value: 1
+      HasValue: 1
     LiveUpdatePort:
       Value: 0
       HasValue: 0
@@ -325,11 +326,11 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  OutputTypeName: 
+  OutputTypeName: AUTODETECT
   threadAffinities:
     Value: []
     HasValue: 0
-  displaySortOrder: 0
+  displaySortOrder: 1
   childIdentifiers: []
   codecChannels:
     Value: []

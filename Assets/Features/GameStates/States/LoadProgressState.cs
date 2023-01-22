@@ -1,10 +1,9 @@
-using Features.Constants;
 using Features.GameStates.States.Interfaces;
 using Features.Services.Save;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.User.Data;
 using Services.Audio;
-using UnityEngine;
 
 namespace Features.GameStates.States
 {
@@ -13,16 +12,21 @@ namespace Features.GameStates.States
     private readonly IGameStateMachine gameStateMachine;
     private readonly ISaveService saveService;
     private readonly IUserProvider userProvider;
+    private readonly IAudioService audioService;
 
-    public LoadProgressState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider)
+    public LoadProgressState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider,
+      IAudioService audioService)
     {
       this.gameStateMachine = gameStateMachine;
       this.saveService = saveService;
       this.userProvider = userProvider;
+      this.audioService = audioService;
     }
     
     public void Enter()
     {
+      audioService.LoadBank(AudioBankType.Master);
+      audioService.LoadBank(AudioBankType.UI);
       UserData data =  CreateUserData();
       SetToProvider(data);
       SerializedUser user = saveService.LoadPlayer();
