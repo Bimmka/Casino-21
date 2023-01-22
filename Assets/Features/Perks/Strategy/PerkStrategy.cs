@@ -11,6 +11,7 @@ namespace Features.Perks.Strategy
       this.settings = settings;
     }
 
+    public abstract bool IsCanBeUsed();
     public abstract void Use();
   }
 }

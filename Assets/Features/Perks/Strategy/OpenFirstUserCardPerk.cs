@@ -5,13 +5,17 @@ namespace Features.Perks.Strategy
 {
   public class OpenFirstUserCardPerk : PerkStrategy
   {
+    private readonly UserHands userHands;
+
     public OpenFirstUserCardPerk(PerkSettings settings, UserHands userHands) : base(settings)
     {
+      this.userHands = userHands;
     }
 
-    public override void Use()
-    {
-      
-    }
+    public override bool IsCanBeUsed() => 
+      userHands.IsNotEmpty;
+
+    public override void Use() => 
+      userHands.OpenFirstCard();
   }
 }

@@ -15,6 +15,8 @@ namespace Features.NPC.Scripts.Base
     public event Action End;
 
     public int Points => dealerHands.CardPoints();
+    public bool IsFull => dealerHands.IsFull;
+    public bool IsNotEmpty => dealerHands.IsNotEmpty;
 
     [Inject]
     public void Construct(DealerHands dealerHands, NPCSettings settings)
@@ -35,6 +37,9 @@ namespace Features.NPC.Scripts.Base
 
     public void ReleaseCards() => 
       dealerHands.ReleaseCards();
+
+    public void RemoveLastCard() => 
+      dealerHands.RemoveLastCard();
 
     private IEnumerator Turn()
     {

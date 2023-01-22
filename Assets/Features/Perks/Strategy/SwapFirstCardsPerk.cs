@@ -6,9 +6,17 @@ namespace Features.Perks.Strategy
 {
   public class SwapFirstCardsPerk : PerkStrategy
   {
+    private readonly UserHands userHands;
+    private readonly DealerMachine dealerMachine;
+
     public SwapFirstCardsPerk(PerkSettings settings, UserHands userHands, DealerMachine dealerMachine) : base(settings)
     {
+      this.userHands = userHands;
+      this.dealerMachine = dealerMachine;
     }
+
+    public override bool IsCanBeUsed() => 
+      userHands.IsNotEmpty && dealerMachine.IsNotEmpty;
 
     public override void Use()
     {

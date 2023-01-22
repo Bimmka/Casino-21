@@ -16,6 +16,7 @@ namespace Features.Hands.Scripts.Base
     private IAudioService audioService;
 
     public bool IsFull => IsHandFull();
+    public bool IsNotEmpty => FirstFulledPoint() != null;
     public bool IsTakingCard { get; private set; }
 
     [Inject]
@@ -55,6 +56,18 @@ namespace Features.Hands.Scripts.Base
         cardPoints[i].Release();
       }
     }
+    
+    public void RemoveFirstCard()
+    {
+      HandPoint point = FirstFulledPoint();
+      point.Release();
+    }
+    
+    public void RemoveLastCard()
+    {
+      HandPoint point = LastFulledPoint();
+      point.Release();
+    }
 
     public void DisplayCardsCost(Action callback)
     {
@@ -72,6 +85,28 @@ namespace Features.Hands.Scripts.Base
     protected virtual void OnTookCard()
     {
       IsTakingCard = false;
+    }
+
+    protected HandPoint FirstFulledPoint()
+    {
+      for (int i = 0; i < cardPoints.Length; i++)
+      {
+        if (cardPoints[i].Card != null)
+          return cardPoints[i];
+      }
+
+      return null;
+    }
+    
+    protected HandPoint LastFulledPoint()
+    {
+      for (int i = cardPoints.Length - 1;  i >= 0; i--)
+      {
+        if (cardPoints[i].Card != null)
+          return cardPoints[i];
+      }
+
+      return null;
     }
 
     private bool IsHandFull()
