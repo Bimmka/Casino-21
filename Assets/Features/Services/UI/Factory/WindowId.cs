@@ -11,5 +11,7 @@
     Win = 6,
     Lose = 7,
     PauseMenu = 8,
+    Leaderboard = 9,
+    
   }
 }
