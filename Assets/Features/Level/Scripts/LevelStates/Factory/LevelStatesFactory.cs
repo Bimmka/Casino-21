@@ -12,6 +12,7 @@ using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Services.Audio;
 
 namespace Features.Level.Scripts.LevelStates.Factory
 {
@@ -27,10 +28,11 @@ namespace Features.Level.Scripts.LevelStates.Factory
     private readonly LevelInfoDisplayer infoDisplayer;
     private readonly ISaveService saveService;
     private readonly ILeaderboard leaderboard;
+    private readonly IAudioService audioService;
 
     public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands,
       GameRules gameRules, IGameSettings gameSettings, IUserProvider userProvider, DealerMachine dealer,
-      LevelInfoDisplayer infoDisplayer, ISaveService saveService, ILeaderboard leaderboard)
+      LevelInfoDisplayer infoDisplayer, ISaveService saveService, ILeaderboard leaderboard, IAudioService audioService)
     {
       this.windowsService = windowsService;
       this.deck = deck;
@@ -42,6 +44,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
       this.infoDisplayer = infoDisplayer;
       this.saveService = saveService;
       this.leaderboard = leaderboard;
+      this.audioService = audioService;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -61,7 +64,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelLoseState):
           return new LevelLoseState(windowsService);
         case nameof(LevelPrepareState):
-          return new LevelPrepareState(levelStateMachine,deck, windowsService);
+          return new LevelPrepareState(levelStateMachine,deck, windowsService, audioService);
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
         case nameof(LevelUserCheckState):

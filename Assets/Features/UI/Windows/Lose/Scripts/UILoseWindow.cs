@@ -4,7 +4,10 @@ using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.Services.GameSettings;
 using Features.Services.UI.Windows;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
+using FMOD.Studio;
+using Services.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,11 +26,13 @@ namespace Features.UI.Windows.Lose.Scripts
     private IGameStateMachine gameStateMachine;
     private ILevelStateMachine levelStateMachine;
     private IWindowsService windowsService;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(IGameSettings gameSettings, IGameStateMachine gameStateMachine,
-      ILevelStateMachine levelStateMachine, IWindowsService windowsService)
+      ILevelStateMachine levelStateMachine, IWindowsService windowsService, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.windowsService = windowsService;
       this.levelStateMachine = levelStateMachine;
       this.gameStateMachine = gameStateMachine;
@@ -54,8 +59,11 @@ namespace Features.UI.Windows.Lose.Scripts
       base.Open();
     }
 
-    private void LoadMainMenu() => 
+    private void LoadMainMenu()
+    {
+      audioService.Stop(AudioEventType.GameAmbient, STOP_MODE.ALLOWFADEOUT);
       gameStateMachine.Enter<MainMenuState>();
+    }
 
     private void RestartGame()
     {

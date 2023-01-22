@@ -3,7 +3,9 @@ using Features.GameStates.States.Interfaces;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Actions.Scripts;
+using Services.Audio;
 
 namespace Features.Level.Scripts.LevelStates.States
 {
@@ -12,12 +14,14 @@ namespace Features.Level.Scripts.LevelStates.States
     private readonly ILevelStateMachine levelStateMachine;
     private readonly CardDeck deck;
     private readonly IWindowsService windowsService;
+    private readonly IAudioService audioService;
 
-    public LevelPrepareState(ILevelStateMachine levelStateMachine, CardDeck deck, IWindowsService windowsService)
+    public LevelPrepareState(ILevelStateMachine levelStateMachine, CardDeck deck, IWindowsService windowsService, IAudioService audioService)
     {
       this.levelStateMachine = levelStateMachine;
       this.deck = deck;
       this.windowsService = windowsService;
+      this.audioService = audioService;
     }
     
     public void Enter()
@@ -27,6 +31,7 @@ namespace Features.Level.Scripts.LevelStates.States
       window.Hide();
       deck.Create();
       levelStateMachine.Enter<LevelBetState>();
+      audioService.Play(AudioEventType.GameAmbient);
     }
 
     public void Exit()
