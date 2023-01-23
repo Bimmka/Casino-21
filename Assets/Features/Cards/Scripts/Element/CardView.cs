@@ -26,10 +26,16 @@ namespace Features.Cards.Scripts.Element
     {
       this.alphaCutoff = alphaCutoff;
       this.hideCostMasks = hideCostMasks;
-      cardPlane.GetPropertyBlock(propBlock);
-      propBlock.SetTexture(MaskTex, RandomMasks(difficultType));
-      propBlock.SetFloat(Cutoff, 1.1f);
-      cardPlane.SetPropertyBlock(propBlock);
+      if (IsHaveMasks(difficultType))
+      {
+        cardPlane.GetPropertyBlock(propBlock);
+        propBlock.SetTexture(MaskTex, RandomMasks(difficultType));
+        propBlock.SetFloat(Cutoff, 1.1f);
+        cardPlane.SetPropertyBlock(propBlock);
+      }
+      else 
+        cardPlane.gameObject.SetActive(false);
+      
       
       if (difficultType == GameDifficultType.Easy)
         cardPlane.gameObject.SetActive(false);
@@ -54,6 +60,9 @@ namespace Features.Cards.Scripts.Element
       propBlock.SetFloat(Cutoff, alphaCutoff);
       cardPlane.SetPropertyBlock(propBlock);
     }
+    
+    private bool IsHaveMasks(GameDifficultType difficultType) => 
+      hideCostMasks.ContainsKey(difficultType) && hideCostMasks[difficultType].Length > 0;
 
     private Texture2D RandomMasks(GameDifficultType difficultType) => 
       hideCostMasks[difficultType][Random.Range(0, hideCostMasks[difficultType].Length)];
