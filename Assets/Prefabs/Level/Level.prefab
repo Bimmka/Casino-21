@@ -160,7 +160,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.15
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.15
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -419,6 +419,12 @@ MonoBehaviour:
   userPointsText: {fileID: 5135628273846016354}
   dealerPointsText: {fileID: 5135628274481975516}
   betDisplayer: {fileID: 2212731647550115573}
+  userPointsTextFormat: 'Player:
+
+    {0}'
+  dealerPointsTextFormat: 'Dealer:
+
+    {0}'
 --- !u!114 &2212731647550115573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +438,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   betText: {fileID: 5135628275543370736}
+  betTextFormat: 'Bet:
+
+    {0}'
   columns:
   - {fileID: 8197149725944080033}
   settings: {fileID: 11400000, guid: b29c7b45eee364749b5f94a7d908608e, type: 2}
@@ -667,7 +676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bet: \n1000"
+  m_text: "Bet: \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -694,12 +703,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.1
+  m_fontSize: 0.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.15
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
