@@ -1,3 +1,4 @@
+using Features.Cards.Scripts.Element;
 using Features.Hands.Scripts.User;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Data;
@@ -20,7 +21,10 @@ namespace Features.Perks.Strategy
 
     public override void Use()
     {
-      
+      Card userFirstCard = userHands.PopFirstCard();
+      Card dealerFirstCard = dealerMachine.PopFirstCard();
+      userHands.SetCard(dealerFirstCard);
+      dealerMachine.SetCard(userFirstCard);
     }
   }
 }

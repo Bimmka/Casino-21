@@ -1,5 +1,6 @@
 using System;
 using Features.Hands.Scripts.User;
+using Features.Level.Scripts.LevelStates.Machine;
 using Features.Perks.Data;
 using Features.Perks.Factory;
 using Features.Perks.Strategy;
@@ -40,13 +41,13 @@ namespace Features.Perks.Observer
             this.userHands = userHands;
         }
 
-        public void Initialize()
+        public void Initialize(ILevelStateMachine levelStateMachine)
         {
             if (gameSettings.PerkType == PerkType.None)
                 return;
 
             settings = staticDataService.ForPerks().Perk(gameSettings.PerkType);
-            strategy = factory.Create(settings);
+            strategy = factory.Create(settings, levelStateMachine);
         }
 
         public void Reset()

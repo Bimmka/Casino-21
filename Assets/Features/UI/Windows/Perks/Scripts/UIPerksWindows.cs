@@ -5,6 +5,7 @@ using Features.Perks.Data;
 using Features.Services.Assets;
 using Features.Services.GameSettings;
 using Features.Services.StaticData;
+using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
@@ -84,8 +85,11 @@ namespace Features.UI.Windows.Perks.Scripts
       clickedPerk = perk;
     }
 
-    private void Close() => 
+    private void Close()
+    {
+      windowsService.Open(WindowId.MainMenu);
       windowsService.Close(ID);
+    }
 
     private void Play()
     {

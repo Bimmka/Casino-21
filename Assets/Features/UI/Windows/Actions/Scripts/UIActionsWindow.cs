@@ -32,6 +32,7 @@ namespace Features.UI.Windows.Actions.Scripts
       this.levelStateMachine = levelStateMachine;
       this.userHands = userHands;
       userHands.TookedCard += OnTookCard;
+      userHands.Refreshed += OnHandsRefresh;
     }
 
     protected override void Initialize()
@@ -56,6 +57,7 @@ namespace Features.UI.Windows.Actions.Scripts
       checkButton.onClick.RemoveListener(CheckPoints);
       usePerkButton.onClick.RemoveListener(UsePerk);
       userHands.TookedCard -= OnTookCard;
+      userHands.Refreshed -= OnHandsRefresh;
     }
 
     public override void Open()
@@ -113,6 +115,9 @@ namespace Features.UI.Windows.Actions.Scripts
       else 
         LockPerk();
     }
+
+    private void OnHandsRefresh() => 
+      ShowBaseButtons();
 
     private void CheckPoints()
     {
