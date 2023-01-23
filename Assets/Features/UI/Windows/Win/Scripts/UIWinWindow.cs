@@ -61,6 +61,7 @@ namespace Features.UI.Windows.Win.Scripts
 
     private void LoadMainMenu()
     {
+      audioService.Play(AudioEventType.Click);
       audioService.Stop(AudioEventType.GameAmbient, STOP_MODE.ALLOWFADEOUT);
       audioService.Stop(AudioEventType.GameMusic, STOP_MODE.ALLOWFADEOUT);
       gameStateMachine.Enter<MainMenuState>();
@@ -68,6 +69,7 @@ namespace Features.UI.Windows.Win.Scripts
 
     private void RestartGame()
     {
+      audioService.Play(AudioEventType.Click);
       levelStateMachine.Enter<LevelResetState>();
       windowsService.Close(ID);
     }

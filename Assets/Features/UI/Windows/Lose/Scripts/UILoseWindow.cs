@@ -69,11 +69,13 @@ namespace Features.UI.Windows.Lose.Scripts
     {
       audioService.Stop(AudioEventType.GameAmbient, STOP_MODE.ALLOWFADEOUT);
       audioService.Stop(AudioEventType.GameMusic, STOP_MODE.ALLOWFADEOUT);
+      audioService.Play(AudioEventType.Click);
       gameStateMachine.Enter<MainMenuState>();
     }
 
     private void RestartGame()
     {
+      audioService.Play(AudioEventType.Click);
       levelStateMachine.Enter<LevelResetState>();
       windowsService.Close(ID);
     }

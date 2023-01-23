@@ -1,4 +1,3 @@
-using System;
 using Features.Level.Scripts.Data;
 using Features.Services.Assets;
 using TMPro;
@@ -10,6 +9,8 @@ namespace Features.Level.Scripts.Info
   public class BetDisplayer : MonoBehaviour
   {
     [SerializeField] private TextMeshProUGUI betText;
+    [TextArea]
+    [SerializeField] private string betTextFormat = "Bet {0}";
     [SerializeField] private BetColumn[] columns;
     [SerializeField] private BetDisplaySettings settings;
     
@@ -31,12 +32,12 @@ namespace Features.Level.Scripts.Info
 
     public void Display(int bet)
     {
-      betText.text = bet.ToString();
+      betText.text = string.Format(betTextFormat, bet.ToString());
     }
 
     public void Hide()
     {
-      betText.text = "0";
+      betText.text =  string.Format(betTextFormat, "");
     }
   }
 }

@@ -1,6 +1,8 @@
+using Features.Services.Audio;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +15,12 @@ namespace Features.UI.Windows.HUD.Scripts
     [SerializeField] private PointsDisplayer pointsDisplayer;
     [SerializeField] private Button pauseMenuButton;
     private IWindowsService windowsService;
+    private IAudioService audioService;
 
     [Inject]
-    public void Construct(IWindowsService windowsService, IUserProvider userProvider)
+    public void Construct(IWindowsService windowsService, IUserProvider userProvider, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.windowsService = windowsService;
       pointsDisplayer.Construct(userProvider.User.PointsData);
     }
@@ -34,7 +38,10 @@ namespace Features.UI.Windows.HUD.Scripts
       pointsDisplayer.Cleanup();
     }
 
-    private void OpenPauseMenu() => 
+    private void OpenPauseMenu()
+    {
       windowsService.Open(WindowId.PauseMenu);
+      audioService.Play(AudioEventType.Click);
+    }
   }
 }

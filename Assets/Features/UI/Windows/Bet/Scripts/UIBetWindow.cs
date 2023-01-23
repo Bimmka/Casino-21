@@ -2,11 +2,13 @@ using System;
 using Features.Level.Scripts.Info;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
+using Features.Services.Audio;
 using Features.Services.GameSettings;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using Features.User.Data;
 using TMPro;
@@ -33,12 +35,14 @@ namespace Features.UI.Windows.Bet.Scripts
     private IWindowsService windowsService;
     private LevelInfoDisplayer levelInfoDisplayer;
     private ILeaderboard leaderboard;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(IUserProvider userProvider, ILevelStateMachine levelStateMachine,
       IGameSettings gameSettings, ISaveService saveService, IWindowsService windowsService,
-      LevelInfoDisplayer levelInfoDisplayer, ILeaderboard leaderboard)
+      LevelInfoDisplayer levelInfoDisplayer, ILeaderboard leaderboard, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.leaderboard = leaderboard;
       this.levelInfoDisplayer = levelInfoDisplayer;
       this.windowsService = windowsService;
@@ -90,6 +94,7 @@ namespace Features.UI.Windows.Bet.Scripts
 
     private void ConfirmBet()
     {
+      audioService.Play(AudioEventType.Click);
       gameSettings.InitializeBet((int)betSlider.value);
       user.PointsData.Reduce((int)betSlider.value);
       leaderboard.LogPoints(user.PointsData.CurrentPoints);

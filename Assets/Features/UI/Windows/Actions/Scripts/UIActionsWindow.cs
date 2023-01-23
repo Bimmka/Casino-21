@@ -3,7 +3,9 @@ using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.Perks.Data;
 using Features.Perks.Observer;
+using Features.Services.Audio;
 using Features.Services.StaticData;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,11 +25,13 @@ namespace Features.UI.Windows.Actions.Scripts
     private ILevelStateMachine levelStateMachine;
     private IStaticDataService staticDataService;
     private PerksObserver perksObserver;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(UserHands userHands, ILevelStateMachine levelStateMachine, IStaticDataService staticDataService,
-      PerksObserver perksObserver)
+      PerksObserver perksObserver, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.perksObserver = perksObserver;
       this.staticDataService = staticDataService;
       this.levelStateMachine = levelStateMachine;
@@ -94,6 +98,7 @@ namespace Features.UI.Windows.Actions.Scripts
       if (userHands.IsFull || userHands.IsTakingCard)
         return;
       
+      audioService.Play(AudioEventType.Click);
       userHands.TakeCard();
     }
 
@@ -101,6 +106,7 @@ namespace Features.UI.Windows.Actions.Scripts
     {
       if (perksObserver.IsCanUsePerk)
       {
+        audioService.Play(AudioEventType.Click);
         perksObserver.Use(PerkTargetType.User);
         LockPerk();
       }
