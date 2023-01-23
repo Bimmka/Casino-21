@@ -1,6 +1,10 @@
+using Features.Constants;
 using Features.Services.GameSettings;
+using Features.Services.Leaderboard;
+using Features.Services.Save;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.Services.UserProvider;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,10 +22,17 @@ namespace Features.UI.Windows.MainMenu.Scripts
     
     private IWindowsService windowsService;
     private IGameSettings gameSettings;
+    private IUserProvider userProvider;
+    private ISaveService saveService;
+    private ILeaderboard leaderboard;
 
     [Inject]
-    public void Construct(IWindowsService windowsService, IGameSettings gameSettings)
+    public void Construct(IWindowsService windowsService, IGameSettings gameSettings, IUserProvider userProvider,
+      ISaveService saveService, ILeaderboard leaderboard)
     {
+      this.leaderboard = leaderboard;
+      this.saveService = saveService;
+      this.userProvider = userProvider;
       this.gameSettings = gameSettings;
       this.windowsService = windowsService;
     }
@@ -48,14 +59,19 @@ namespace Features.UI.Windows.MainMenu.Scripts
 
     public override void Open()
     {
+      if (userProvider.User.PointsData.CurrentPoints == 0)
+      {
+        userProvider.User.PointsData.Add(GameConstants.PlayerDefaultRestartPoints);
+        saveService.SavePlayer(userProvider.User);
+        leaderboard.LogPoints(userProvider.User.PointsData.CurrentPoints);
+        windowsService.Open(WindowId.Restart);
+      }
       base.Open();
       gameSettings.Reset();
     }
 
-    private void Quit()
-    {
+    private void Quit() => 
       Application.Quit();
-    }
 
     private void StartPlay() => 
       windowsService.Open(WindowId.Difficult);

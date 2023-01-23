@@ -63,10 +63,10 @@ namespace Features.UI.Windows.Settings.Scripts
 
     private void RestoreSliders()
     {
-      //masterSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.MasterVolume)));
+      masterSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.MasterVolume)));
       ambientSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.AmbientVolume)));
       musicSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.MusicVolume)));
-      //effectsSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.EffectVolume)));
+      effectsSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.EffectVolume)));
     }
 
     private void Close() => 

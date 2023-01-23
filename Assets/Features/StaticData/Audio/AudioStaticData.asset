@@ -44,3 +44,9 @@ MonoBehaviour:
   - Type: 1
     Name: bus:/Ambience bus
     DefaultValue: 0
+  - Type: 3
+    Name: bus:/SFX bus
+    DefaultValue: 0
+  - Type: 0
+    Name: bus:/
+    DefaultValue: 0

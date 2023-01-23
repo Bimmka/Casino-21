@@ -16,5 +16,6 @@
     Settings = 11,
     Difficult = 12,
     About = 13,
+    Restart = 14,
   }
 }

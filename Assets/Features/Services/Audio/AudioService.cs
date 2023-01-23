@@ -264,11 +264,11 @@ namespace Features.Services.Audio
             if (string.IsNullOrEmpty(savedVolumes))
                 return;
 
-            /*List<float> volumes = JsonConvert.DeserializeObject<List<float>>(savedVolumes);
+            List<float> volumes = JsonConvert.DeserializeObject<List<float>>(savedVolumes);
             for (int i = 0; i < volumes.Count; i++)
             {
                 volumesBus[(AudioVolumeType) i].setVolume(volumes[i]);
-            }*/
+            }
         }
     }
 }

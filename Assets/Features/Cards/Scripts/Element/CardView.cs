@@ -28,7 +28,7 @@ namespace Features.Cards.Scripts.Element
       this.hideCostMasks = hideCostMasks;
       cardPlane.GetPropertyBlock(propBlock);
       propBlock.SetTexture(MaskTex, RandomMasks(difficultType));
-      propBlock.SetFloat(Cutoff, 0f);
+      propBlock.SetFloat(Cutoff, 1.1f);
       cardPlane.SetPropertyBlock(propBlock);
       
       if (difficultType == GameDifficultType.Easy)
@@ -44,7 +44,7 @@ namespace Features.Cards.Scripts.Element
     public void DisplayCost()
     {
       cardPlane.GetPropertyBlock(propBlock);
-      propBlock.SetFloat(Cutoff, 0f);
+      propBlock.SetFloat(Cutoff, 1.1f);
       cardPlane.SetPropertyBlock(propBlock);
     }
 

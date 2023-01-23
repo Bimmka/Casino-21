@@ -15,6 +15,7 @@
     public static string PlayerStatisticsKey = "Statistics";
     
     public static int PlayerDefaultPoints = 10000;
+    public static int PlayerDefaultRestartPoints = 1000;
     
     public static string SoundKey = "Sound";
     public static string SoundMusicKey = "Music";
