@@ -1,3 +1,4 @@
+using System;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Data;
 
@@ -15,7 +16,17 @@ namespace Features.Perks.Strategy
     public override bool IsCanBeUsed() => 
       dealerMachine.IsFull == false;
 
-    public override void Use() => 
-      dealerMachine.TakeCard();
+    public override void Use(Action callback)
+    {
+      if (dealerMachine.IsFull == false)
+        dealerMachine.TakeCard(() => OnTookCard(callback));
+      else
+        callback?.Invoke();
+    }
+
+    private void OnTookCard(Action callback)
+    {
+      callback?.Invoke();
+    }
   }
 }

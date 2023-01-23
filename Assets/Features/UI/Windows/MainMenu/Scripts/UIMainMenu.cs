@@ -1,5 +1,3 @@
-using Features.GameStates;
-using Features.GameStates.States;
 using Features.Services.GameSettings;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
@@ -17,16 +15,14 @@ namespace Features.UI.Windows.MainMenu.Scripts
     [SerializeField] private Button hardPlayButton;
     [SerializeField] private Button leaderboardButton;
     
-    private IGameStateMachine gameStateMachine;
     private IGameSettings gameSettings;
     private IWindowsService windowsService;
 
     [Inject]
-    public void Construct(IGameStateMachine gameStateMachine, IGameSettings gameSettings, IWindowsService windowsService)
+    public void Construct(IGameSettings gameSettings, IWindowsService windowsService)
     {
       this.windowsService = windowsService;
       this.gameSettings = gameSettings;
-      this.gameStateMachine = gameStateMachine;
     }
 
     protected override void Subscribe()
@@ -47,6 +43,12 @@ namespace Features.UI.Windows.MainMenu.Scripts
       leaderboardButton.onClick.RemoveListener(OpenLeaderboard);
     }
 
+    public override void Open()
+    {
+      base.Open();
+      gameSettings.Reset();
+    }
+
     private void StartEasyPlay() => 
       StartGame(GameDifficultType.Easy);
 
@@ -59,7 +61,8 @@ namespace Features.UI.Windows.MainMenu.Scripts
     private void StartGame(GameDifficultType type)
     {
       gameSettings.SetType(type);
-      gameStateMachine.Enter<GameLoadState>();
+      windowsService.Close(ID);
+      windowsService.Open(WindowId.Perks);
     }
 
     private void OpenLeaderboard() => 

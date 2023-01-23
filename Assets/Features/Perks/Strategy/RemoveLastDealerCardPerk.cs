@@ -1,3 +1,4 @@
+using System;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Data;
 
@@ -15,7 +16,10 @@ namespace Features.Perks.Strategy
     public override bool IsCanBeUsed() => 
       dealerMachine.IsNotEmpty;
 
-    public override void Use() => 
+    public override void Use(Action callback)
+    {
       dealerMachine.RemoveLastCard();
+      callback?.Invoke();
+    }
   }
 }

@@ -1,3 +1,5 @@
+using System;
+using Features.Cards.Scripts.Element;
 using Features.Hands.Scripts.User;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Data;
@@ -18,9 +20,13 @@ namespace Features.Perks.Strategy
     public override bool IsCanBeUsed() => 
       userHands.IsNotEmpty && dealerMachine.IsNotEmpty;
 
-    public override void Use()
+    public override void Use(Action callback)
     {
-      
+      Card userFirstCard = userHands.PopFirstCard();
+      Card dealerFirstCard = dealerMachine.PopFirstCard();
+      userHands.SetCard(dealerFirstCard);
+      dealerMachine.SetCard(userFirstCard);
+      callback?.Invoke();
     }
   }
 }

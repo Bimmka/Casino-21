@@ -6,5 +6,9 @@ namespace Features.Perks.Data
     WinGames,
     TotalGames,
     WinStreak,
+    TotalLose,
+    EasyWin,
+    MediumWin,
+    HardWin,
   }
 }

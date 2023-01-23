@@ -56,12 +56,14 @@ namespace Features.UI.Windows.Win.Scripts
     public override void Open()
     {
       winText.text = string.Format(winTextFormat, (int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
+      audioService.Play(AudioEventType.Win);
       base.Open();
     }
 
     private void LoadMainMenu()
     {
       audioService.Stop(AudioEventType.GameAmbient, STOP_MODE.ALLOWFADEOUT);
+      audioService.Stop(AudioEventType.GameMusic, STOP_MODE.ALLOWFADEOUT);
       gameStateMachine.Enter<MainMenuState>();
     }
 

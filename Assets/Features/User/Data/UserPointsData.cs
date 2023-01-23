@@ -25,6 +25,9 @@ namespace Features.User.Data
       NotifyAboutChange();
     }
 
+    public bool IsEnough(int points) => 
+      CurrentPoints >= points;
+
     private void NotifyAboutChange() => 
       Changed?.Invoke(CurrentPoints);
   }

@@ -12,6 +12,6 @@
     Lose = 7,
     PauseMenu = 8,
     Leaderboard = 9,
-    
+    Perks = 10,
   }
 }

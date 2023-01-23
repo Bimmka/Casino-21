@@ -1,4 +1,5 @@
 using Features.Coefficients.Data;
+using Features.Perks.Data;
 
 namespace Features.Services.GameSettings
 {
@@ -6,6 +7,7 @@ namespace Features.Services.GameSettings
   {
     private readonly CoefficientsSettings coefficientsSettings;
     public GameDifficultType DifficultType { get; private set; }
+    public PerkType PerkType { get; private set; }
     public int CurrentBet { get; private set; }
 
     public GameSettingsService(CoefficientsSettings coefficientsSettings)
@@ -21,5 +23,15 @@ namespace Features.Services.GameSettings
 
     public float CurrentCoefficient() => 
       coefficientsSettings.WinCoefficients[DifficultType];
+
+    public void AddPerk(PerkType type) => 
+      PerkType = type;
+
+    public void Reset()
+    {
+      PerkType = PerkType.None;
+      CurrentBet = 0;
+      DifficultType = GameDifficultType.Easy;
+    }
   }
 }

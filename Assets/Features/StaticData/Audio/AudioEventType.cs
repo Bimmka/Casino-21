@@ -5,5 +5,8 @@
     None = 0,
     Card,
     GameAmbient,
+    Win, 
+    Lose,
+    GameMusic
   }
 }

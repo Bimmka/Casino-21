@@ -4,6 +4,7 @@ using Features.GameStates;
 using Features.GameStates.Factory;
 using Features.GameStates.Observer.Scripts;
 using Features.GameStates.States;
+using Features.Perks.Data;
 using Features.SceneLoading.Scripts;
 using Features.Services.Assets;
 using Features.Services.GameSettings;
@@ -29,6 +30,7 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private CoefficientsSettings coefficientsSettings;
     [SerializeField] private AudioContainer audioContainer;
     [SerializeField] private LeaderboardSettings leaderboardSettings;
+    [SerializeField] private PerksSettingsContainer perksSettingsContainer;
 
     public override void Start()
     {
@@ -62,7 +64,7 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindStaticData() =>
       Container.Bind<IStaticDataService>().To<StaticDataService>().FromNew().AsSingle()
-        .WithArguments(windowsContainer);
+        .WithArguments(windowsContainer, perksSettingsContainer);
 
     private void BindCoroutineRunner() => 
       Container.Bind<ICoroutineRunner>().FromInstance(this).AsSingle();

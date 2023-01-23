@@ -27,6 +27,6 @@ namespace Features.Level.Scripts.LevelStates.States
     }
 
     private void OnEndTurn() => 
-      levelStateMachine.Enter<LevelDealerCheckState>();
+      levelStateMachine.Enter<LevelUsePerkOnDealerState>();
   }
 }

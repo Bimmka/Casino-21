@@ -2,6 +2,7 @@ namespace Features.Perks.Data
 {
   public enum PerkType
   {
+    None,
     OpenFirstUserCard,
     OpenLastUserCard,
     RemoveUserFirstCard,
@@ -10,5 +11,6 @@ namespace Features.Perks.Data
     RemoveLastDealerCard,
     SwapFirstCards,
     TakeFullHands,
+    AddBet,
   }
 }

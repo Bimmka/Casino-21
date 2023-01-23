@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Features.Cards.Scripts.Element;
 using Features.Hands.Scripts.Dealer;
 using Features.NPC.Scripts.Data;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Features.NPC.Scripts.Base
     public int Points => dealerHands.CardPoints();
     public bool IsFull => dealerHands.IsFull;
     public bool IsNotEmpty => dealerHands.IsNotEmpty;
+    public bool IsTakingCard => dealerHands.IsTakingCard;
 
     [Inject]
     public void Construct(DealerHands dealerHands, NPCSettings settings)
@@ -30,10 +32,8 @@ namespace Features.NPC.Scripts.Base
       StartCoroutine(Turn());
     }
 
-    public void TakeCard()
-    {
-      dealerHands.TakeCard();
-    }
+    public void TakeCard(Action callback = null) => 
+      dealerHands.TakeCard(callback);
 
     public void ReleaseCards() => 
       dealerHands.ReleaseCards();
@@ -41,12 +41,21 @@ namespace Features.NPC.Scripts.Base
     public void RemoveLastCard() => 
       dealerHands.RemoveLastCard();
 
+    public void DisplayCardsCost(Action callback) => 
+      dealerHands.DisplayCardsCost(callback);
+
+    public void SetCard(Card card) => 
+      dealerHands.SetCard(card);
+
+    public Card PopFirstCard() => 
+      dealerHands.PopFirstCard();
+
     private IEnumerator Turn()
     {
       while (dealerHands.IsFull == false && IsNeedTake())
       {
         TakeCard();
-        while (dealerHands.IsTakingCard)
+        while (IsTakingCard)
         {
           yield return null;
         }
