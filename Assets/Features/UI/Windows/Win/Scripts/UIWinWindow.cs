@@ -18,7 +18,6 @@ namespace Features.UI.Windows.Win.Scripts
   public class UIWinWindow : BaseWindow
   {
     [SerializeField] private TextMeshProUGUI winText;
-    [SerializeField] private string winTextFormat;
     [SerializeField] private Button leaveButton;
     [SerializeField] private Button restartButton;
     
@@ -55,7 +54,7 @@ namespace Features.UI.Windows.Win.Scripts
 
     public override void Open()
     {
-      winText.text = string.Format(winTextFormat, (int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
+      winText.text = ((int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient())).ToString();
       audioService.Play(AudioEventType.Win);
       base.Open();
     }

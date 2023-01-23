@@ -19,7 +19,6 @@ namespace Features.UI.Windows.Lose.Scripts
   public class UILoseWindow : BaseWindow
   {
     [SerializeField] private TextMeshProUGUI lostText;
-    [SerializeField] private string lostTextFormat;
     [SerializeField] private Button leaveButton;
     [SerializeField] private Button restartButton;
     
@@ -59,7 +58,7 @@ namespace Features.UI.Windows.Lose.Scripts
 
     public override void Open()
     {
-      lostText.text = string.Format(lostTextFormat, gameSettings.CurrentBet);
+      lostText.text = gameSettings.CurrentBet.ToString();
       audioService.Play(AudioEventType.Lose);
       if (userProvider.User.PointsData.CurrentPoints == 0)
         restartButton.gameObject.SetActive(false);

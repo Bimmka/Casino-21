@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Main
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: afea941a308a896429c4a4f395e1ddde, type: 3}
+    - {fileID: 102900000, guid: 64d81c349a173e343a2ea563764f77dd, type: 3}
+    - {fileID: 102900000, guid: 3974fdda69173c14a91ef561e2a541d5, type: 3}
+    - {fileID: 102900000, guid: 3d6ba9a7523d5c147a0c92447f91bb22, type: 3}
+    - {fileID: 102900000, guid: b09ec9aa34a673a42905d9ed00bac4a4, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 6d3aac60d65bee24b94fc966a1a8b385, type: 3}
+  - {fileID: 21300000, guid: 6b773881a148dcd4e95a73e4f4c81375, type: 3}
+  - {fileID: 21300000, guid: 3cb591d13e4327b468015345ca2f0393, type: 3}
+  - {fileID: 21300000, guid: f59f1dd1e1ee58c47a5013b2676f9c19, type: 3}
+  - {fileID: 21300000, guid: 1fc76952f4d3a1d40a7f080d38df5590, type: 3}
+  - {fileID: 21300000, guid: 4a6d680386785de4bb86b0d2531dc4c4, type: 3}
+  - {fileID: 21300000, guid: 5c8186234f0f680469cc798b9617bfb2, type: 3}
+  - {fileID: 21300000, guid: a9805535ddaa6024f986e8afe7733861, type: 3}
+  - {fileID: 21300000, guid: 80229e35359fa6e4e919fe9875d240a5, type: 3}
+  - {fileID: 21300000, guid: ce506b87199efa3439f6a4e11ee1c198, type: 3}
+  - {fileID: 21300000, guid: 764a1cd85ca0bd647b007685d524ef59, type: 3}
+  - {fileID: 21300000, guid: 678639f92656fb84394690c4938209e2, type: 3}
+  - {fileID: 21300000, guid: 9605eb4b1cd993b408fdb729de542247, type: 3}
+  - {fileID: 21300000, guid: a52bac6cdfcbae342a89b04e07af5dc0, type: 3}
+  - {fileID: 21300000, guid: 022df0aeba91d6c4d8e1740caccb284a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Selected Button
+  - Bet Size Frame
+  - Money Background
+  - you_lose
+  - Slider Background Full
+  - Bet Text Frame
+  - Slider Background Empty
+  - leaderboard_frame
+  - leaderboard_line
+  - Pause Menu Frame
+  - you_win
+  - Unselectd Button
+  - Pause Icon
+  - Slider Mark
+  - Game Button
+  m_RenderDataMap: {}
+  m_Tag: Main
+  m_IsVariant: 0

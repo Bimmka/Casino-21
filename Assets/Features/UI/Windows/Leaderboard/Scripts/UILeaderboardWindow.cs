@@ -68,7 +68,7 @@ namespace Features.UI.Windows.Leaderboard.Scripts
       else
       {
         spawner.Spawn(users);
-        view.DisplayUser(new LeaderboardUser(userProvider.User.CommonData.Nickname, userProvider.User.PointsData.CurrentPoints));
+        view.DisplayUser(new LeaderboardUser(userProvider.User.CommonData.Nickname, userProvider.User.PointsData.CurrentPoints, -1));
       }
     }
   }
