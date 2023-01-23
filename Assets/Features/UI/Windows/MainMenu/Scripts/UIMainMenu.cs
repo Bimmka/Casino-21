@@ -57,17 +57,11 @@ namespace Features.UI.Windows.MainMenu.Scripts
       Application.Quit();
     }
 
-    private void StartPlay()
-    {
+    private void StartPlay() => 
       windowsService.Open(WindowId.Difficult);
-      windowsService.Close(ID);
-    }
 
-    private void OpenSettings()
-    {
+    private void OpenSettings() => 
       windowsService.Open(WindowId.Settings);
-      windowsService.Close(ID);
-    }
 
     private void OpenAbout() => 
       windowsService.Open(WindowId.About);
