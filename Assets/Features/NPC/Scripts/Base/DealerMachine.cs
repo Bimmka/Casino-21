@@ -41,6 +41,9 @@ namespace Features.NPC.Scripts.Base
     public void RemoveLastCard() => 
       dealerHands.RemoveLastCard();
 
+    public void DisplayCardsCost(Action callback) => 
+      dealerHands.DisplayCardsCost(callback);
+
     private IEnumerator Turn()
     {
       while (dealerHands.IsFull == false && IsNeedTake())

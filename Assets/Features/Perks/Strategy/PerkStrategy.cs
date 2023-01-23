@@ -6,9 +6,6 @@ namespace Features.Perks.Strategy
   {
     private readonly PerkSettings settings;
 
-    public PerkType Type => settings.Type;
-    public int Cost => settings.UseCost;
-
     protected PerkStrategy(PerkSettings settings)
     {
       this.settings = settings;

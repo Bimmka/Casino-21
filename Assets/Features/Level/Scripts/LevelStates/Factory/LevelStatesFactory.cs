@@ -7,6 +7,7 @@ using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Factory;
+using Features.Perks.Observer;
 using Features.Rules.Data;
 using Features.Services.GameSettings;
 using Features.Services.Leaderboard;
@@ -30,12 +31,12 @@ namespace Features.Level.Scripts.LevelStates.Factory
     private readonly ISaveService saveService;
     private readonly ILeaderboard leaderboard;
     private readonly IAudioService audioService;
-    private readonly PerkStrategyFactory perksFactory;
+    private readonly PerksObserver perksObserver;
 
     public LevelStatesFactory(IWindowsService windowsService, CardDeck deck, UserHands userHands,
       GameRules gameRules, IGameSettings gameSettings, IUserProvider userProvider, DealerMachine dealer,
       LevelInfoDisplayer infoDisplayer, ISaveService saveService, ILeaderboard leaderboard, IAudioService audioService,
-      PerkStrategyFactory perksFactory)
+      PerksObserver perksObserver)
     {
       this.windowsService = windowsService;
       this.deck = deck;
@@ -48,7 +49,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
       this.saveService = saveService;
       this.leaderboard = leaderboard;
       this.audioService = audioService;
-      this.perksFactory = perksFactory;
+      this.perksObserver = perksObserver;
     }
     
     public IExitableState Create<TState>(ILevelStateMachine levelStateMachine) where TState : IExitableState
@@ -68,14 +69,13 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelLoseState):
           return new LevelLoseState(windowsService);
         case nameof(LevelPrepareState):
-          return new LevelPrepareState(levelStateMachine,deck, windowsService, audioService, perksFactory, userProvider, 
-            userHands, gameSettings);
+          return new LevelPrepareState(levelStateMachine,deck, windowsService, audioService, perksObserver);
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
         case nameof(LevelUserCheckState):
           return new LevelUserCheckState(userHands, gameRules, levelStateMachine, infoDisplayer, gameSettings);
         case nameof(LevelUserTurnState):
-          return new LevelUserTurnState(windowsService);
+          return new LevelUserTurnState(windowsService, perksObserver);
         case nameof(LevelWinState):
           return new LevelWinState(windowsService, gameSettings, userProvider, saveService, leaderboard);
         default:

@@ -1,7 +1,7 @@
 using Features.Hands.Scripts.User;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
-using Features.Perks.Strategy;
+using Features.Perks.Observer;
 using Features.Services.StaticData;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
@@ -21,20 +21,24 @@ namespace Features.UI.Windows.Actions.Scripts
     private UserHands userHands;
     private ILevelStateMachine levelStateMachine;
     private IStaticDataService staticDataService;
+    private PerksObserver perksObserver;
 
     [Inject]
-    public void Construct(UserHands userHands, ILevelStateMachine levelStateMachine, IStaticDataService staticDataService)
+    public void Construct(UserHands userHands, ILevelStateMachine levelStateMachine, IStaticDataService staticDataService,
+      PerksObserver perksObserver)
     {
+      this.perksObserver = perksObserver;
       this.staticDataService = staticDataService;
       this.levelStateMachine = levelStateMachine;
       this.userHands = userHands;
+      userHands.TookedCard += OnTookCard;
     }
 
     protected override void Initialize()
     {
       base.Initialize();
-      if (userHands.IsHavePerk)
-        view.SetPerkView(staticDataService.ForPerks().Perk(userHands.PerkType));
+      if (perksObserver.IsHavePerk)
+        view.SetPerkView(staticDataService.ForPerks().Perk(perksObserver.PerkType));
     }
 
     protected override void Subscribe()
@@ -51,6 +55,7 @@ namespace Features.UI.Windows.Actions.Scripts
       takeButton.onClick.RemoveListener(TakeCard);
       checkButton.onClick.RemoveListener(CheckPoints);
       usePerkButton.onClick.RemoveListener(UsePerk);
+      userHands.TookedCard -= OnTookCard;
     }
 
     public override void Open()
@@ -58,11 +63,11 @@ namespace Features.UI.Windows.Actions.Scripts
       base.Open();
       Show();
       ShowBaseButtons();
-      if (userHands.IsHavePerk)
+      if (perksObserver.IsHavePerk)
       {
         view.ShowPerk();
-        if (userHands.IsCanUsePerk)
-          view.SetUnlockPerk();
+        if (perksObserver.IsCanUsePerk)
+          UnlockPerk();
         else
           view.SetLockPerk();
       }
@@ -77,7 +82,7 @@ namespace Features.UI.Windows.Actions.Scripts
 
     public void LockPerk()
     {
-      if (userHands.IsHavePerk)
+      if (perksObserver.IsHavePerk)
         view.SetLockPerk();
     }
 
@@ -91,11 +96,22 @@ namespace Features.UI.Windows.Actions.Scripts
 
     private void UsePerk()
     {
-      if (userHands.IsCanUsePerk)
+      if (perksObserver.IsCanUsePerk)
       {
-        userHands.UsePerk();
+        perksObserver.Use();
         LockPerk();
       }
+    }
+
+    private void OnTookCard(bool isBusy)
+    {
+      if (perksObserver.IsHavePerk == false)
+        return;
+      
+      if (perksObserver.IsCanUsePerk && isBusy == false)
+        UnlockPerk();
+      else 
+        LockPerk();
     }
 
     private void CheckPoints()
@@ -115,5 +131,8 @@ namespace Features.UI.Windows.Actions.Scripts
 
     private void HideBaseButtons() => 
       view.HideButtons();
+
+    private void UnlockPerk() => 
+      view.SetUnlockPerk();
   }
 }

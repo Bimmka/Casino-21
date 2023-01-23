@@ -11,24 +11,16 @@ namespace Features.Perks.Factory
   {
     private readonly UserHands userHands;
     private readonly DealerMachine dealerMachine;
-    private readonly IStaticDataService staticDataService;
 
-    public PerkStrategyFactory(UserHands userHands, DealerMachine dealerMachine,
-      IStaticDataService staticDataService)
+    public PerkStrategyFactory(UserHands userHands, DealerMachine dealerMachine)
     {
       this.userHands = userHands;
       this.dealerMachine = dealerMachine;
-      this.staticDataService = staticDataService;
     }
     
-    public PerkStrategy Create(PerkType type)
+    public PerkStrategy Create(PerkSettings settings)
     {
-      if (type == PerkType.None)
-        return null;
-
-      PerkSettings settings = staticDataService.ForPerks().Perk(type);
-      
-      switch (type)
+      switch (settings.Type)
       {
         case PerkType.OpenFirstUserCard:
           return new OpenFirstUserCardPerk(settings, userHands);

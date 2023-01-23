@@ -20,6 +20,8 @@ namespace Features.Hands.Scripts.Base
     public bool IsNotEmpty => FirstFulledPoint() != null;
     public bool IsTakingCard { get; private set; }
 
+    public event Action<bool> TookedCard; 
+
     [Inject]
     public void Construct(CardDeck deck, IAudioService audioService)
     {
@@ -44,6 +46,7 @@ namespace Features.Hands.Scripts.Base
     public virtual void TakeCard()
     {
       IsTakingCard = true;
+      NotifyAboutTookCard();
       audioService.Play(AudioEventType.Card);
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
@@ -57,13 +60,13 @@ namespace Features.Hands.Scripts.Base
         cardPoints[i].Release();
       }
     }
-    
+
     public void RemoveFirstCard()
     {
       HandPoint point = FirstFulledPoint();
       point.Release();
     }
-    
+
     public void RemoveLastCard()
     {
       HandPoint point = LastFulledPoint();
@@ -86,6 +89,7 @@ namespace Features.Hands.Scripts.Base
     protected virtual void OnTookCard()
     {
       IsTakingCard = false;
+      NotifyAboutTookCard();
     }
 
     protected HandPoint FirstFulledPoint()
@@ -98,7 +102,7 @@ namespace Features.Hands.Scripts.Base
 
       return null;
     }
-    
+
     protected HandPoint LastFulledPoint()
     {
       for (int i = cardPoints.Length - 1;  i >= 0; i--)
@@ -131,5 +135,8 @@ namespace Features.Hands.Scripts.Base
 
       return null;
     }
+
+    private void NotifyAboutTookCard() => 
+      TookedCard?.Invoke(IsTakingCard);
   }
 }
