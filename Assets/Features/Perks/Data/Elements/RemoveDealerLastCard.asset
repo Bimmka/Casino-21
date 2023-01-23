@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79acad21a3914e609ac9c1867d92e9ef, type: 3}
   m_Name: RemoveDealerLastCard
   m_EditorClassIdentifier: 
-  Name: Dealer Last
-  Description: Remove Dealer Last Card
+  Name: Protection racket
+  Description: Remove the last card in dealer hand after his check
   Type: 6
   TargetType: 1
-  UseCost: 0
+  UseCost: 250
   Coeff: 0
   UnlockCondition:
-    Type: 1
-    Count: 1
-    TextFormat: Win
+    Type: 6
+    Count: 10
+    TextFormat: Win {0} times on medium difficulty
   Icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}
