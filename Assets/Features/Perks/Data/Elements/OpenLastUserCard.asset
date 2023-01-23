@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79acad21a3914e609ac9c1867d92e9ef, type: 3}
   m_Name: OpenLastUserCard
   m_EditorClassIdentifier: 
-  Name: Cat Open Last
-  Description: Open Last User Card
+  Name: Sixth sense
+  Description: Reveal the last card number in your hand
   Type: 2
   TargetType: 0
-  UseCost: 0
+  UseCost: 200
+  Coeff: 0
   UnlockCondition:
     Type: 0
     Count: 0
