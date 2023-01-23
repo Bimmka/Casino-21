@@ -97,7 +97,10 @@ namespace Features.Services.Leaderboard
 
         for (int i = 0; i < members.Length; i++)
         {
-          users.Add(new LeaderboardUser(members[i].player.name, members[i].score, i+1));
+          users.Add(new LeaderboardUser(
+            string.IsNullOrEmpty(members[i].player.name) ? members[i].player.id.ToString() : members[i].player.name,
+            members[i].score, 
+            i+1));
         }
 
         lastUpdateTime = Time.time;

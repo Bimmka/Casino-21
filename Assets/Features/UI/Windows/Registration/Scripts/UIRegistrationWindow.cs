@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Features.Constants;
 using Features.GameStates;
 using Features.GameStates.States;
@@ -28,6 +29,8 @@ namespace Features.UI.Windows.Registration.Scripts
 
     private bool isRegistrating;
     private IAudioService audioService;
+    
+    private Regex regex = new Regex("^[A-Za-z\\d]+$");
 
     [Inject]
     public void Construct(IGameStateMachine gameStateMachine, IUserProvider userProvider, ISaveService saveService,
@@ -88,7 +91,7 @@ namespace Features.UI.Windows.Registration.Scripts
       string.IsNullOrEmpty(nicknameInputField.text);
 
     private bool IsNicknameInvalidLetters() => 
-      false;
+      regex.IsMatch(nicknameInputField.text) == false;
 
     private void Register()
     {

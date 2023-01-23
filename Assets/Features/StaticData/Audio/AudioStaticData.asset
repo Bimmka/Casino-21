@@ -43,13 +43,13 @@ MonoBehaviour:
   Parameters:
   - Type: 2
     Name: bus:/Music bus
-    DefaultValue: 0
+    DefaultValue: 1
   - Type: 1
     Name: bus:/Ambience bus
-    DefaultValue: 0
+    DefaultValue: 1
   - Type: 3
     Name: bus:/SFX bus
-    DefaultValue: 0
+    DefaultValue: 1
   - Type: 0
     Name: bus:/
-    DefaultValue: 0
+    DefaultValue: 1

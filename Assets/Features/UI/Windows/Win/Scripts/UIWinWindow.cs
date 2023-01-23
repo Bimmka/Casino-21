@@ -60,7 +60,7 @@ namespace Features.UI.Windows.Win.Scripts
 
     public override void Open()
     {
-      winText.text = string.Format(winTextFormat, (int)(gameSettings.CurrentBet * gameSettings.CurrentCoefficient()));
+      winText.text = string.Format(winTextFormat, ((int)(gameSettings.CurrentBet + gameSettings.CurrentBet * gameSettings.CurrentCoefficient())));
       audioService.Play(AudioEventType.Win);
       base.Open();
       StartCoroutine(WaitOpen());

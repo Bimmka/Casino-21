@@ -61,14 +61,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1fc76952f4d3a1d40a7f080d38df5590, type: 3}
   - {fileID: 21300000, guid: 4a6d680386785de4bb86b0d2531dc4c4, type: 3}
   - {fileID: 21300000, guid: 5c8186234f0f680469cc798b9617bfb2, type: 3}
+  - {fileID: 21300000, guid: 107bd8b43666e7c428162145546c6279, type: 3}
   - {fileID: 21300000, guid: a9805535ddaa6024f986e8afe7733861, type: 3}
   - {fileID: 21300000, guid: 80229e35359fa6e4e919fe9875d240a5, type: 3}
+  - {fileID: 21300000, guid: d89b97a6fe01db44390b705f4a38649f, type: 3}
   - {fileID: 21300000, guid: ce506b87199efa3439f6a4e11ee1c198, type: 3}
   - {fileID: 21300000, guid: 764a1cd85ca0bd647b007685d524ef59, type: 3}
   - {fileID: 21300000, guid: 678639f92656fb84394690c4938209e2, type: 3}
   - {fileID: 21300000, guid: 9605eb4b1cd993b408fdb729de542247, type: 3}
   - {fileID: 21300000, guid: a52bac6cdfcbae342a89b04e07af5dc0, type: 3}
   - {fileID: 21300000, guid: 022df0aeba91d6c4d8e1740caccb284a, type: 3}
+  - {fileID: 21300000, guid: fc10df9f0a0b03f48a04fc7f556a0535, type: 3}
   m_PackedSpriteNamesToIndex:
   - Selected Button
   - Bet Size Frame
@@ -77,14 +80,17 @@ SpriteAtlas:
   - Slider Background Full
   - Bet Text Frame
   - Slider Background Empty
+  - shop_frames
   - leaderboard_frame
   - leaderboard_line
+  - coin
   - Pause Menu Frame
   - you_win
   - Unselectd Button
   - Pause Icon
   - Slider Mark
   - Game Button
+  - ability_frame
   m_RenderDataMap: {}
   m_Tag: Main
   m_IsVariant: 0

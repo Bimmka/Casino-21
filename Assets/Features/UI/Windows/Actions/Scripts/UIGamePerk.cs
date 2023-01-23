@@ -11,7 +11,6 @@ namespace Features.UI.Windows.Actions.Scripts
     [SerializeField] private GameObject unlockedView;
     [SerializeField] private Button useButton;
     [SerializeField] private Image icon;
-    [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI priceText;
     public void SetLockedView() => 
       ChangeViewState(true);
@@ -29,7 +28,6 @@ namespace Features.UI.Windows.Actions.Scripts
     public void Display(PerkSettings perk)
     {
       icon.sprite = perk.Icon;
-      descriptionText.text = perk.Description;
       priceText.text = perk.UseCost.ToString();
     }
   }
