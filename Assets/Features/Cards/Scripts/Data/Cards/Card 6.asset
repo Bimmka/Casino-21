@@ -29,13 +29,14 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 6577312423555d443a6f1f7c5713ea33, type: 3}
     - {fileID: 2800000, guid: 65671c7df379f3c4e926d09d4b1fc268, type: 3}
     - {fileID: 2800000, guid: 36c885f3d23d81345bb28be0d6c49c3d, type: 3}
+    - {fileID: 2800000, guid: cc3347b549ca61c429c69d44864249ea, type: 3}
     - {fileID: 2800000, guid: 4f10d4dab9fc9204688b5efb738bcd8c, type: 3}
     - {fileID: 2800000, guid: 24202c8dfc93d7f4189b9d911f9553c2, type: 3}
     - {fileID: 2800000, guid: 60c936c0819f9d44aaa75e299be244fc, type: 3}
     - {fileID: 2800000, guid: fce79bfe88874b543a6f113004f07dcd, type: 3}
-    - {fileID: 2800000, guid: ca2479abfa32248448fa3a69dd9e23da, type: 3}
     - {fileID: 2800000, guid: ebf49e2c7f11b7b479c71e10b69fd6d2, type: 3}
     - {fileID: 2800000, guid: 47549710a5ef9ae49ac5ef0bbd872776, type: 3}
+    - {fileID: 2800000, guid: ca2479abfa32248448fa3a69dd9e23da, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -153,7 +154,7 @@ MonoBehaviour:
       Data: 4|UnityEngine.Texture2D[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 8
     - Name: 
       Entry: 10
       Data: 13
@@ -175,6 +176,9 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 19
+    - Name: 
+      Entry: 10
+      Data: 20
     - Name: 
       Entry: 13
       Data: 
