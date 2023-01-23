@@ -1,9 +1,11 @@
 using Features.Constants;
 using Features.GameStates;
 using Features.GameStates.States;
+using Features.Services.Audio;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using TMPro;
 using UnityEngine;
@@ -25,11 +27,13 @@ namespace Features.UI.Windows.Registration.Scripts
     private ILeaderboard leaderboard;
 
     private bool isRegistrating;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(IGameStateMachine gameStateMachine, IUserProvider userProvider, ISaveService saveService,
-      ILeaderboard leaderboard)
+      ILeaderboard leaderboard, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.leaderboard = leaderboard;
       this.saveService = saveService;
       this.userProvider = userProvider;
@@ -50,9 +54,10 @@ namespace Features.UI.Windows.Registration.Scripts
 
     private void TryRegistration()
     {
+      audioService.Play(AudioEventType.Click);
+      
       if(isRegistrating)
         return;
-      
       HideErrorTip();
       
       if (IsNicknameEmpty())

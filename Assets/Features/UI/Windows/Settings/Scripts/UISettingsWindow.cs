@@ -69,8 +69,11 @@ namespace Features.UI.Windows.Settings.Scripts
       effectsSlider.SetValueWithoutNotify(LinearToDecibel(audioService.GetVolumeValue(AudioVolumeType.EffectVolume)));
     }
 
-    private void Close() => 
+    private void Close()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Close(ID);
+    }
 
     private void OnClickSound(bool isOn) => 
       audioService.SetEnableState(isOn);

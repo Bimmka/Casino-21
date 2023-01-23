@@ -3,11 +3,13 @@ using Features.GameStates;
 using Features.GameStates.States;
 using Features.Perks.Data;
 using Features.Services.Assets;
+using Features.Services.Audio;
 using Features.Services.GameSettings;
 using Features.Services.StaticData;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using Features.User.Data;
 using UnityEngine;
@@ -34,11 +36,13 @@ namespace Features.UI.Windows.Perks.Scripts
 
     private PerkElement clickedPerk;
     private UserOpenPerks userPerksData;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(IGameStateMachine gameStateMachine, IGameSettings gameSettings, IAssetProvider assetProvider,
-      IStaticDataService staticDataService, IWindowsService windowsService, IUserProvider userProvider)
+      IStaticDataService staticDataService, IWindowsService windowsService, IUserProvider userProvider, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.windowsService = windowsService;
       this.gameSettings = gameSettings;
       this.gameStateMachine = gameStateMachine;
@@ -86,6 +90,8 @@ namespace Features.UI.Windows.Perks.Scripts
 
     private void OnChoosePerk(PerkElement perk)
     {
+      audioService.Play(AudioEventType.Click);
+      
       if (IsSame(perk))
         Deselect();
       else if (IsOther(perk))
@@ -121,12 +127,14 @@ namespace Features.UI.Windows.Perks.Scripts
 
     private void Close()
     {
+      audioService.Play(AudioEventType.Click);
       windowsService.Open(WindowId.Difficult);
       windowsService.Close(ID);
     }
 
     private void Play()
     {
+      audioService.Play(AudioEventType.Click);
       gameSettings.AddPerk(clickedPerk == null ? PerkType.None : clickedPerk.Type);
       gameStateMachine.Enter<GameLoadState>();
     }

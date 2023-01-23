@@ -1,7 +1,9 @@
 using Features.GameStates;
 using Features.GameStates.States;
+using Features.Services.Audio;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,10 +18,12 @@ namespace Features.UI.Windows.PauseMenu.Scripts
     [SerializeField] private Button continueButton;
     private IGameStateMachine gameStateMachine;
     private IWindowsService windowsService;
+    private IAudioService audioService;
 
     [Inject]
-    public void Construct(IGameStateMachine gameStateMachine, IWindowsService windowsService)
+    public void Construct(IGameStateMachine gameStateMachine, IWindowsService windowsService, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.windowsService = windowsService;
       this.gameStateMachine = gameStateMachine;
     }
@@ -43,12 +47,19 @@ namespace Features.UI.Windows.PauseMenu.Scripts
     private void OpenSettings()
     {
       windowsService.Open(WindowId.Settings);
+      audioService.Play(AudioEventType.Click);
     }
 
-    private void LoadMainMenu() => 
+    private void LoadMainMenu()
+    {
+      audioService.Play(AudioEventType.Click);
       gameStateMachine.Enter<MainMenuState>();
+    }
 
-    private void Close() => 
+    private void Close()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Close(ID);
+    }
   }
 }

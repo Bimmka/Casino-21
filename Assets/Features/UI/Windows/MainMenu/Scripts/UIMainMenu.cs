@@ -1,10 +1,12 @@
 using Features.Constants;
+using Features.Services.Audio;
 using Features.Services.GameSettings;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,11 +27,13 @@ namespace Features.UI.Windows.MainMenu.Scripts
     private IUserProvider userProvider;
     private ISaveService saveService;
     private ILeaderboard leaderboard;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(IWindowsService windowsService, IGameSettings gameSettings, IUserProvider userProvider,
-      ISaveService saveService, ILeaderboard leaderboard)
+      ISaveService saveService, ILeaderboard leaderboard, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.leaderboard = leaderboard;
       this.saveService = saveService;
       this.userProvider = userProvider;
@@ -73,16 +77,28 @@ namespace Features.UI.Windows.MainMenu.Scripts
     private void Quit() => 
       Application.Quit();
 
-    private void StartPlay() => 
+    private void StartPlay()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Open(WindowId.Difficult);
+    }
 
-    private void OpenSettings() => 
+    private void OpenSettings()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Open(WindowId.Settings);
+    }
 
-    private void OpenAbout() => 
+    private void OpenAbout()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Open(WindowId.About);
+    }
 
-    private void OpenLeaderboard() => 
+    private void OpenLeaderboard()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Open(WindowId.Leaderboard);
+    }
   }
 }

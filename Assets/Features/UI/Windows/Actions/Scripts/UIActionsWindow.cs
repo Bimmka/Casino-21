@@ -133,6 +133,7 @@ namespace Features.UI.Windows.Actions.Scripts
       
       HideBaseButtons();
       view.HidePerk();
+      audioService.Play(AudioEventType.Click);
       userHands.CheckAnimation(OnCheck);
     }
 

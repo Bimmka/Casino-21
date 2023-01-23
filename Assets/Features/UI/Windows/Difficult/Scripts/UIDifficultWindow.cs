@@ -1,6 +1,8 @@
+using Features.Services.Audio;
 using Features.Services.GameSettings;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,10 +19,12 @@ namespace Features.UI.Windows.Difficult.Scripts
     
     private IGameSettings gameSettings;
     private IWindowsService windowsService;
+    private IAudioService audioService;
 
     [Inject]
-    public void Construct(IGameSettings gameSettings, IWindowsService windowsService)
+    public void Construct(IGameSettings gameSettings, IWindowsService windowsService, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.windowsService = windowsService;
       this.gameSettings = gameSettings;
     }
@@ -63,6 +67,7 @@ namespace Features.UI.Windows.Difficult.Scripts
       gameSettings.SetType(type);
       windowsService.Open(WindowId.Perks);
       windowsService.Close(ID);
+      audioService.Play(AudioEventType.Click);
     }
   }
 }

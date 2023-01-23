@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Features.Services.Assets;
+using Features.Services.Audio;
 using Features.Services.Leaderboard;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.StaticData.Audio;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,11 +25,13 @@ namespace Features.UI.Windows.Leaderboard.Scripts
     private IUserProvider userProvider;
     private IWindowsService windowsService;
     private LeaderboardElementSpawner spawner;
+    private IAudioService audioService;
 
     [Inject]
     public void Construct(IAssetProvider assetProvider, ILeaderboard leaderboard, IUserProvider userProvider,
-      IWindowsService windowsService)
+      IWindowsService windowsService, IAudioService audioService)
     {
+      this.audioService = audioService;
       this.windowsService = windowsService;
       this.userProvider = userProvider;
       this.leaderboard = leaderboard;
@@ -49,8 +53,11 @@ namespace Features.UI.Windows.Leaderboard.Scripts
       refreshButton.onClick.RemoveListener(Refresh);
     }
 
-    private void Close() => 
+    private void Close()
+    {
+      audioService.Play(AudioEventType.Click);
       windowsService.Close(ID);
+    }
 
     private void Refresh()
     {
