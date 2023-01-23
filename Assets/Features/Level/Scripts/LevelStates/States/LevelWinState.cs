@@ -5,6 +5,7 @@ using Features.Services.Save;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
+using Features.User.Data;
 
 namespace Features.Level.Scripts.LevelStates.States
 {
@@ -29,6 +30,10 @@ namespace Features.Level.Scripts.LevelStates.States
     public void Enter()
     {
       windowsService.Open(WindowId.Win);
+      userProvider.User.StatisticsData.IncStatistic(StatisticsType.WinStreak);
+      userProvider.User.StatisticsData.IncStatistic(StatisticsType.TotalWins);
+      userProvider.User.StatisticsData.IncStatistic(StatisticsType.TotalGames);
+      userProvider.User.OpenPerksData.RefreshPerksOpen();
       userProvider.User.PointsData.Add(WinPoints());
       saveService.SavePlayer(userProvider.User);
       leaderboard.LogPoints(userProvider.User.PointsData.CurrentPoints);

@@ -8,7 +8,9 @@ namespace Features.Perks.Data
     public string Name;
     public string Description;
     public PerkType Type;
+    public PerkTargetType TargetType;
     public int UseCost;
+    public float Coeff;
     public UnlockCondition UnlockCondition;
     public Sprite Icon;
   }

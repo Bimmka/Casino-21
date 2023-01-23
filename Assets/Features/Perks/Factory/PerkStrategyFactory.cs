@@ -1,9 +1,13 @@
 using System;
+using Features.CustomCoroutine;
 using Features.Hands.Scripts.User;
+using Features.Level.Scripts.Info;
+using Features.Level.Scripts.LevelStates.Machine;
 using Features.NPC.Scripts.Base;
 using Features.Perks.Data;
 using Features.Perks.Strategy;
-using Features.Services.StaticData;
+using Features.Services.GameSettings;
+using Features.Services.UI.Windows;
 
 namespace Features.Perks.Factory
 {
@@ -11,14 +15,23 @@ namespace Features.Perks.Factory
   {
     private readonly UserHands userHands;
     private readonly DealerMachine dealerMachine;
+    private readonly ICoroutineRunner coroutineRunner;
+    private readonly IWindowsService windowsService;
+    private readonly IGameSettings gameSettings;
+    private readonly LevelInfoDisplayer infoDisplayer;
 
-    public PerkStrategyFactory(UserHands userHands, DealerMachine dealerMachine)
+    public PerkStrategyFactory(UserHands userHands, DealerMachine dealerMachine, ICoroutineRunner coroutineRunner,
+      IWindowsService windowsService, IGameSettings gameSettings, LevelInfoDisplayer infoDisplayer)
     {
       this.userHands = userHands;
       this.dealerMachine = dealerMachine;
+      this.coroutineRunner = coroutineRunner;
+      this.windowsService = windowsService;
+      this.gameSettings = gameSettings;
+      this.infoDisplayer = infoDisplayer;
     }
     
-    public PerkStrategy Create(PerkSettings settings)
+    public PerkStrategy Create(PerkSettings settings, ILevelStateMachine levelStateMachine)
     {
       switch (settings.Type)
       {
@@ -27,7 +40,7 @@ namespace Features.Perks.Factory
         case PerkType.OpenLastUserCard:
           return new OpenLastUserCardPerk(settings, userHands);
         case PerkType.RemoveUserFirstCard:
-          return new RemoveUserFirstCardPerk(settings, userHands);
+          return new RemoveUserFirstCardPerk(settings, userHands, windowsService);
         case PerkType.RemoveUserLastCard:
           return new RemoveUserLastCardPerk(settings, userHands);
         case PerkType.AddCardToDealer:
@@ -37,7 +50,9 @@ namespace Features.Perks.Factory
         case PerkType.SwapFirstCards:
           return new SwapFirstCardsPerk(settings, userHands, dealerMachine);
         case PerkType.TakeFullHands:
-          return new TakeFullHands(settings, userHands, dealerMachine);
+          return new TakeFullHands(settings, userHands, dealerMachine, coroutineRunner, windowsService, levelStateMachine);
+        case PerkType.AddBet:
+          return new MultiplyBetPerk(settings, gameSettings, infoDisplayer); 
         default:
           throw new ArgumentOutOfRangeException();
       }

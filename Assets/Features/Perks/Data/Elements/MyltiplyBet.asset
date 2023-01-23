@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79acad21a3914e609ac9c1867d92e9ef, type: 3}
-  m_Name: TakeFullHands
+  m_Name: MyltiplyBet
   m_EditorClassIdentifier: 
-  Name: Take Full Hands
-  Description: Take Full Hands
-  Type: 8
+  Name: Add Bet
+  Description: Myltiply Bet
+  Type: 9
   TargetType: 0
   UseCost: 0
-  Coeff: 0
+  Coeff: 2
   UnlockCondition:
-    Type: 3
-    Count: 1
+    Type: 0
+    Count: 0
     TextFormat: Win
   Icon: {fileID: 21300000, guid: 62ce01ddca719d34ea9648c586a7cc94, type: 3}

@@ -11,5 +11,6 @@ namespace Features.Perks.Data
     RemoveLastDealerCard,
     SwapFirstCards,
     TakeFullHands,
+    AddBet,
   }
 }

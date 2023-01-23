@@ -1,13 +1,9 @@
 using Features.Cards.Scripts.Deck;
 using Features.GameStates.States.Interfaces;
-using Features.Hands.Scripts.User;
 using Features.Level.Scripts.LevelStates.Machine;
-using Features.Perks.Factory;
 using Features.Perks.Observer;
-using Features.Services.GameSettings;
 using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
-using Features.Services.UserProvider;
 using Features.StaticData.Audio;
 using Features.UI.Windows.Actions.Scripts;
 using Services.Audio;
@@ -36,7 +32,7 @@ namespace Features.Level.Scripts.LevelStates.States
     {
       windowsService.Open(WindowId.HUD);
       deck.Create();
-      perksObserver.Initialize();
+      perksObserver.Initialize(levelStateMachine);
       UIActionsWindow window = (UIActionsWindow) windowsService.Open(WindowId.Action);
       window.Hide();
       levelStateMachine.Enter<LevelBetState>();

@@ -5,8 +5,11 @@ using Features.Perks.Data;
 using Features.Services.Assets;
 using Features.Services.GameSettings;
 using Features.Services.StaticData;
+using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
+using Features.Services.UserProvider;
 using Features.UI.Windows.Base.Scripts;
+using Features.User.Data;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -30,10 +33,11 @@ namespace Features.UI.Windows.Perks.Scripts
     private PerksSettingsContainer perksSettingsContainer;
 
     private PerkElement clickedPerk;
+    private UserOpenPerks userPerksData;
 
     [Inject]
     public void Construct(IGameStateMachine gameStateMachine, IGameSettings gameSettings, IAssetProvider assetProvider,
-      IStaticDataService staticDataService, IWindowsService windowsService)
+      IStaticDataService staticDataService, IWindowsService windowsService, IUserProvider userProvider)
     {
       this.windowsService = windowsService;
       this.gameSettings = gameSettings;
@@ -41,6 +45,7 @@ namespace Features.UI.Windows.Perks.Scripts
       perksSpawner = new PerksSpawner(assetProvider, spawnParent, perkPrefab);
       perks = new List<PerkElement>(10);
       perksSettingsContainer = staticDataService.ForPerks();
+      userPerksData = userProvider.User.OpenPerksData;
     }
 
     public override void Open()
@@ -74,7 +79,7 @@ namespace Features.UI.Windows.Perks.Scripts
 
     private void CreatePerk(PerkSettings settings)
     {
-      PerkElement element = perksSpawner.Create(settings, true);
+      PerkElement element = perksSpawner.Create(settings, userPerksData.IsOpen(settings.Type));
       element.Clicked += OnChoosePerk;
       perks.Add(element);
     }
@@ -84,8 +89,11 @@ namespace Features.UI.Windows.Perks.Scripts
       clickedPerk = perk;
     }
 
-    private void Close() => 
+    private void Close()
+    {
+      windowsService.Open(WindowId.MainMenu);
       windowsService.Close(ID);
+    }
 
     private void Play()
     {

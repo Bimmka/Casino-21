@@ -1,9 +1,9 @@
 using System;
+using System.Collections;
 using Features.Cards.Scripts.Deck;
 using Features.Cards.Scripts.Element;
 using Features.StaticData.Audio;
 using Services.Audio;
-using StaticData.Audio;
 using UnityEngine;
 using Zenject;
 
@@ -20,7 +20,7 @@ namespace Features.Hands.Scripts.Base
     public bool IsNotEmpty => FirstFulledPoint() != null;
     public bool IsTakingCard { get; private set; }
 
-    public event Action<bool> TookedCard; 
+    public event Action<bool> TookedCard;
 
     [Inject]
     public void Construct(CardDeck deck, IAudioService audioService)
@@ -43,14 +43,22 @@ namespace Features.Hands.Scripts.Base
       return sum;
     }
 
-    public virtual void TakeCard()
+    public virtual void TakeCard(Action callback = null)
     {
       IsTakingCard = true;
       NotifyAboutTookCard();
       audioService.Play(AudioEventType.Card);
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
-      freePoint.SetCard(card, OnTookCard);
+      freePoint.SetCard(card, () => OnTookCard(callback));
+    }
+    
+    public void SetCard(Card card)
+    {
+      IsTakingCard = true;
+      NotifyAboutTookCard();
+      HandPoint freePoint = FreePoint();
+      freePoint.SetCard(card, () => OnTookCard());
     }
 
     public void ReleaseCards()
@@ -60,14 +68,23 @@ namespace Features.Hands.Scripts.Base
         cardPoints[i].Release();
       }
     }
+    
+    public Card PopFirstCard()
+    {
+      HandPoint point = FirstFulledPoint();
+      Card card = point.Card;
+      point.Reset();
+      return card;
+    }
 
-    public void RemoveFirstCard()
+    public void RemoveFirstCard(Action callback)
     {
       HandPoint point = FirstFulledPoint();
       point.Release();
+      StartCoroutine(ShiftCards(callback));
     }
 
-    public void RemoveLastCard()
+    public virtual void RemoveLastCard()
     {
       HandPoint point = LastFulledPoint();
       point.Release();
@@ -86,10 +103,11 @@ namespace Features.Hands.Scripts.Base
       callback?.Invoke();
     }
 
-    protected virtual void OnTookCard()
+    protected virtual void OnTookCard(Action callback = null)
     {
       IsTakingCard = false;
       NotifyAboutTookCard();
+      callback?.Invoke();
     }
 
     protected HandPoint FirstFulledPoint()
@@ -114,6 +132,25 @@ namespace Features.Hands.Scripts.Base
       return null;
     }
 
+    protected IEnumerator ShiftCards(Action callback)
+    {
+      for (int i = 1; i < cardPoints.Length; i++)
+      {
+        if (cardPoints[i-1].Card != null || cardPoints[i].Card == null)
+          continue;
+        
+        cardPoints[i-1].SetCard(cardPoints[i].Card);
+        cardPoints[i].Reset();
+      }
+
+      while (IsHaveWaitingCardPoint())
+      {
+        yield return null;
+      }
+      
+      callback?.Invoke();
+    }
+
     private bool IsHandFull()
     {
       for (int i = 0; i < cardPoints.Length; i++)
@@ -134,6 +171,17 @@ namespace Features.Hands.Scripts.Base
       }
 
       return null;
+    }
+
+    private bool IsHaveWaitingCardPoint()
+    {
+      for (int i = 0; i < cardPoints.Length; i++)
+      {
+        if (cardPoints[i].Card != null && cardPoints[i].IsWaitingCard)
+          return true;
+      }
+
+      return false;
     }
 
     private void NotifyAboutTookCard() => 

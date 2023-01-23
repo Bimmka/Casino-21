@@ -2,6 +2,7 @@ using Features.Constants;
 using Features.GameStates.States.Interfaces;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
+using Features.Services.StaticData;
 using Features.Services.UserProvider;
 using Features.StaticData.Audio;
 using Features.User.Data;
@@ -17,15 +18,17 @@ namespace Features.GameStates.States
     private readonly IUserProvider userProvider;
     private readonly IAudioService audioService;
     private readonly ILeaderboard leaderboard;
+    private readonly IStaticDataService staticDataService;
 
     public LoadProgressState(IGameStateMachine gameStateMachine, ISaveService saveService, IUserProvider userProvider,
-      IAudioService audioService, ILeaderboard leaderboard)
+      IAudioService audioService, ILeaderboard leaderboard, IStaticDataService staticDataService)
     {
       this.gameStateMachine = gameStateMachine;
       this.saveService = saveService;
       this.userProvider = userProvider;
       this.audioService = audioService;
       this.leaderboard = leaderboard;
+      this.staticDataService = staticDataService;
     }
     
     public void Enter()
@@ -69,7 +72,7 @@ namespace Features.GameStates.States
     }
 
     private UserData CreateUserData() => 
-      new UserData();
+      new UserData(staticDataService.ForPerks());
 
     private void SetToProvider(UserData data) => 
       userProvider.Initialize(data);

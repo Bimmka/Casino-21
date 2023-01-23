@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Open Cat First
   Description: Open User First Card
   Type: 1
-  UseCost: 200
+  TargetType: 0
+  UseCost: 0
   UnlockCondition:
     Type: 0
     Count: 0
