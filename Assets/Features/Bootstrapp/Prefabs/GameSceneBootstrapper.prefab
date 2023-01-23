@@ -90,3 +90,5 @@ MonoBehaviour:
   npcSettings: {fileID: 11400000, guid: 0a736cf3f8a919e44aa71d2442968eb6, type: 2}
   levelInfoDisplayer: {fileID: 0}
   perksObserverPrefab: {fileID: 4068667538638254946, guid: 543a41a4a0bc8774ab56b3aaacef188a, type: 3}
+  userHandsAnimationSpawnParent: {fileID: 0}
+  userAnimationPrefab: {fileID: 504969594603957871, guid: 3b79c96897de81d47ba045300a8d2674, type: 3}

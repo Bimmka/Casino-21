@@ -1,5 +1,6 @@
 using System;
 using Features.GameStates.States.Interfaces;
+using Features.Hands.Scripts.User;
 using Features.Services.GameSettings;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
@@ -17,15 +18,17 @@ namespace Features.Level.Scripts.LevelStates.States
     private readonly IUserProvider userProvider;
     private readonly ISaveService saveService;
     private readonly ILeaderboard leaderboard;
+    private readonly UserHands userHands;
 
     public LevelWinState(IWindowsService windowsService, IGameSettings gameSettings, 
-      IUserProvider userProvider, ISaveService saveService, ILeaderboard leaderboard)
+      IUserProvider userProvider, ISaveService saveService, ILeaderboard leaderboard, UserHands userHands)
     {
       this.windowsService = windowsService;
       this.gameSettings = gameSettings;
       this.userProvider = userProvider;
       this.saveService = saveService;
       this.leaderboard = leaderboard;
+      this.userHands = userHands;
     }
 
     public void Enter()
@@ -50,6 +53,7 @@ namespace Features.Level.Scripts.LevelStates.States
       userProvider.User.PointsData.Add(WinPoints());
       saveService.SavePlayer(userProvider.User);
       leaderboard.LogPoints(userProvider.User.PointsData.CurrentPoints);
+      userHands.WinAnimation();
     }
 
     public void Exit()

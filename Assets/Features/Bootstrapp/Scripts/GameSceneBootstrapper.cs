@@ -37,11 +37,15 @@ namespace Features.Bootstrapp.Scripts
     [SerializeField] private NPCSettings npcSettings;
     [SerializeField] private LevelInfoDisplayer levelInfoDisplayer;
     [SerializeField] private PerksObserver perksObserverPrefab;
+    [SerializeField] private Transform userHandsAnimationSpawnParent;
+    [SerializeField] private UserAnimation userAnimationPrefab;
+    [SerializeField] private Transform dealerHandsAnimationSpawnParent;
 
     private CardDeck spawnedDeck;
     private UserHands spawnedUserHands;
     private DealerHands spawnedDealerHands;
-    
+    private UserAnimation spawnedUserAnimation;
+
     public override void Start()
     {
       base.Start();
@@ -65,6 +69,7 @@ namespace Features.Bootstrapp.Scripts
       BindLevelInfoDisplayer();
       BindPerksFactory();
       BindPerksObserver();
+      BindUserAnimation();
     }
 
     private void BindLevelStateMachine() => 
@@ -134,5 +139,16 @@ namespace Features.Bootstrapp.Scripts
 
     private void BindPerksObserver() => 
       Container.Bind<PerksObserver>().ToSelf().FromComponentInNewPrefab(perksObserverPrefab).AsSingle();
+
+    private void BindUserAnimation() =>
+      Container.Bind<UserAnimation>().ToSelf().FromMethod(UserAnimation).AsSingle();
+
+    private UserAnimation UserAnimation()
+    {
+      if (spawnedUserAnimation == null)
+        spawnedUserAnimation = Container.InstantiatePrefab(userAnimationPrefab, userHandsAnimationSpawnParent).GetComponent<UserAnimation>();
+
+      return spawnedUserAnimation;
+    }
   }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4095686324184319592}
   - component: {fileID: 38822525523178506}
-  - component: {fileID: -1765765385741833499}
   m_Layer: 0
   m_Name: Dealer Hand
   m_TagString: Untagged
@@ -58,18 +57,6 @@ MonoBehaviour:
   - {fileID: 4546907896675362654}
   - {fileID: 4546907896998036481}
   - {fileID: 4546907897821287409}
---- !u!114 &-1765765385741833499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5641822428761716023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d02154104a72a548bc0ab45baaeedbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5782717755465950122
 PrefabInstance:
   m_ObjectHideFlags: 0

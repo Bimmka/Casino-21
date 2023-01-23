@@ -125,9 +125,13 @@ namespace Features.UI.Windows.Actions.Scripts
       if (userHands.IsTakingCard)
         return;
       
-      levelStateMachine.Enter<LevelUserCheckState>();
       HideBaseButtons();
+      view.HidePerk();
+      userHands.CheckAnimation(OnCheck);
     }
+
+    private void OnCheck() => 
+      levelStateMachine.Enter<LevelUserCheckState>();
 
     private void Show() => 
       view.Show();

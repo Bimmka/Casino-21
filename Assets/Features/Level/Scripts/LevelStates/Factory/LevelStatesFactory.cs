@@ -66,7 +66,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelFirstCardsState):
           return new LevelFirstCardsState(userHands, dealer, levelStateMachine, deck, gameSettings);
         case nameof(LevelLoseState):
-          return new LevelLoseState(windowsService, userProvider, saveService);
+          return new LevelLoseState(windowsService, userProvider, saveService, userHands);
         case nameof(LevelPerkCheckState):
           return new LevelPerkCheckState(userHands, levelStateMachine, dealer, gameSettings, infoDisplayer, gameRules);
         case nameof(LevelPrepareState):
@@ -80,7 +80,7 @@ namespace Features.Level.Scripts.LevelStates.Factory
         case nameof(LevelUserTurnState):
           return new LevelUserTurnState(windowsService, perksObserver);
         case nameof(LevelWinState):
-          return new LevelWinState(windowsService, gameSettings, userProvider, saveService, leaderboard);
+          return new LevelWinState(windowsService, gameSettings, userProvider, saveService, leaderboard, userHands);
         default:
           throw new ArgumentOutOfRangeException();
       }

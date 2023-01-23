@@ -1,54 +1,34 @@
-using UnityEditor.Animations;
+using System;
+using Features.Hands.Scripts.Animation;
 using UnityEngine;
 
-public class UserAnimation : MonoBehaviour
+namespace Features.Hands.Scripts.User
 {
-    private AnimationController _animationController;
-    private Animator _animator;
-
-    private string idle = "Sceletal_Hand|Hand_1_Idle";
-    private string loss = "Sceletal_Hand|Hand_1_Lose";
-    private string more = "Sceletal_Hand|Hand_1_More";
-    private string stop = "Sceletal_Hand|Hand_1_Stop";
-    private string win = "Sceletal_Hand|Hand_1_Win";
-
-    void Start()
+    public class UserAnimation : MonoBehaviour
     {
-        _animationController = GetComponent<AnimationController>();
+        [SerializeField] private AnimationController animationController;
         
-        AnimatorController animatorController = (AnimatorController) _animator.runtimeAnimatorController;
+        private static readonly int Loss = Animator.StringToHash( "Lose");
+        private static readonly int More = Animator.StringToHash( "More");
+        private static readonly int Stop = Animator.StringToHash( "Stop");
+        private static readonly int Win = Animator.StringToHash("Win");
 
-        animatorController.AddParameter (Animator.StringToHash(idle).ToString(), AnimatorControllerParameterType.Bool);
-        animatorController.AddParameter (Animator.StringToHash(loss).ToString(), AnimatorControllerParameterType.Trigger);
-        animatorController.AddParameter (Animator.StringToHash(more).ToString(), AnimatorControllerParameterType.Trigger);
-        animatorController.AddParameter (Animator.StringToHash(stop).ToString(), AnimatorControllerParameterType.Trigger);
-        animatorController.AddParameter (Animator.StringToHash(win).ToString(), AnimatorControllerParameterType.Trigger);
-        
-    }
+        public void SetLose() => 
+            animationController.SetTrigger(Loss);
 
-    public void Idle(bool flag)
-    {
-        _animationController.SetBool(Animator.StringToHash(idle),flag);
-    }
+        public void SetMore(Action callback)
+        {
+            animationController.SaveEvent(callback);
+            animationController.SetTrigger(More);
+        }
     
-    public void Loss(bool flag)
-    {
-        _animationController.SetTrigger(Animator.StringToHash(loss));
-    }
-    
-    public void More(bool flag)
-    {
-        _animationController.SetTrigger(Animator.StringToHash(more));
-    }
-    
-    public void Stop(bool flag)
-    {
-        _animationController.SetTrigger(Animator.StringToHash(stop));
-    }
-    
-    public void Win(bool flag)
-    {
-        _animationController.SetTrigger(Animator.StringToHash(win));
-    }
+        public void SetStop(Action callback)
+        {
+            animationController.SaveEvent(callback);
+            animationController.SetTrigger(Stop);
+        }
 
+        public void SetWin() => 
+            animationController.SetTrigger(Win);
+    }
 }

@@ -21,9 +21,8 @@ namespace Features.Hands.Scripts.Base
     public bool IsTakingCard { get; private set; }
 
     public event Action<bool> TookedCard;
-
-    [Inject]
-    public void Construct(CardDeck deck, IAudioService audioService)
+    
+    protected void Construct(CardDeck deck, IAudioService audioService)
     {
       this.audioService = audioService;
       this.deck = deck;
@@ -45,14 +44,14 @@ namespace Features.Hands.Scripts.Base
 
     public virtual void TakeCard(Action callback = null)
     {
-      IsTakingCard = true;
+      SetIsTakingCard(true);
       NotifyAboutTookCard();
       audioService.Play(AudioEventType.Card);
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
       freePoint.SetCard(card, () => OnTookCard(callback));
     }
-    
+
     public void SetCard(Card card)
     {
       IsTakingCard = true;
@@ -68,7 +67,7 @@ namespace Features.Hands.Scripts.Base
         cardPoints[i].Release();
       }
     }
-    
+
     public Card PopFirstCard()
     {
       HandPoint point = FirstFulledPoint();
@@ -110,6 +109,9 @@ namespace Features.Hands.Scripts.Base
       callback?.Invoke();
     }
 
+    protected void SetIsTakingCard(bool isTake) => 
+      IsTakingCard = isTake;
+
     protected HandPoint FirstFulledPoint()
     {
       for (int i = 0; i < cardPoints.Length; i++)
@@ -131,6 +133,9 @@ namespace Features.Hands.Scripts.Base
 
       return null;
     }
+
+    protected void NotifyAboutTookCard() => 
+      TookedCard?.Invoke(IsTakingCard);
 
     protected IEnumerator ShiftCards(Action callback)
     {
@@ -183,8 +188,5 @@ namespace Features.Hands.Scripts.Base
 
       return false;
     }
-
-    private void NotifyAboutTookCard() => 
-      TookedCard?.Invoke(IsTakingCard);
   }
 }
