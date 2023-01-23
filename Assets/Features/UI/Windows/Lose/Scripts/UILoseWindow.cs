@@ -1,3 +1,5 @@
+using System.Collections;
+using DG.Tweening;
 using Features.GameStates;
 using Features.GameStates.States;
 using Features.Level.Scripts.LevelStates.Machine;
@@ -19,8 +21,12 @@ namespace Features.UI.Windows.Lose.Scripts
   public class UILoseWindow : BaseWindow
   {
     [SerializeField] private TextMeshProUGUI lostText;
+    [SerializeField] private string lostTextFormat = "-{0}";
     [SerializeField] private Button leaveButton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private float delayOpen = 2f;
+    [SerializeField] private float openTime = 1f;
+    [SerializeField] private CanvasGroup canvasGroup;
     
     private IGameSettings gameSettings;
     private IGameStateMachine gameStateMachine;
@@ -58,11 +64,12 @@ namespace Features.UI.Windows.Lose.Scripts
 
     public override void Open()
     {
-      lostText.text = gameSettings.CurrentBet.ToString();
+      lostText.text = string.Format(lostTextFormat, gameSettings.CurrentBet.ToString());
       audioService.Play(AudioEventType.Lose);
       if (userProvider.User.PointsData.CurrentPoints == 0)
         restartButton.gameObject.SetActive(false);
       base.Open();
+      StartCoroutine(WaitOpen());
     }
 
     private void LoadMainMenu()
@@ -78,6 +85,19 @@ namespace Features.UI.Windows.Lose.Scripts
       audioService.Play(AudioEventType.Click);
       levelStateMachine.Enter<LevelResetState>();
       windowsService.Close(ID);
+    }
+
+    private IEnumerator WaitOpen()
+    {
+      float time = 0;
+
+      while (time < delayOpen)
+      {
+        time += Time.deltaTime;
+        yield return null;
+      }
+
+      canvasGroup.DOFade(1f, openTime).SetEase(Ease.InOutSine);
     }
   }
 }
