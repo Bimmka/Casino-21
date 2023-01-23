@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79acad21a3914e609ac9c1867d92e9ef, type: 3}
   m_Name: TakeFullHands
   m_EditorClassIdentifier: 
-  Name: Swap Card
-  Description: Swap First Cards
-  Type: 7
+  Name: Take Full Hands
+  Description: Take Full Hands
+  Type: 8
   UseCost: 200
   UnlockCondition:
     Type: 0
