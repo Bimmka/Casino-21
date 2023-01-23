@@ -1,3 +1,4 @@
+using System;
 using Features.Level.Scripts.Info;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
@@ -8,6 +9,7 @@ using Features.Services.UI.Windows;
 using Features.Services.UserProvider;
 using Features.UI.Windows.Base.Scripts;
 using Features.User.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -20,6 +22,9 @@ namespace Features.UI.Windows.Bet.Scripts
     [SerializeField] private UIBetWindowView view;
     [SerializeField] private Slider betSlider;
     [SerializeField] private Button betButton;
+    [SerializeField] private TMP_InputField betInputField;
+
+    private const int BetMinValue = 1;
     
     private UserData user;
     private ILevelStateMachine levelStateMachine;
@@ -41,9 +46,10 @@ namespace Features.UI.Windows.Bet.Scripts
       this.gameSettings = gameSettings;
       this.levelStateMachine = levelStateMachine;
       user = userProvider.User;
-      betSlider.minValue = 0;
+      betSlider.minValue = BetMinValue;
       betSlider.maxValue = user.PointsData.CurrentPoints;
       betSlider.wholeNumbers = true;
+      view.DisplayBet(BetMinValue);
     }
 
     protected override void Subscribe()
@@ -51,6 +57,7 @@ namespace Features.UI.Windows.Bet.Scripts
       base.Subscribe();
       betSlider.onValueChanged.AddListener(OnChangeSlider);
       betButton.onClick.AddListener(ConfirmBet);
+      betInputField.onEndEdit.AddListener(UpdateBet);
     }
 
     protected override void Cleanup()
@@ -58,11 +65,27 @@ namespace Features.UI.Windows.Bet.Scripts
       base.Cleanup();
       betSlider.onValueChanged.RemoveListener(OnChangeSlider);
       betButton.onClick.RemoveListener(ConfirmBet);
+      betInputField.onEndEdit.RemoveListener(UpdateBet);
     }
 
     private void OnChangeSlider(float sliderValue)
     {
       view.DisplayBet(sliderValue);
+    }
+
+    private void UpdateBet(string text)
+    {
+      if (int.TryParse(text, out int bet))
+      {
+        bet = Math.Clamp(bet, BetMinValue, user.PointsData.CurrentPoints);
+        view.DisplayBet(bet);
+        betSlider.value = bet;
+      }
+      else
+      {
+        view.DisplayBet(BetMinValue);
+        betSlider.value = BetMinValue;
+      }
     }
 
     private void ConfirmBet()
