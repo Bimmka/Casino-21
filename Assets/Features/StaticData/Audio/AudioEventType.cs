@@ -7,6 +7,7 @@
     GameAmbient,
     Win, 
     Lose,
-    GameMusic
+    GameMusic,
+    Click
   }
 }

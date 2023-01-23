@@ -30,6 +30,9 @@ MonoBehaviour:
   - Path: event:/Win
     BankType: 0
     Type: 3
+  - Path: event:/Click
+    BankType: 0
+    Type: 6
   Banks:
   - Path: Master.strings
     Type: 0
