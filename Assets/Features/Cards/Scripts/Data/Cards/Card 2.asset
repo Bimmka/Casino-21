@@ -17,7 +17,10 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 2800000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
-    - {fileID: 2800000, guid: 158d9c687149a0e499002e08c9420c70, type: 3}
+    - {fileID: 2800000, guid: a902a3bd544d7b14da1186d41f0fbb7b, type: 3}
+    - {fileID: 2800000, guid: 310072b87c9a4434f9e712c5ae6b5aca, type: 3}
+    - {fileID: 2800000, guid: 37d50c5d60132f04c8e18be71969d70b, type: 3}
+    - {fileID: 2800000, guid: 36c885f3d23d81345bb28be0d6c49c3d, type: 3}
     - {fileID: 2800000, guid: 81ed8c76d2bc4a4c95d092c98af4e58f, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -79,10 +82,19 @@ MonoBehaviour:
       Data: 3|UnityEngine.Texture2D[], UnityEngine.CoreModule
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -106,7 +118,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 2
+      Data: 5
     - Name: 
       Entry: 13
       Data: 
