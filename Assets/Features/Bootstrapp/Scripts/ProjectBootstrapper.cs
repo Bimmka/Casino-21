@@ -7,6 +7,7 @@ using Features.GameStates.States;
 using Features.Perks.Data;
 using Features.SceneLoading.Scripts;
 using Features.Services.Assets;
+using Features.Services.Audio;
 using Features.Services.GameSettings;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
@@ -16,7 +17,6 @@ using Features.Services.UserProvider;
 using Features.StaticData.Audio;
 using Features.StaticData.Leaderboard;
 using Features.UI.Windows.Data;
-using Services.Audio;
 using UnityEngine;
 using Zenject;
 

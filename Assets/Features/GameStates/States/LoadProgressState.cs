@@ -1,12 +1,12 @@
 using Features.Constants;
 using Features.GameStates.States.Interfaces;
+using Features.Services.Audio;
 using Features.Services.Leaderboard;
 using Features.Services.Save;
 using Features.Services.StaticData;
 using Features.Services.UserProvider;
 using Features.StaticData.Audio;
 using Features.User.Data;
-using Services.Audio;
 using UnityEngine;
 
 namespace Features.GameStates.States
@@ -33,17 +33,12 @@ namespace Features.GameStates.States
     
     public void Enter()
     {
-      if (audioService.IsBankLoaded(AudioBankType.Master) == false)
-        audioService.LoadBank(AudioBankType.Master);
-      
-      if (audioService.IsBankLoaded(AudioBankType.UI) == false)
-        audioService.LoadBank(AudioBankType.UI);
-      
-      if (userProvider.User == null)
-      {
-        UserData data =  CreateUserData();
-        SetToProvider(data);
-      }
+      audioService.LoadBank(AudioBankType.Master);
+      audioService.LoadBank(AudioBankType.UI);
+      audioService.InitializeBuses();
+
+      UserData data =  CreateUserData();
+      SetToProvider(data);
       leaderboard.Login(OnLogin);
     }
 

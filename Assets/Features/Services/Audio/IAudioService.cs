@@ -1,9 +1,8 @@
 ﻿using Features.Services.Cleanup;
 using Features.StaticData.Audio;
 using FMOD.Studio;
-using StaticData.Audio;
 
-namespace Services.Audio
+namespace Features.Services.Audio
 {
   public interface IAudioService : ICleanup
   {
@@ -14,8 +13,8 @@ namespace Services.Audio
     void LoadBank(AudioBankType type);
     void ReleaseBank(AudioBankType type);
     bool IsBankLoaded(AudioBankType type);
-    void Play(AudioEventType type, AudioParameterType parameter, float value);
-    void SetParameterValue(AudioEventType type, AudioParameterType parameter, int value);
-    void AlwaysPlay(AudioEventType type);
+    void SetVolumeValue(AudioVolumeType volume, float value);
+    float GetVolumeValue(AudioVolumeType type);
+    void InitializeBuses();
   }
 }

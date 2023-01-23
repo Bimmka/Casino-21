@@ -1,5 +1,6 @@
 using Features.GameStates;
 using Features.GameStates.States;
+using Features.Services.UI.Factory;
 using Features.Services.UI.Windows;
 using Features.UI.Windows.Base.Scripts;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Features.UI.Windows.PauseMenu.Scripts
   public class UIPauseMenu : BaseWindow
   {
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button settingsButton;
     [SerializeField] private Button continueButton;
     private IGameStateMachine gameStateMachine;
     private IWindowsService windowsService;
@@ -27,13 +29,20 @@ namespace Features.UI.Windows.PauseMenu.Scripts
       base.Subscribe();
       exitButton.onClick.AddListener(LoadMainMenu);
       continueButton.onClick.AddListener(Close);
+      settingsButton.onClick.AddListener(OpenSettings);
     }
 
     protected override void Cleanup()
     {
       base.Cleanup();
-      exitButton.onClick.AddListener(LoadMainMenu);
-      continueButton.onClick.AddListener(Close);
+      exitButton.onClick.RemoveListener(LoadMainMenu);
+      continueButton.onClick.RemoveListener(Close);
+      settingsButton.onClick.RemoveListener(OpenSettings);
+    }
+
+    private void OpenSettings()
+    {
+      windowsService.Open(WindowId.Settings);
     }
 
     private void LoadMainMenu() => 

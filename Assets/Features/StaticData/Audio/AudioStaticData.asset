@@ -37,4 +37,10 @@ MonoBehaviour:
   - Path: Master
     Type: 1
     IsPreloadSimples: 0
-  Parameters: []
+  Parameters:
+  - Type: 2
+    Name: bus:/Music bus
+    DefaultValue: 0
+  - Type: 1
+    Name: bus:/Ambience bus
+    DefaultValue: 0

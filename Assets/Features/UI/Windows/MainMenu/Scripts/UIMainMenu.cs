@@ -10,37 +10,40 @@ namespace Features.UI.Windows.MainMenu.Scripts
 {
   public class UIMainMenu : BaseWindow
   {
-    [SerializeField] private Button easyPlayButton;
-    [SerializeField] private Button mediumPlayButton;
-    [SerializeField] private Button hardPlayButton;
+    [SerializeField] private Button playButton;
     [SerializeField] private Button leaderboardButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button aboutButton;
+    [SerializeField] private Button quitButton;
     
-    private IGameSettings gameSettings;
     private IWindowsService windowsService;
+    private IGameSettings gameSettings;
 
     [Inject]
-    public void Construct(IGameSettings gameSettings, IWindowsService windowsService)
+    public void Construct(IWindowsService windowsService, IGameSettings gameSettings)
     {
-      this.windowsService = windowsService;
       this.gameSettings = gameSettings;
+      this.windowsService = windowsService;
     }
 
     protected override void Subscribe()
     {
       base.Subscribe();
-      easyPlayButton.onClick.AddListener(StartEasyPlay);
-      mediumPlayButton.onClick.AddListener(StartMediumPlay);
-      hardPlayButton.onClick.AddListener(StartHardPlay);
+      playButton.onClick.AddListener(StartPlay);
+      settingsButton.onClick.AddListener(OpenSettings);
+      aboutButton.onClick.AddListener(OpenAbout);
+      quitButton.onClick.AddListener(Quit);
       leaderboardButton.onClick.AddListener(OpenLeaderboard);
     }
 
     protected override void Cleanup()
     {
       base.Cleanup();
-      easyPlayButton.onClick.RemoveListener(StartEasyPlay);
-      mediumPlayButton.onClick.RemoveListener(StartMediumPlay);
-      hardPlayButton.onClick.RemoveListener(StartHardPlay);
+      playButton.onClick.RemoveListener(StartPlay);
+      settingsButton.onClick.RemoveListener(OpenSettings);
+      aboutButton.onClick.RemoveListener(OpenAbout);
       leaderboardButton.onClick.RemoveListener(OpenLeaderboard);
+      quitButton.onClick.RemoveListener(Quit);
     }
 
     public override void Open()
@@ -49,21 +52,25 @@ namespace Features.UI.Windows.MainMenu.Scripts
       gameSettings.Reset();
     }
 
-    private void StartEasyPlay() => 
-      StartGame(GameDifficultType.Easy);
-
-    private void StartMediumPlay() => 
-      StartGame(GameDifficultType.Medium);
-
-    private void StartHardPlay() => 
-      StartGame(GameDifficultType.Hard);
-
-    private void StartGame(GameDifficultType type)
+    private void Quit()
     {
-      gameSettings.SetType(type);
-      windowsService.Close(ID);
-      windowsService.Open(WindowId.Perks);
+      Application.Quit();
     }
+
+    private void StartPlay()
+    {
+      windowsService.Open(WindowId.Difficult);
+      windowsService.Close(ID);
+    }
+
+    private void OpenSettings()
+    {
+      windowsService.Open(WindowId.Settings);
+      windowsService.Close(ID);
+    }
+
+    private void OpenAbout() => 
+      windowsService.Open(WindowId.About);
 
     private void OpenLeaderboard() => 
       windowsService.Open(WindowId.Leaderboard);

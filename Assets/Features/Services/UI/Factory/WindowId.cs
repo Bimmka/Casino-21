@@ -13,5 +13,8 @@
     PauseMenu = 8,
     Leaderboard = 9,
     Perks = 10,
+    Settings = 11,
+    Difficult = 12,
+    About = 13,
   }
 }

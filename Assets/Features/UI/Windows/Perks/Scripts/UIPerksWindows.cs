@@ -121,7 +121,7 @@ namespace Features.UI.Windows.Perks.Scripts
 
     private void Close()
     {
-      windowsService.Open(WindowId.MainMenu);
+      windowsService.Open(WindowId.Difficult);
       windowsService.Close(ID);
     }
 

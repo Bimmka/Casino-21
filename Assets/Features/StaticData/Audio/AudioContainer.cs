@@ -10,6 +10,6 @@ namespace Features.StaticData.Audio
     public int MaxPlayingEventsOnOneTime = 5;
     public AudioEvent[] Events;
     public AudioBank[] Banks;
-    public AudioParameter[] Parameters;
+    public VolumeParameter[] Parameters;
   }
 }

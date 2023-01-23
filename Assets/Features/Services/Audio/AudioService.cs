@@ -4,18 +4,21 @@ using Features.Constants;
 using Features.StaticData.Audio;
 using FMOD.Studio;
 using FMODUnity;
+using Newtonsoft.Json;
 using StaticData.Audio;
 using UnityEngine;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
-namespace Services.Audio
+namespace Features.Services.Audio
 {
     public class AudioService : IAudioService
     {
+        private readonly AudioContainer audioContainer;
         private readonly Dictionary<AudioEventType, AudioEvent> events;
         private readonly Dictionary<AudioBankType, AudioBank> banks;
-        private readonly Dictionary<AudioParameterType, AudioParameter> parameters;
+        private readonly Dictionary<AudioVolumeType, VolumeParameter> parameters;
         private readonly Dictionary<AudioEventType, EventInstance> eventInstances;
+        private readonly Dictionary<AudioVolumeType, Bus> volumesBus;
         private readonly List<string> loadedBanks;
     
         private readonly int maxOneTimePlayingEventsCount;
@@ -26,10 +29,12 @@ namespace Services.Audio
 
         public AudioService(AudioContainer audioContainer)
         {
+            this.audioContainer = audioContainer;
             events = new Dictionary<AudioEventType, AudioEvent>(audioContainer.Events.Length);
             banks = new Dictionary<AudioBankType, AudioBank>(audioContainer.Banks.Length);
-            parameters = new Dictionary<AudioParameterType, AudioParameter>(audioContainer.Parameters.Length);
+            parameters = new Dictionary<AudioVolumeType, VolumeParameter>(audioContainer.Parameters.Length);
             eventInstances = new Dictionary<AudioEventType, EventInstance>(audioContainer.MaxHoldingInstancesCount);
+            volumesBus = new Dictionary<AudioVolumeType, Bus>(parameters.Count);
             
             loadedBanks = new List<string>(5);
         
@@ -42,16 +47,10 @@ namespace Services.Audio
             {
                 banks.Add(audioContainer.Banks[i].Type, audioContainer.Banks[i]);
             }
-            
-            for (int i = 0; i < audioContainer.Parameters.Length; i++)
-            {
-                parameters.Add(audioContainer.Parameters[i].Type, audioContainer.Parameters[i]);
-            }
-
             maxOneTimePlayingEventsCount = audioContainer.MaxPlayingEventsOnOneTime;
             maxHoldingInstanceCount = audioContainer.MaxHoldingInstancesCount;
 
-            LoadEnableSetting();
+           
         }
 
         public void Cleanup()
@@ -62,6 +61,20 @@ namespace Services.Audio
             }
 
             IsCleanedUp = true;
+        }
+
+        public void InitializeBuses()
+        {
+            Bus bus;
+            for (int i = 0; i < audioContainer.Parameters.Length; i++)
+            {
+                bus = RuntimeManager.GetBus(audioContainer.Parameters[i].Name);
+                bus.setVolume(audioContainer.Parameters[i].DefaultValue);
+                volumesBus.Add(audioContainer.Parameters[i].Type, bus);
+                parameters.Add(audioContainer.Parameters[i].Type, audioContainer.Parameters[i]);
+            }
+            
+            LoadSettings();
         }
 
         public void LoadBank(AudioBankType type)
@@ -94,23 +107,9 @@ namespace Services.Audio
         public void SetEnableState(bool isEnable)
         {
             IsEnable = isEnable;
-            SaveEnableSetting();
+            SaveSettings();
         }
-
-        public void AlwaysPlay(AudioEventType type)
-        {
-            if (IsHaveEvent(type) == false)
-                return;
         
-            if (IsBankLoaded(events[type].BankType) == false)
-                LoadBank(events[type].BankType);
-            
-            if (IsInstanceCreated(type))
-                Play(eventInstances[type]);
-            else if (IsCanCreateNewInstance())
-                Play( NewInstance(type, events[type].Path));
-        }
-
         public void Play(AudioEventType type)
         {
             if (IsHaveEvent(type) == false || IsEnable == false)
@@ -125,26 +124,17 @@ namespace Services.Audio
                 Play( NewInstance(type, events[type].Path));
             
         }
-        
-        public void Play(AudioEventType type, AudioParameterType parameter, float value)
+
+        public void SetVolumeValue(AudioVolumeType volume, float value)
         {
-            if (IsHaveEvent(type) == false || IsEnable == false)
-                return;
-        
-            if (IsBankLoaded(events[type].BankType) == false)
-                LoadBank(events[type].BankType);
-            
-            if (IsInstanceCreated(type))
-                Play(eventInstances[type], ParameterName(parameter), value);
-            else if (IsCanCreateNewInstance())
-                Play( NewInstance(type, events[type].Path), ParameterName(parameter), value);
-            
+            volumesBus[volume].setVolume(value);
+            SaveSettings();
         }
 
-        public void SetParameterValue(AudioEventType type, AudioParameterType parameter, int value)
+        public float GetVolumeValue(AudioVolumeType type)
         {
-            if (IsInstanceCreated(type))
-                eventInstances[type].setParameterByName(ParameterName(parameter), value);
+            volumesBus[type].getVolume(out float volume);
+            return volume;
         }
 
         public void Stop(AudioEventType type, STOP_MODE stopMode)
@@ -155,12 +145,6 @@ namespace Services.Audio
 
         private void Play(EventInstance instance) => 
             instance.start();
-        
-        private void Play(EventInstance instance, string parameterName, float value)
-        {
-            instance.setParameterByName(parameterName, value);
-            instance.start();
-        }
 
         private EventInstance NewInstance(AudioEventType type, string path)
         {
@@ -217,13 +201,6 @@ namespace Services.Audio
             return new AudioBank();
         }
 
-        private string ParameterName(AudioParameterType type)
-        {
-            if (parameters.ContainsKey(type))
-                return parameters[type].Name;
-            return "";
-        }
-
         private bool IsHaveEvent(AudioEventType type) => 
             events.ContainsKey(type);
 
@@ -267,10 +244,31 @@ namespace Services.Audio
         private bool IsNeedToRemoveOldInstance() => 
             eventInstances.Count >= maxHoldingInstanceCount;
 
-        private void SaveEnableSetting() => 
+        private void SaveSettings()
+        {
             PlayerPrefs.SetInt(GameConstants.SoundKey, IsEnable ? 1 : 0);
+            List<float> volumes = new List<float>(volumesBus.Count);
+            float value;
+            foreach (KeyValuePair<AudioVolumeType,Bus> bus in volumesBus)
+            {
+                bus.Value.getVolume(out value);
+                volumes.Add(value);
+            }
+            PlayerPrefs.SetString(GameConstants.SoundMusicKey, JsonConvert.SerializeObject(volumes));
+        }
 
-        private void LoadEnableSetting() => 
+        private void LoadSettings()
+        {
             IsEnable = PlayerPrefs.GetInt(GameConstants.SoundKey, 1) == 1;
+            string savedVolumes = PlayerPrefs.GetString(GameConstants.SoundMusicKey, "");
+            if (string.IsNullOrEmpty(savedVolumes))
+                return;
+
+            List<float> volumes = JsonConvert.DeserializeObject<List<float>>(savedVolumes);
+            for (int i = 0; i < volumes.Count; i++)
+            {
+                volumesBus[(AudioVolumeType) i].setVolume(volumes[i]);
+            }
+        }
     }
 }
