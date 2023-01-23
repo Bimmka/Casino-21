@@ -9,8 +9,8 @@ namespace Features.Cards.Scripts.Element
   {
     [SerializeField] private Renderer cardPlane;
 
-    private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
-    private static readonly int Cutoff = Shader.PropertyToID("_Cutoff");
+    private static readonly int MaskTex = Shader.PropertyToID("_Mask");
+    private static readonly int Cutoff = Shader.PropertyToID("_Alpha_Cutoff");
     
     private Dictionary<GameDifficultType, Texture2D[]> hideCostMasks;
     private float alphaCutoff;
