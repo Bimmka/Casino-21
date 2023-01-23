@@ -18,7 +18,7 @@ MonoBehaviour:
   - Path: event:/Cards
     BankType: 0
     Type: 1
-  - Path: event:/Music and ambience
+  - Path: event:/Ambience
     BankType: 0
     Type: 2
   Banks:
