@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Cat Last
   Description: Remove User Last Card
   Type: 4
-  UseCost: 200
+  TargetType: 0
+  UseCost: 0
   UnlockCondition:
     Type: 0
     Count: 0

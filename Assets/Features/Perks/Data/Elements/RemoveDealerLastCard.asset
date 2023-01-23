@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Dealer Last
   Description: Remove Dealer Last Card
   Type: 6
-  UseCost: 200
+  TargetType: 1
+  UseCost: 0
   UnlockCondition:
     Type: 0
     Count: 0

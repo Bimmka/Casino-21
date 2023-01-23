@@ -10,6 +10,7 @@ namespace Features.Perks.Data
     public PerkType Type;
     public PerkTargetType TargetType;
     public int UseCost;
+    public float Coeff;
     public UnlockCondition UnlockCondition;
     public Sprite Icon;
   }

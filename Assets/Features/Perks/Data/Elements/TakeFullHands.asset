@@ -15,6 +15,7 @@ MonoBehaviour:
   Name: Take Full Hands
   Description: Take Full Hands
   Type: 8
+  TargetType: 0
   UseCost: 0
   UnlockCondition:
     Type: 0

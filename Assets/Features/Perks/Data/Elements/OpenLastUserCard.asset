@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Cat Open Last
   Description: Open Last User Card
   Type: 2
-  UseCost: 200
+  TargetType: 0
+  UseCost: 0
   UnlockCondition:
     Type: 0
     Count: 0

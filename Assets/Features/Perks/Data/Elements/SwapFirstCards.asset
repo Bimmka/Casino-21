@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Swap Card
   Description: Swap First Cards
   Type: 7
-  UseCost: 200
+  TargetType: 0
+  UseCost: 0
   UnlockCondition:
     Type: 0
     Count: 0

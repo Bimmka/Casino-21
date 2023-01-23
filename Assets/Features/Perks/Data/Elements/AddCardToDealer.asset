@@ -15,7 +15,8 @@ MonoBehaviour:
   Name: Dealer Add
   Description: Add Card To Dealer
   Type: 5
-  UseCost: 200
+  TargetType: 1
+  UseCost: 0
   UnlockCondition:
     Type: 0
     Count: 0

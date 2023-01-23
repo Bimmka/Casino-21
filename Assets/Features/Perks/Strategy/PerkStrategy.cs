@@ -5,7 +5,7 @@ namespace Features.Perks.Strategy
 {
   public abstract class PerkStrategy
   {
-    private readonly PerkSettings settings;
+    protected readonly PerkSettings settings;
 
     protected PerkStrategy(PerkSettings settings)
     {
