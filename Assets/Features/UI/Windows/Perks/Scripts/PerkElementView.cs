@@ -14,6 +14,7 @@ namespace Features.UI.Windows.Perks.Scripts
     [SerializeField] private TextMeshProUGUI unlockConditionText;
     [SerializeField] private GameObject openParent;
     [SerializeField] private GameObject closeParent;
+    [SerializeField] private GameObject selectFrameParent;
 
     public void Display(PerkSettings settings, bool isOpen)
     {
@@ -25,5 +26,11 @@ namespace Features.UI.Windows.Perks.Scripts
       openParent.SetActive(isOpen);
       closeParent.SetActive(!isOpen);
     }
+
+    public void SetSelectView() => 
+      selectFrameParent.SetActive(true);
+
+    public void SetDeselectView() => 
+      selectFrameParent.SetActive(false);
   }
 }

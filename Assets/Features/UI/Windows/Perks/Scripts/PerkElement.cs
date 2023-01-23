@@ -32,6 +32,12 @@ namespace Features.UI.Windows.Perks.Scripts
       clickButton.onClick.RemoveListener(NotifyAboutClick);
     }
 
+    public void Select() => 
+      view.SetSelectView();
+
+    public void Deselect() => 
+      view.SetDeselectView();
+
     private void NotifyAboutClick() => 
       Clicked?.Invoke(this);
   }

@@ -86,8 +86,38 @@ namespace Features.UI.Windows.Perks.Scripts
 
     private void OnChoosePerk(PerkElement perk)
     {
-      clickedPerk = perk;
+      if (IsSame(perk))
+        Deselect();
+      else if (IsOther(perk))
+      {
+        Deselect();
+        Select(perk);
+      }
+      else if (IsNew())
+        Select(perk);
+      
     }
+
+    private void Select(PerkElement perk)
+    {
+      clickedPerk = perk;
+      clickedPerk.Select();
+    }
+
+    private void Deselect()
+    {
+      clickedPerk.Deselect();
+      clickedPerk = null;
+    }
+
+    private bool IsNew() => 
+      clickedPerk == null;
+
+    private bool IsSame(PerkElement perk) => 
+      clickedPerk != null && clickedPerk.Type == perk.Type;
+
+    private bool IsOther(PerkElement perk) => 
+      clickedPerk != null && clickedPerk.Type != perk.Type;
 
     private void Close()
     {
