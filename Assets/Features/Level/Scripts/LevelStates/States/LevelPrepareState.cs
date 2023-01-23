@@ -37,6 +37,7 @@ namespace Features.Level.Scripts.LevelStates.States
       window.Hide();
       levelStateMachine.Enter<LevelBetState>();
       audioService.Play(AudioEventType.GameAmbient);
+      audioService.Play(AudioEventType.GameMusic);
     }
 
     public void Exit()

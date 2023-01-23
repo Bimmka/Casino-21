@@ -56,12 +56,14 @@ namespace Features.UI.Windows.Lose.Scripts
     public override void Open()
     {
       lostText.text = string.Format(lostTextFormat, gameSettings.CurrentBet);
+      audioService.Play(AudioEventType.Lose);
       base.Open();
     }
 
     private void LoadMainMenu()
     {
       audioService.Stop(AudioEventType.GameAmbient, STOP_MODE.ALLOWFADEOUT);
+      audioService.Stop(AudioEventType.GameMusic, STOP_MODE.ALLOWFADEOUT);
       gameStateMachine.Enter<MainMenuState>();
     }
 

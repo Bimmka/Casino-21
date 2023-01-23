@@ -6,6 +6,7 @@
     Card,
     GameAmbient,
     Win, 
-    Lose
+    Lose,
+    GameMusic
   }
 }

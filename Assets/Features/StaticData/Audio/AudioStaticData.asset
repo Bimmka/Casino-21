@@ -21,6 +21,15 @@ MonoBehaviour:
   - Path: event:/Ambience
     BankType: 0
     Type: 2
+  - Path: event:/Lose
+    BankType: 0
+    Type: 4
+  - Path: event:/Music
+    BankType: 0
+    Type: 5
+  - Path: event:/Win
+    BankType: 0
+    Type: 3
   Banks:
   - Path: Master.strings
     Type: 0
