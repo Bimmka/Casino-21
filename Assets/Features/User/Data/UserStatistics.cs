@@ -13,6 +13,11 @@ namespace Features.User.Data
         {StatisticsType.TotalGames, 0},
         {StatisticsType.TotalWins, 0},
         {StatisticsType.WinStreak, 0},
+        {StatisticsType.TotalLose, 0},
+        {StatisticsType.EasyWin, 0},
+        {StatisticsType.MediumWin, 0},
+        {StatisticsType.HardWin, 0},
+        
       };
     }
 

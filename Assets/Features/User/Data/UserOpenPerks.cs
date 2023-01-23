@@ -63,6 +63,14 @@ namespace Features.User.Data
           return userStatistics.Statistic(StatisticsType.TotalGames) >= unlockCondition.Count;
         case UnlockConditionType.WinStreak:
           return userStatistics.Statistic(StatisticsType.WinStreak) >= unlockCondition.Count;
+        case UnlockConditionType.TotalLose:
+          return userStatistics.Statistic(StatisticsType.TotalLose) >= unlockCondition.Count;
+        case UnlockConditionType.EasyWin:
+          return userStatistics.Statistic(StatisticsType.EasyWin) >= unlockCondition.Count;
+        case UnlockConditionType.MediumWin:
+          return userStatistics.Statistic(StatisticsType.MediumWin) >= unlockCondition.Count;
+        case UnlockConditionType.HardWin:
+          return userStatistics.Statistic(StatisticsType.HardWin) >= unlockCondition.Count;
         default:
           throw new ArgumentOutOfRangeException();
       }

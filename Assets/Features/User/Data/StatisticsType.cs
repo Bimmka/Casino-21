@@ -4,6 +4,10 @@ namespace Features.User.Data
   {
     TotalGames = 0,
     TotalWins,
-    WinStreak
+    WinStreak,
+    TotalLose,
+    EasyWin,
+    MediumWin,
+    HardWin,
   }
 }

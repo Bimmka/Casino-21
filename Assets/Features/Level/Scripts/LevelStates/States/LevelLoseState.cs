@@ -25,6 +25,7 @@ namespace Features.Level.Scripts.LevelStates.States
       windowsService.Open(WindowId.Lose);
       userProvider.User.StatisticsData.ResetStatistic(StatisticsType.WinStreak);
       userProvider.User.StatisticsData.IncStatistic(StatisticsType.TotalGames);
+      userProvider.User.StatisticsData.IncStatistic(StatisticsType.TotalLose);
       userProvider.User.OpenPerksData.RefreshPerksOpen();
       saveService.SavePlayer(userProvider.User);
     }
