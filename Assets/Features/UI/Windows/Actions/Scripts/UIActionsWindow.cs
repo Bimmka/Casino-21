@@ -1,6 +1,7 @@
 using Features.Hands.Scripts.User;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
+using Features.Perks.Data;
 using Features.Perks.Observer;
 using Features.Services.StaticData;
 using Features.UI.Windows.Base.Scripts;
@@ -100,7 +101,7 @@ namespace Features.UI.Windows.Actions.Scripts
     {
       if (perksObserver.IsCanUsePerk)
       {
-        perksObserver.Use();
+        perksObserver.Use(PerkTargetType.User);
         LockPerk();
       }
     }

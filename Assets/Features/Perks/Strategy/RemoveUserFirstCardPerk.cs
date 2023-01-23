@@ -1,3 +1,4 @@
+using System;
 using Features.Hands.Scripts.User;
 using Features.Perks.Data;
 using Features.Services.UI.Factory;
@@ -20,15 +21,16 @@ namespace Features.Perks.Strategy
     public override bool IsCanBeUsed() => 
       userHands.IsNotEmpty;
 
-    public override void Use()
+    public override void Use(Action callback)
     {
       ActionsWindow().Hide();
-      userHands.RemoveFirstCard(OnRemoved);
+      userHands.RemoveFirstCard(() => OnRemoved(callback));
     }
 
-    private void OnRemoved()
+    private void OnRemoved(Action callback)
     {
       ActionsWindow().Open();
+      callback?.Invoke();
     }
     
     private UIActionsWindow ActionsWindow() => 

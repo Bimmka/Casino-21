@@ -43,14 +43,14 @@ namespace Features.Hands.Scripts.Base
       return sum;
     }
 
-    public virtual void TakeCard()
+    public virtual void TakeCard(Action callback = null)
     {
       IsTakingCard = true;
       NotifyAboutTookCard();
       audioService.Play(AudioEventType.Card);
       Card card = deck.TopCard();
       HandPoint freePoint = FreePoint();
-      freePoint.SetCard(card, OnTookCard);
+      freePoint.SetCard(card, () => OnTookCard(callback));
     }
     
     public void SetCard(Card card)
@@ -58,7 +58,7 @@ namespace Features.Hands.Scripts.Base
       IsTakingCard = true;
       NotifyAboutTookCard();
       HandPoint freePoint = FreePoint();
-      freePoint.SetCard(card, OnTookCard);
+      freePoint.SetCard(card, () => OnTookCard());
     }
 
     public void ReleaseCards()
@@ -103,10 +103,11 @@ namespace Features.Hands.Scripts.Base
       callback?.Invoke();
     }
 
-    protected virtual void OnTookCard()
+    protected virtual void OnTookCard(Action callback = null)
     {
       IsTakingCard = false;
       NotifyAboutTookCard();
+      callback?.Invoke();
     }
 
     protected HandPoint FirstFulledPoint()

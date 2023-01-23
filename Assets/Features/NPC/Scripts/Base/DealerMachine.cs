@@ -32,10 +32,8 @@ namespace Features.NPC.Scripts.Base
       StartCoroutine(Turn());
     }
 
-    public void TakeCard()
-    {
-      dealerHands.TakeCard();
-    }
+    public void TakeCard(Action callback = null) => 
+      dealerHands.TakeCard(callback);
 
     public void ReleaseCards() => 
       dealerHands.ReleaseCards();

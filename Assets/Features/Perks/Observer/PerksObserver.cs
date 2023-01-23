@@ -28,6 +28,7 @@ namespace Features.Perks.Observer
                                                && userPoints.IsEnough(settings.UseCost) && IsUsed == false;
         public bool IsHavePerk => strategy != null;
         public PerkType PerkType => settings.Type;
+        public PerkTargetType Target => settings.TargetType;
         public bool IsUsed { get; private set; }
 
         [Inject]
@@ -55,11 +56,17 @@ namespace Features.Perks.Observer
             IsUsed = false;
         }
 
-        public void Use()
+        public void Use(PerkTargetType targetType, Action callback = null)
         {
-            strategy.Use();
             userPoints.Reduce(settings.UseCost);
             IsUsed = true;
+            if (targetType == settings.TargetType)
+                Apply(callback);
+        }
+
+        public void Apply(Action callback)
+        {
+            strategy.Use(callback);
         }
     }
 }

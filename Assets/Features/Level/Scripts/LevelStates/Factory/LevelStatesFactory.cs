@@ -6,7 +6,6 @@ using Features.Level.Scripts.Info;
 using Features.Level.Scripts.LevelStates.Machine;
 using Features.Level.Scripts.LevelStates.States;
 using Features.NPC.Scripts.Base;
-using Features.Perks.Factory;
 using Features.Perks.Observer;
 using Features.Rules.Data;
 using Features.Services.GameSettings;
@@ -74,6 +73,8 @@ namespace Features.Level.Scripts.LevelStates.Factory
           return new LevelPrepareState(levelStateMachine,deck, windowsService, audioService, perksObserver);
         case nameof(LevelResetState):
           return new LevelResetState(userHands, dealer, deck, levelStateMachine, infoDisplayer);
+        case nameof(LevelUsePerkOnDealerState):
+          return new LevelUsePerkOnDealerState(perksObserver, levelStateMachine);
         case nameof(LevelUserCheckState):
           return new LevelUserCheckState(userHands, gameRules, levelStateMachine, infoDisplayer, gameSettings);
         case nameof(LevelUserTurnState):

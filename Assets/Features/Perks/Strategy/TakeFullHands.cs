@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Features.CustomCoroutine;
 using Features.Hands.Scripts.User;
@@ -32,12 +33,12 @@ namespace Features.Perks.Strategy
     public override bool IsCanBeUsed() => 
       userHands.IsNotEmpty && dealerMachine.IsNotEmpty;
 
-    public override void Use()
+    public override void Use(Action callback)
     {
-      coroutineRunner.StartCoroutine(TakeCards());
+      coroutineRunner.StartCoroutine(TakeCards(callback));
     }
 
-    private IEnumerator TakeCards()
+    private IEnumerator TakeCards(Action callback)
     {
       ActionsWindow().Hide();
       while (userHands.IsFull == false && dealerMachine.IsFull == false)
@@ -53,6 +54,7 @@ namespace Features.Perks.Strategy
           yield return null;
         }
       }
+      callback?.Invoke();
       levelStateMachine.Enter<LevelPerkCheckState>();
     }
     

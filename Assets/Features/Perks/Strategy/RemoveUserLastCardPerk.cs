@@ -1,3 +1,4 @@
+using System;
 using Features.Hands.Scripts.User;
 using Features.Perks.Data;
 
@@ -15,7 +16,10 @@ namespace Features.Perks.Strategy
     public override bool IsCanBeUsed() => 
       userHands.IsNotEmpty;
 
-    public override void Use() => 
+    public override void Use(Action callback)
+    {
       userHands.RemoveLastCard();
+      callback?.Invoke();
+    }
   }
 }

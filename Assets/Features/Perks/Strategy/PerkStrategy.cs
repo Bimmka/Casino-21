@@ -1,3 +1,4 @@
+using System;
 using Features.Perks.Data;
 
 namespace Features.Perks.Strategy
@@ -12,6 +13,6 @@ namespace Features.Perks.Strategy
     }
 
     public abstract bool IsCanBeUsed();
-    public abstract void Use();
+    public abstract void Use(Action callback);
   }
 }
